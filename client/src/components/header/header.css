@@ -1,0 +1,34 @@
+
+/* ----- index.js ----- */
+.header h1 {
+   margin: 0px;
+   padding: 0px;
+   font-size: 38px;
+   font-weight: bold;
+}
+
+.header h2 {
+   margin: 0px;
+   padding: 0px;
+   font-size: 20px;
+   font-weight: bold;
+   padding-left: 100px;
+}
+
+/* ----- navbar.js ----- */
+.navbar {
+   background: black;
+ }
+ 
+ .navbar .mainContainer div {
+   display: inline-block;
+   margin: 0px;
+   padding: 6px 12px;
+   color: white;
+   background: #900;
+   transition: all 0.2s;
+ }
+ 
+ .navbar .mainContainer div:hover {
+   background: #c00;
+ }

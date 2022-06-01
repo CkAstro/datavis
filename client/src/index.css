@@ -1,0 +1,36 @@
+
+body, html {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.mainContainer {
+  width: 1000px;
+  margin: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.mainLayout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+}
+
+.datavisContainer {
+  display: grid;
+  grid-template-columns: 9fr 4fr;
+  height: 100%;
+  grid-gap: 20px;
+  box-sizing: border-box;
+  padding: 20px 0px;
+}
+
+.datavisContainer .displayArea, .toolbarArea {
+  background: #cacaca;
+  height: 100%;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
