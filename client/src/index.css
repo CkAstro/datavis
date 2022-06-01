@@ -1,7 +1,6 @@
 body, html {
   margin: 0px;
   padding: 0px;
-  box-sizing: border-box;
 }
 
 :root {
@@ -13,7 +12,7 @@ body, html {
    --main-padding: 20px;
 }
 
-/* layout troubleshooting (uncomment to view all borders) */
+/* ----- layout troubleshooting (uncomment to view all borders) ----- */
 /* * {
    background: #000 !important;
    color: #0f0 !important;
@@ -47,8 +46,6 @@ body, html {
 
 .datavisContainer .displayArea, .toolbarArea {
   background: var(--ncsu-light-gray);
-  height: 100%;
   border-radius: var(--main-spacing);
   padding: var(--main-padding);
-  box-sizing: border-box;
 }

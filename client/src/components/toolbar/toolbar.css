@@ -1,3 +1,9 @@
+/* ----- index.js ----- */
+.toolbarArea {
+   display: grid;
+   grid-template-rows: auto auto 1fr;
+}
+
 .toolbarArea>p:first-child {
    text-align: center;
    margin: 0px;
@@ -6,18 +12,11 @@
    border-bottom: 1px dotted var(--ncsu-dark-gray);
 }
 
-.itemCreator>p:first-child {
-   /* text-align: center; */
+.optionsArea {
+   border-bottom: 1px dotted var(--ncsu-dark-gray);
 }
 
-.itemCreator>button,.itemCreator>select {
-   float: right;
-   border: none;
-}
-.itemCreator>select {
-   margin-right: 6px;
-}
-
+/* ----- camera controller ----- */
 .cameraController>button {
    width: 80px;
    padding: 6px 12px;
@@ -28,6 +27,70 @@
    margin-right: 6px;
 }
 
-.optionsArea {
-   border-bottom: 1px dotted var(--ncsu-dark-gray);
+/* ----- item creator ----- */
+.itemCreator>button,.itemCreator>select {
+   float: right;
+   border: none;
+}
+.itemCreator>select {
+   margin-right: 6px;
+}
+
+/* ----- item display ----- */
+.displayContainer {
+   position: relative;
+   height: auto;
+   box-sizing: border-box;
+}
+.itemDisplay {
+   position: absolute;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   height: auto;
+   overflow: auto;
+}
+.itemDisplay>p:first-child {
+   text-align: center;
+   margin: 0px;
+   padding: 12px 0px;
+}
+
+/* ----- vis item ----- */
+.visItem {
+   /* position: relative; */
+   height: 30px;
+}
+
+.visItem:nth-child(2n) {
+   background: #c0c0c0;
+}
+
+.visItem::after {
+   clear: both;
+   content: '';
+}
+.visItem p {
+   margin: 0px;
+   padding: 0px;
+}
+
+.visItem .closeButton {
+   float: right;
+   filter: brightness(100%);
+   -webkit-filter: brightness(100%);
+   transition: all 0.2s;
+   cursor: pointer;
+}
+.visItem .closeButton:hover {
+   filter: brightness(80%);
+   -webkit-filter: brightness(80%);
+}
+
+.visItem .varSelect {
+   float: right;
+   margin-right: 6px;
+   height: 24px;
+   border: none;
 }
