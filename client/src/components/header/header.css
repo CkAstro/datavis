@@ -5,32 +5,32 @@
    padding: 0px;
    font-size: 38px;
    font-weight: bold;
-   color: #900;
+   color: var(--ncsu-dark-red);
 }
 
 .header h2 {
    margin: 0px;
    padding: 0px;
-   font-size: 20px;
+   font-size: 18px;
    font-weight: bold;
    padding: 12px 100px;
-   color: #333;
+   padding-top: 6px;
 }
 
 /* ----- navbar.js ----- */
 .navbar {
-   background: #333;
- }
+   background: var(--ncsu-dark-gray);
+}
  
- .navbar .mainContainer div {
+.navbar .mainContainer div {
    display: inline-block;
    margin: 0px;
    padding: 6px 12px;
    color: white;
-   background: #c00;
+   background: var(--ncsu-light-red);
    transition: all 0.2s;
- }
+}
  
- .navbar .mainContainer div:hover {
-   background: #900;
- }
+.navbar .mainContainer div:hover {
+   background: var(--ncsu-dark-red);
+}
