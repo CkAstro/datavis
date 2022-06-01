@@ -5,6 +5,7 @@
    padding: 0px;
    font-size: 38px;
    font-weight: bold;
+   color: #900;
 }
 
 .header h2 {
@@ -12,12 +13,13 @@
    padding: 0px;
    font-size: 20px;
    font-weight: bold;
-   padding-left: 100px;
+   padding: 12px 100px;
+   color: #333;
 }
 
 /* ----- navbar.js ----- */
 .navbar {
-   background: black;
+   background: #333;
  }
  
  .navbar .mainContainer div {
@@ -25,10 +27,10 @@
    margin: 0px;
    padding: 6px 12px;
    color: white;
-   background: #900;
+   background: #c00;
    transition: all 0.2s;
  }
  
  .navbar .mainContainer div:hover {
-   background: #c00;
+   background: #900;
  }
