@@ -31,6 +31,10 @@
    margin-right: 6px;
 }
 
+.cameraController>button.active {
+   background: green;
+}
+
 /* ----- item creator ----- */
 .itemCreator>button,.itemCreator>select {
    float: right;

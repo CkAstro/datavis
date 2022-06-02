@@ -4,19 +4,28 @@ import Header from './components/header';
 import Display from './components/display';
 import Toolbar from './components/toolbar';
 import { RenderablesProvider } from './contexts/renderables';
+import { CameraProvider } from './contexts/camera';
 import './index.css';
+
+const DataVis = () => {
+   return (
+      <div className='datavisContainer'>
+         <RenderablesProvider>
+            <CameraProvider>
+               <Display/>
+               <Toolbar/>
+            </CameraProvider>
+         </RenderablesProvider>
+      </div>
+   );
+}
 
 const App = () => {
    return (
       <div className='mainLayout'>
          <Header/>
          <div className='mainContainer'>
-            <div className='datavisContainer'>
-               <RenderablesProvider>
-                  <Display/>
-                  <Toolbar/>
-               </RenderablesProvider>
-            </div>
+            <DataVis/>
          </div>
       </div>
    );
