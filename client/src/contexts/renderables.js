@@ -24,6 +24,7 @@ const useRenderables = () => {
       const newRenderable = {
          id: getNewId(),
          type: type,
+         isVisible: [true, true],
       }
       setRenderables(renderables.concat(newRenderable));
    }
@@ -33,10 +34,19 @@ const useRenderables = () => {
       setRenderables(newRenderables);
    }
 
+   const toggleVisible = (id, ind) => {
+      const newRenderables = renderables.map(item => {
+         if (item.id === id)  item.isVisible[ind] = !item.isVisible[ind];
+         return item;
+      });
+      setRenderables(newRenderables);
+   }
+
    return {
       renderables: renderables,
       handleCreate: createRenderable,
       handleDelete: deleteRenderable,
+      handleVisible: toggleVisible,
    }
 }
 

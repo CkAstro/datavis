@@ -3,18 +3,40 @@ import { useRenderables } from '../../contexts/renderables';
 import './itemdisplay.css';
 
 const VisItem = ({ props }) => {
-   const { handleDelete } = useRenderables();
+   const { renderables, handleDelete, handleVisible } = useRenderables();
    const { options } = useCamera();
 
-   const button2Enabled = options.compare ? 'active' : 'disabled';
+   const visButton1 = () => {
+      const item = renderables.find(item => item.id === props.id);
+      const isActive = item.isVisible[0];
+      return (
+         <div 
+            onClick={() => handleVisible(props.id, 0)}
+            className={`toggleVis ${isActive ? 'active' : ''}`}
+         >1</div>
+      );
+   }
+
+   const visButton2 = () => {
+      const item = renderables.find(item => item.id === props.id);
+      const isActive = item.isVisible[1];
+      const isClickable = options.compare;
+      
+      return (
+         <div
+            onClick={isClickable ? () => handleVisible(props.id, 1) : null}
+            className={`toggleVis ${isClickable ? (isActive ? 'active' : '') : 'disabled'}`}
+         >2</div>
+      );
+   }
 
    return (
       <div className='visItem'>
          <div className='visHeader'>
             <div className='itemName'>{props.id} - {props.type}</div>
             <div className='toggleArea'>
-               <div className='toggleVis active'>1</div>
-            <div className={`toggleVis ${button2Enabled}`}>2</div>
+               {visButton1()}
+               {visButton2()}
             </div>
             <img 
                className='closeButton' 
