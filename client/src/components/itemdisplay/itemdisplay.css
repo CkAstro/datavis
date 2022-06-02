@@ -1,0 +1,157 @@
+
+/* ----- item display ----- */
+.displayContainer {
+   position: relative;
+   height: auto;
+   box-sizing: border-box;
+}
+.itemDisplay {
+   position: absolute;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   height: auto;
+   overflow: auto;
+}
+
+/* ----- vis item ----- */
+.visItem {
+   padding: 6px;
+   /* padding-right: 0px; */
+}
+
+.visItem:nth-child(2n) {
+   background: #c0c0c0;
+}
+.visItem:nth-child(2n+1) {
+   background: #bababa;
+}
+
+.visItem::after {
+   clear: both;
+   content: '';
+}
+.visItem p {
+   margin: 0px;
+   padding: 0px;
+}
+
+.visItem .toggleArea { position: relative; padding: 0px 6px; }
+.visItem .toggleArea::after {
+   content: '';
+   display: block;
+   position: absolute;
+   right: -1px;
+   top: 10%;
+   height: 80%;
+   width: 1.1px;
+   border-right: 1px dotted var(--ncsu-dark-gray);
+}
+
+.visItem .toggleArea::before {
+   content: '';
+   display: block;
+   position: absolute;
+   left: -1px;
+   top: 10%;
+   height: 80%;
+   width: 1.1px;
+   border-left: 1px dotted var(--ncsu-dark-gray);
+}
+
+.visItem .toggleVis {
+   display: inline-block;
+   border: 1px solid var(--ncsu-dark-gray);
+   padding: 0px 6px;
+}
+.visItem .toggleVis:not(:first-child) {
+   margin-left: 6px;
+}
+
+.visItem .closeButton {
+   float: right;
+   padding: 2px;
+   border: 1px solid var(--ncsu-dark-red);
+   background: rgba(143, 0, 0, 0.1);
+   border-radius: 3px;
+   filter: brightness(100%);
+   -webkit-filter: brightness(100%);
+   transition: all 0.2s;
+   cursor: pointer;
+   margin-left: 6px;
+}
+.visItem .closeButton:hover {
+   filter: brightness(80%);
+   -webkit-filter: brightness(80%);
+   background: rgba(143, 0, 0, 0.3);
+}
+
+.visItem .varSelect {
+   float: right;
+   margin-right: 6px;
+   height: 24px;
+   border: none;
+}
+
+.editIcon {
+   width: 12px;
+   height: 12px;
+   transform: translate(5px, -6px);
+   cursor: pointer;
+}
+
+.toggleArea .toggleVis {
+   cursor: pointer;
+   background: rgba(143, 0, 0, 0.1);
+   transition: all 0.2s;
+}
+
+.toggleArea .toggleVis:not(.disabled):not(.active):hover {
+   background: rgba(143, 0, 0, 0.3);
+}
+
+.toggleVis.active {
+   background: rgba(0, 143, 0, 0.2);
+}
+
+.toggleVis.active:hover {
+   background: rgba(0, 143, 0, 0.4);
+}
+
+.toggleVis.disabled {
+   color: #666;
+   border-color: #555;
+   background: rgba(0, 0, 0, 0.1);
+   cursor: not-allowed;
+}
+
+.visItem>.visHeader {
+   display: grid;
+   grid-template-columns: 1fr auto auto;
+}
+
+
+
+.itemName {
+   margin-right: 6px;
+   overflow: hidden;
+   position: relative;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   box-sizing: border-box;
+}
+
+.itemName::before {
+   cursor: pointer;
+   display: block;
+   content: '';
+   position: absolute;
+   right: 0px;
+   top: 0;
+   background: url('./edit.png');
+   background-size: 12px;
+   width: 12px;
+   height: 12px;
+   filter: invert(12%) sepia(81%) saturate(7111%) hue-rotate(14deg) brightness(81%) contrast(123%);
+}
