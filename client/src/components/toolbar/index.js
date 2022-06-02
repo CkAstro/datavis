@@ -28,13 +28,23 @@ const ItemCreator = () => {
 const VisItem = () => {
    return (
       <div className='visItem'>
-         <img src={require('./deleteButton.png')} className='closeButton'/>
-         <select className='varSelect'>
-            <option>Density</option>
-            <option>Pressure</option>
-            <option>Color</option>
-         </select>
-         <p>0 - Sphere</p>
+         <div className='visHeader'>
+            <div className='itemName'>0 - Sphere askdjflasklo</div>
+            <div className='toggleArea'>
+               <div className='toggleVis active'>1</div>
+               <div className='toggleVis disabled'>2</div>
+            </div>
+            <img className='closeButton' src={require('./trashcan_small.png')}/>
+         </div>
+
+
+
+         {/* <img src={require('./trashcan_small.png')} className='closeButton'/>
+         <div className='toggleArea'>
+            <div className='toggleVis disabled'>2</div>
+            <div className='toggleVis active'>1</div>
+         </div>
+         <p>0 - Sphere<img className='editIcon' src={require('./edit.png')}/></p> */}
       </div>
    );
 }
@@ -43,7 +53,9 @@ const ItemDisplay = () => {
    return (
       <div className='displayContainer'>
       <div className='itemDisplay'>
-         <p>Items</p>
+         <VisItem/>
+         <VisItem/>
+         {/* <VisItem/>
          <VisItem/>
          <VisItem/>
          <VisItem/>
@@ -60,10 +72,7 @@ const ItemDisplay = () => {
          <VisItem/>
          <VisItem/>
          <VisItem/>
-         <VisItem/>
-         <VisItem/>
-         <VisItem/>
-         <VisItem/>
+         <VisItem/> */}
       </div>
       </div>
    );
@@ -79,6 +88,7 @@ const Toolbar = () => {
             <CameraController/>
             <ItemCreator/>
          </div>
+         <p>Items</p>
          <ItemDisplay/>
       </div>
    );
