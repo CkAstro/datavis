@@ -3,6 +3,8 @@ body, html {
   padding: 0px;
 }
 
+/* ----- globals ----- */
+
 :root {
    --ncsu-dark-red: #900;
    --ncsu-light-red: #c00;
@@ -10,6 +12,15 @@ body, html {
    --ncsu-light-gray: #cacaca;
    --main-spacing: 20px;
    --main-padding: 20px;
+}
+
+/* remove text selection */
+.noselect {
+   -webkit-touch-callout: none;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
 }
 
 /* ----- layout troubleshooting (uncomment to view all borders) ----- */
