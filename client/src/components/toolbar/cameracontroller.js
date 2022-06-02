@@ -5,7 +5,9 @@ const CameraController = () => {
    const { options, handleCompare, handleLinked } = useCamera();
 
    const compareClass = options.compare ? 'active' : '';
-   const linkedClass = options.compare && options.linked ? 'active' : '';
+   const linkedClass = options.compare ? 
+      (options.linked ? 'active' : '') : 
+      'disabled';
 
    return (
       <div className='cameraController'>

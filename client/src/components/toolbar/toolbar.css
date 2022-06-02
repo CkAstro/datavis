@@ -31,8 +31,18 @@
    margin-right: 6px;
 }
 
+.cameraController>button {
+   background: rgba(143, 0, 0, 0.3);
+   cursor: pointer;
+   transition: all 0.2s;
+}
 .cameraController>button.active {
-   background: green;
+   background: rgba(0, 143, 0, 0.3);
+}
+
+.cameraController>button.disabled {
+   background: #bbb;
+   cursor: not-allowed;
 }
 
 /* ----- item creator ----- */
