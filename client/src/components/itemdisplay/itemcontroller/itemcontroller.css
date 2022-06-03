@@ -1,0 +1,181 @@
+
+.itemController {
+   background: #b9b9b9;
+}
+.itemController:nth-child(2n+1) {
+   background: #adadad;
+}
+
+/* ----- controller header ----- */
+.controllerHeader {
+   display: grid;
+   grid-template-columns: auto 1fr auto auto;
+   padding: 6px;
+}
+
+.controllerHeader>.activeToggle {
+   font-weight: bold;
+   width: 16px;
+   color: var(--ncsu-dark-red);
+   cursor: pointer;
+}
+
+/* ----- controller info ----- */
+.controllerInfo {
+   position: relative;
+}
+
+.controllerInfo>.infoContainer {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   width: auto;
+}
+
+.controllerInfo .nameChangeArea {
+   width: calc(100% - 18px);
+}
+
+.controllerInfo .controllerName {
+   display: inline-block;
+   max-width: calc(100% - 18px);
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   font-weight: bold;
+}
+
+.controllerInfo .editIcon {
+   display: inline-block;
+   width: 12px;
+   height: 12px;
+   transform: translate(2px, -8px);
+}
+
+
+/* ----- vis toggle ----- */
+.visToggle {
+   position: relative;
+   padding: 0px 6px;
+}
+
+.visToggle::before {
+   position: absolute;
+   left: -1px;
+   top: 10%;
+   width: 1.1px;
+   height: 80%;
+   border-left: 1px dotted var(--ncsu-dark-gray);
+   content: ''; 
+}
+
+.visToggle::after {
+   position: absolute;
+   right: -1px;
+   top: 10%;
+   width: 1.1px;
+   height: 80%;
+   border-right: 1px dotted var(--ncsu-dark-gray);
+   content: '';
+}
+
+
+.visToggle>.toggleButton {
+   display: inline-block;
+   margin: 0px;
+   padding: 0px 6px;
+   border: 1px solid var(--ncsu-dark-red);
+   border-radius: 3px;
+   background: rgba(143, 0, 0, 0.1);
+   color: #500;
+   cursor: pointer;
+   transition: all 0.2s;
+}
+.visToggle>.toggleButton:hover {
+   background: rgba(143, 0, 0, 0.3);
+   border-color: #500;
+   color: #300;
+}
+
+.visToggle>.toggleButton.active {
+   background: rgba(0, 143, 0, 0.1);
+   border-color: #050;
+   color: #050;
+}
+.visToggle>.toggleButton.active:hover {
+   background: rgba(0, 143, 0, 0.3);
+   border-color: #030;
+   color: #030;
+}
+
+.visToggle>.toggleButton.disabled {
+   background: rgba(143, 143, 143, 0.1);
+   border-color: #555;
+   color: #555;
+   cursor: not-allowed;
+}
+
+
+.visToggle>.toggleButton:not(:first-child) {
+   margin-left: 6px;
+}
+
+
+
+/* ----- close icon ----- */
+.closeIcon {
+   margin-left: 6px;
+   padding: 2px;
+   border: 1px solid var(--ncsu-dark-red);
+   border-radius: 3px;
+   background-color: rgba(143, 0, 0, 0.1);
+   transition: all 0.2s;
+   cursor: pointer;
+}
+
+.closeIcon:hover {
+   border-color: #500;
+   background-color: rgba(143, 0, 0, 0.3);
+}
+
+
+/* ----- controller content ----- */
+.controllerContent {
+   max-height: 0px;
+   overflow: hidden;
+   transition: all 0.3s;
+}
+.controllerContent.active {
+   max-height: 150px;
+}
+
+.controllerContent>* {
+   padding: 6px;
+   border-top: 1px dotted #999;
+}
+
+/* ----- slider container ----- */
+.sliderContainer>.varSlider {
+   display: grid; 
+   grid-template-columns: 25% 60% 15%;
+}
+.varSlider>.varSliderValue {
+   text-align: right;
+}
+
+/* ----- variable selector ------ */
+.varSelectContainer {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   box-sizing: border-box;
+}
+
+/* .varSelectContainer>span {
+} */
+
+.varSelectContainer>select {
+   /* border: none; */
+}

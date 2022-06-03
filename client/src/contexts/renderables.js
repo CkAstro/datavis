@@ -20,14 +20,68 @@ const useRenderables = () => {
       return length ? renderables[length-1].id + 1 : 0;
    }
 
+   const getSliderList = type => {
+      if (type === 'Slice') {
+         return [{
+            variable: 'x offset',
+            trueValue: 0.0,
+            text: 'offset',
+            value: 0,
+            min: -50,
+            max: 50,
+         }];
+      } else if (type === 'Sphere') {
+         const offsetSlider = {
+            variable: 'x offset',
+            trueValue: 0.0,
+            text: 'x offset',
+            value: 0,
+            min: -50,
+            max: 50,
+         }
+         const radialSlider = {
+            variable: 'radius',
+            trueValue: 0.5,
+            text: 'radius',
+            value: 50,
+            min: 0,
+            max: 100,
+         }
+         return [
+            {...offsetSlider}, 
+            {...offsetSlider, variable: 'y offset', text: 'y offset'},
+            {...offsetSlider, variable: 'z offset', text: 'z offset'},
+            {...radialSlider},
+         ];
+      } else if (type === 'Surface') {
+         return [{
+            variable: 'value',
+            trueValue: 0.0,
+            text: 'value',
+            value: 50,
+            min: 0,
+            max: 100,
+         }];
+      } else {
+         throw new Error('how did we get here?');
+      }
+   }
+
    const createRenderable = type => {
-      const newRenderable = {
+      const newRenderables = renderables.map(item => {
+         item.isActive = false;
+         return item;
+      });
+      const renderable = {
          id: getNewId(),
+         itemName: type,
          type: type,
          isVisible: [true, true],
-         isActive: false,
+         isActive: true,
+         sliderList: getSliderList(type),
+         activeVar: 'density',
       }
-      setRenderables(renderables.concat(newRenderable));
+      setRenderables(newRenderables.concat(renderable));
    }
 
    const deleteRenderable = id => {
@@ -51,12 +105,47 @@ const useRenderables = () => {
       setRenderables(newRenderables);
    }
 
+   const changeActiveVar = (id, newVar) => {
+      if (newVar === 'density' || newVar === 'pressure' || newVar === 'color') {
+         const newRenderables = renderables.map(item => {
+            if (item.id === id) item.activeVar = newVar;
+            return item;
+         });
+         setRenderables(newRenderables);
+      } else {
+         throw new Error('invalid variable selection');
+      }
+   }
+
+   const changeSlideValue = (val, ind, id) => {
+      const newRenderables = renderables.map(item => {
+         if (item.id === id) {
+            const slider = item.sliderList[ind];
+            slider.value = val;
+            slider.trueValue = val / (slider.max - slider.min);
+         }
+         return item;
+      });
+      setRenderables(newRenderables);
+   }
+
+   const changeItemName = (name, id) => {
+      const newRenderables = renderables.map(item => {
+         if (item.id === id) item.itemName = name;
+         return item;
+      });
+      setRenderables(newRenderables);
+   }
+
    return {
       renderables: renderables,
       handleCreate: createRenderable,
       handleDelete: deleteRenderable,
       handleVisible: toggleVisible,
       handleActivate: activateRenderable,
+      handleVarChange: changeActiveVar,
+      handleSliderChange: changeSlideValue,
+      handleNameChange: changeItemName,
    }
 }
 
