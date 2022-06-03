@@ -22,14 +22,12 @@ const ControllerHeader = ({ controllerId }) => {
    }, [isActive]);
 
 
-   useEffect(() => {
-      const handleKeyPress = event => {
-         if (event.keyCode === 27) setEditMode(false);
+   const handleKeyPress = event => {
+      if (event.keyCode === 27) {
+         setEditMode(false);
+         setInput('');
       }
-
-      document.addEventListener('keydown', handleKeyPress);
-      return () => document.removeEventListener('keydown', handleKeyPress);
-   });
+   }
 
    const visButton1 = () => {
       const isVisible = activeController.isVisible[0];
@@ -72,12 +70,13 @@ const ControllerHeader = ({ controllerId }) => {
          onChange={handleInput}
          value={input}
          onClick={clearInput}
+         onKeyDown={e => handleKeyPress(e)}
       />
    </form>);
    
    const nameDisplayArea = <><div className='controllerName' title={activeController.itemName}>{activeController.id} - {activeController.itemName}</div>{editIcon}</>;
    const itemNameDiv = isActive && editMode ? nameChangeArea : nameDisplayArea;
-   
+
    return (
       <div className='controllerHeader'>
          <div className={`activeToggle ${isActive ? 'active' : ''}`}
