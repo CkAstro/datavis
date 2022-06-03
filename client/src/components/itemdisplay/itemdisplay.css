@@ -129,6 +129,44 @@
 .visItem>.visHeader {
    display: grid;
    grid-template-columns: 1fr auto auto;
+   cursor: pointer;
+}
+
+.visItem>.visContent {
+   /* display: none; */
+   max-height: 0px;
+   overflow: hidden;
+   transition: all 0.3s;
+}
+
+.visContentContainer {
+   margin-top: 6px;
+   padding-top: 6px;
+   border-top: 1px dotted #999;
+}
+/* .visItem>.visContent>.visContentContainer {
+   display: none;
+} */
+
+.visItem>.visContent.active {
+   /* visibility: visible; */
+   /* opacity: 1; */
+   max-height: 500px;
+   /* display: block; */
+}
+
+/* .visItem>.visContent.active>.visContentContainer {
+   display: block;
+} */
+
+
+.displaySelector {
+   margin-top: 6px;
+   padding-top: 6px;
+   border-top: 1px dotted #999;
+}
+.displaySelector select {
+   float: right;
 }
 
 

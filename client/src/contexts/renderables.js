@@ -25,6 +25,7 @@ const useRenderables = () => {
          id: getNewId(),
          type: type,
          isVisible: [true, true],
+         isActive: false,
       }
       setRenderables(renderables.concat(newRenderable));
    }
@@ -42,11 +43,20 @@ const useRenderables = () => {
       setRenderables(newRenderables);
    }
 
+   const activateRenderable = id => {
+      const newRenderables = renderables.map(item => {
+         item.isActive = item.id === id ? !item.isActive : false;
+         return item;
+      });
+      setRenderables(newRenderables);
+   }
+
    return {
       renderables: renderables,
       handleCreate: createRenderable,
       handleDelete: deleteRenderable,
       handleVisible: toggleVisible,
+      handleActivate: activateRenderable,
    }
 }
 
