@@ -5,6 +5,10 @@ const CameraContext = createContext();
 const defaultOptions = {
    compare: false,
    linked: true,
+   zoom: -3.0,
+   azi: 0.0,
+   pol: 0.0,
+   queue: true,
 }
 
 const CameraProvider = ({ children }) => {
@@ -31,10 +35,21 @@ const useCamera = () => {
       setOptions({ ...options, linked: linked });
    }
 
+   const moveCamera = (dz, da, dp) => {
+      setOptions({
+         ...options,
+         zoom: options.zoom + dz,
+         azi: options.azi + da,
+         pol: options.pol + dp,
+         queue: true,
+      });
+   }
+
    return {
       options: options,
       handleCompare: toggleCompare,
       handleLinked: toggleLinked,
+      handleCamera: moveCamera,
    }
 }
 
