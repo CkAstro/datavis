@@ -21,7 +21,7 @@ const useRenderables = () => {
    }
 
    const getSliderList = type => {
-      if (type === 'Slice') {
+      if (type === 'slice') {
          return [{
             variable: 'x offset',
             trueValue: 0.0,
@@ -30,7 +30,7 @@ const useRenderables = () => {
             min: -50,
             max: 50,
          }];
-      } else if (type === 'Sphere') {
+      } else if (type === 'sphere') {
          const offsetSlider = {
             variable: 'x offset',
             trueValue: 0.0,
@@ -53,7 +53,7 @@ const useRenderables = () => {
             {...offsetSlider, variable: 'z offset', text: 'z offset'},
             {...radialSlider},
          ];
-      } else if (type === 'Surface') {
+      } else if (type === 'surface') {
          return [{
             variable: 'value',
             trueValue: 0.0,

@@ -67,13 +67,13 @@ class GLHelper {
 
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
-      for (const obj in objects) {
+      for (const obj of objects) {
          const shader = this.shaderSuite.sliceShader;
          gl.useProgram(shader.program);
          gl.uniformMatrix4fv(shader.uniformLocations.projectionMatrix, false, this.projectionMatrix);
          gl.uniformMatrix4fv(shader.uniformLocations.modelViewMatrix, false, this.modelViewMatrix);
 
-         this.sphere.render();
+         this[obj.type].render();
       }
    }
 }

@@ -3,7 +3,7 @@ import { useRenderables } from '../../contexts/renderables';
 import './toolbar.css'; 
 
 const ItemCreator = () => {
-   const [ selection, setSelection ] = useState('Slice');
+   const [ selection, setSelection ] = useState('slice');
 
    const handleSelection = event => {
       event.preventDefault();
@@ -16,9 +16,9 @@ const ItemCreator = () => {
       <div className='itemCreator'>
          <button onClick={() => handleCreate(selection)}>Create</button>
          <select onChange={e => handleSelection(e)}>
-            <option value='Slice'>Slice</option>
-            <option value='Sphere'>Sphere</option>
-            <option value='Surface'>Surface</option>
+            <option value='slice'>Slice</option>
+            <option value='sphere'>Sphere</option>
+            <option value='surface'>Surface</option>
          </select>
          <p>Create Item</p>
       </div>

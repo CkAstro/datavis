@@ -48,7 +48,7 @@ const drawScene = (gl, scene, objects, frameRate) => {
    }
 
    glhelper.updateModelViewMatrix(scene.zoom, scene.azi, scene.pol);
-   glhelper.renderObjectList([1]);
+   glhelper.renderObjectList(objects);
 }
 
 const Display = () => {
