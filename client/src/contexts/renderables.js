@@ -80,6 +80,7 @@ const useRenderables = () => {
          isActive: true,
          sliderList: getSliderList(type),
          activeVar: 'density',
+         activeVarIndex: 0,
       }
       setRenderables(newRenderables.concat(renderable));
    }
@@ -107,8 +108,16 @@ const useRenderables = () => {
 
    const changeActiveVar = (id, newVar) => {
       if (newVar === 'density' || newVar === 'pressure' || newVar === 'color') {
+         let newVarIndex;
+         if (newVar === 'density') newVarIndex = 0;
+         if (newVar === 'pressure') newVarIndex = 1;
+         if (newVar === 'color') newVarIndex = 2;
+
          const newRenderables = renderables.map(item => {
-            if (item.id === id) item.activeVar = newVar;
+            if (item.id === id) {
+               item.activeVar = newVar;
+               item.activeVarIndex = newVarIndex;
+            }
             return item;
          });
          setRenderables(newRenderables);

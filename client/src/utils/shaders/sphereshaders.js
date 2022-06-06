@@ -31,6 +31,7 @@ const fs =
    flat in vec3 origin;
 
    uniform float uRadius;
+   uniform int uDataIndex;
 
    uniform highp sampler3D modelData;
    uniform highp sampler2D colorMap;
@@ -99,7 +100,7 @@ const fs =
       gl_FragDepth = 1.0/depth;  
 
       // now that we know we want to draw, get pixel color
-      float val = texture(modelData, 0.5*(pos+1.0))[0];
+      float val = texture(modelData, 0.5*(pos+1.0))[uDataIndex];
       vec4 clr = texture(colorMap, vec2(val, 0.5));
       vec3 norm = normalize(pos-origin);
       float diffuse = 0.3 + abs(dot(norm, light));

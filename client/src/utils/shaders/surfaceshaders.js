@@ -26,7 +26,7 @@ const fs =
    flat in vec3 eyePos;
 
    uniform float uValue;
-   // uniform int uDataIndex;
+   uniform int uDataIndex;
 
    uniform highp sampler3D modelData;
    uniform highp sampler2D colorMap;
@@ -68,7 +68,6 @@ const fs =
    // we could create a normal texture for each variable (density, etc)
    // instead we will just sample near position and take a gradient
    vec3 getSurfaceNormal(vec3 pos) {
-      int uDataIndex = 0;
       vec3 normPos = 0.5*(pos+1.0);    // data ranges -1 to 1, tex ranges 0-1
       vec2 dir = vec2(0.004, 0.0);     // clean math
       float x2 = texture(modelData, normPos+dir.xyy)[uDataIndex];
@@ -93,13 +92,13 @@ const fs =
 
       // move along LoS until we hit uValue;
       vec3 pos = eyePos + sph.x * rayDir;
-      float lastVal = texture(modelData, 0.5*(pos+1.0))[0];
+      float lastVal = texture(modelData, 0.5*(pos+1.0))[uDataIndex];
 
       bool surface = false;      // this is required to fix rendering bug 
                                  // on Windows; we must break to exterior
                                  // IF-statement to set gl_FragDepth
       for (float l=sph.x; l<sph.y; l+=del) {
-         float thisVal = texture(modelData, 0.5*(pos+1.0))[0];
+         float thisVal = texture(modelData, 0.5*(pos+1.0))[uDataIndex];
 
          if ((lastVal < uValue && thisVal >= uValue) || (lastVal > uValue && thisVal <= uValue)) {
             pos += (uValue-thisVal) / (thisVal-lastVal) * delRay; // interpolate position

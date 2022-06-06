@@ -67,7 +67,7 @@ class GLHelper {
    renderObjectList(objects, textures, cmaps) {
       const gl = this.glInstance;
 
-      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl.clearColor(0.0, 0.0, 0.0, 0.0);
       gl.clearDepth(1.0);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.enable(gl.DEPTH_TEST); 
@@ -109,6 +109,7 @@ class GLHelper {
 
          gl.uniformMatrix4fv(shader.uniformLocations.projectionMatrix, false, this.projectionMatrix);
          gl.uniformMatrix4fv(shader.uniformLocations.modelViewMatrix, false, this.modelViewMatrix);
+         gl.uniform1i(shader.uniformLocations.dataIndex, obj.activeVarIndex)
 
          gl.activeTexture(gl.TEXTURE0);
          gl.bindTexture(gl.TEXTURE_3D, textures[0]);

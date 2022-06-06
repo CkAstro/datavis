@@ -18,6 +18,7 @@ const buildShaderSuite = gl => {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
             translation: 'uTranslation',
+            rotation: 'uRotation',
             modelData: 'modelData',
             colorMap: 'colorMap',
             dataIndex: 'uDataIndex',
@@ -53,8 +54,6 @@ const buildShaderSuite = gl => {
    }
    return buildProgramInfo(gl, programInfo);
 }
-
-let texList = null;
 
 const drawScene = (gl, scene, objects, frameRate) => {
    
