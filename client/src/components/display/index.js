@@ -17,6 +17,7 @@ const buildShaderSuite = gl => {
          uniforms: {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
+            translation: 'uTranslation',
          },
       },
       sphereShader: {
@@ -25,6 +26,9 @@ const buildShaderSuite = gl => {
          uniforms: {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
+            translation: 'uTranslation',
+            eyePosition: 'uEyePos',
+            radius: 'uRadius',
          },
       },
       surfaceShader: {
@@ -33,6 +37,8 @@ const buildShaderSuite = gl => {
          uniforms: {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
+            eyePosition: 'uEyePos',
+            dataValue: 'uDataValue',
          },
       },
    }

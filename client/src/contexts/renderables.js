@@ -27,8 +27,8 @@ const useRenderables = () => {
             trueValue: 0.0,
             text: 'offset',
             value: 0,
-            min: -50,
-            max: 50,
+            min: -100,
+            max: 100,
          }];
       } else if (type === 'sphere') {
          const offsetSlider = {
@@ -36,8 +36,8 @@ const useRenderables = () => {
             trueValue: 0.0,
             text: 'x offset',
             value: 0,
-            min: -50,
-            max: 50,
+            min: -100,
+            max: 100,
          }
          const radialSlider = {
             variable: 'radius',
@@ -122,7 +122,7 @@ const useRenderables = () => {
          if (item.id === id) {
             const slider = item.sliderList[ind];
             slider.value = val;
-            slider.trueValue = val / (slider.max - slider.min);
+            slider.trueValue = val / 100.0;
          }
          return item;
       });
