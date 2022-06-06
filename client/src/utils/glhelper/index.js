@@ -76,6 +76,7 @@ class GLHelper {
       gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
       for (const obj of objects) {
+         if (!obj.isVisible[0]) continue;
 
          let shader;
          if (obj.type === 'slice') {
