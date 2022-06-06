@@ -1,27 +1,29 @@
 import { useRenderables } from '../../../contexts/renderables';
 import VariableSelector from './variableselector';
+import Slider from './slider';
 import './itemcontroller.css';
 
 const ControllerContent = ({ controllerId }) => {
-   const { renderables, handleSliderChange } = useRenderables();
+   const { renderables } = useRenderables();
 
    const activeItem = renderables.find(item => item.id === controllerId);
    const isActive = activeItem.isActive;
 
    const sliderList = () => {
       return activeItem.sliderList.map((slider, ind) => {
+         const props = {
+            isActive: isActive,
+            id: activeItem.id,
+            variable: slider.variable,
+            ind: ind,
+            text: slider.text,
+            min: slider.min,
+            max: slider.max,
+            value: slider.value,
+            trueValue: slider.trueValue,
+         }
          return (
-            <div key={ind} className='varSlider'>
-               <span className='varSliderText'>{slider.text}</span>
-               <input 
-                  type='range' 
-                  onChange={e => handleSliderChange(e.target.value, ind, activeItem.id)}
-                  min={slider.min} 
-                  max={slider.max} 
-                  value={slider.value}
-               />
-               <span className='varSliderValue'>{slider.trueValue}</span>
-            </div>
+            <Slider key={ind} props={props}/>
          );
       });
    }

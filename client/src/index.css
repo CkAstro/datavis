@@ -24,6 +24,14 @@ body, html {
    user-select: none;
 }
 
+.noscrollbar {
+   scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+.noscrollbar::-webkit-scrollbar {
+   display: none;
+}
+
 /* ----- layout troubleshooting (uncomment to view all borders) ----- */
 /* * {
    background: #000 !important;

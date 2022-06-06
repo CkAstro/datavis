@@ -179,3 +179,7 @@
 .varSelectContainer>select {
    /* border: none; */
 }
+
+.valChangeArea {
+   width: 85%;
+}

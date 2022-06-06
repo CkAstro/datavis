@@ -11,7 +11,7 @@ const ItemDisplay = () => {
    
    return (
       <div className='displayContainer'>
-         <div className='itemDisplay'>
+         <div className='itemDisplay noscrollbar'>
             {getItemList()}
          </div>
       </div>

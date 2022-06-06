@@ -6,6 +6,8 @@ import './itemcontroller.css';
 const ControllerHeader = ({ controllerId }) => {
    const [ input, setInput ] = useState('');
    const [ editMode, setEditMode ] = useState(false);
+   const [ showEditIcon, setShowEditIcon ] = useState(false);
+
    const { renderables, handleDelete, handleVisible, handleActivate, handleNameChange } = useRenderables();
    const { options } = useCamera();
 
@@ -14,25 +16,31 @@ const ControllerHeader = ({ controllerId }) => {
       setEditMode(true);
    }
 
+   const disableEdit = () => {
+      setEditMode(false);
+      setInput('');
+      setShowEditIcon(false);
+   }
+
    const activeController = renderables.find(item => item.id === controllerId);
    const isActive = activeController.isActive;
 
    useEffect(() => {
-      if (!isActive) setEditMode(false);
+      if (!isActive) {
+         setEditMode(false);
+         setShowEditIcon(false);
+      }
    }, [isActive]);
 
 
    const handleKeyPress = event => {
-      if (event.keyCode === 27) {
-         setEditMode(false);
-         setInput('');
-      }
+      if (event.keyCode === 27) disableEdit();
    }
 
    const visButton1 = () => {
       const isVisible = activeController.isVisible[0];
       return (
-         <div className={`toggleButton ${isVisible ? 'active' : ''}`}
+         <div className={`toggleButton noselect ${isVisible ? 'active' : ''}`}
             onClick={() => handleVisible(controllerId, 0)}
          >1</div>
       );
@@ -42,13 +50,13 @@ const ControllerHeader = ({ controllerId }) => {
       const isVisible = activeController.isVisible[1];
       const isEnabled = options.compare;
       return (
-         <div className={`toggleButton ${isEnabled ? (isVisible ? 'active' : '') : 'disabled'}`}
+         <div className={`toggleButton noselect ${isEnabled ? (isVisible ? 'active' : '') : 'disabled'}`}
             onClick={isEnabled ? () => handleVisible(controllerId, 1) : null}
          >2</div>
       );
    }
 
-   const editIcon = isActive ? 
+   const editIcon = isActive && showEditIcon ? 
       <img className='editIcon' onClick={() => enableEdit()} src={require('./edit.png')}/> : 
       null;
 
@@ -63,6 +71,7 @@ const ControllerHeader = ({ controllerId }) => {
       event.preventDefault();
       handleNameChange(input, activeController.id);
       setEditMode(false);
+      setShowEditIcon(false);
    }
 
    const nameChangeArea = (<form onSubmit={requestNameChange}>
@@ -71,15 +80,27 @@ const ControllerHeader = ({ controllerId }) => {
          value={input}
          onClick={clearInput}
          onKeyDown={e => handleKeyPress(e)}
+         onBlur={disableEdit}
       />
    </form>);
    
-   const nameDisplayArea = <><div className='controllerName' title={activeController.itemName}>{activeController.id} - {activeController.itemName}</div>{editIcon}</>;
+   const nameDisplayArea = (
+      <>
+         <div className='controllerName noselect' 
+            title={activeController.itemName}
+            onClick={() => setShowEditIcon(true)}
+            onDoubleClick={() => enableEdit()}
+         >
+            {activeController.id} - {activeController.itemName}
+         </div>
+         {editIcon}
+      </>
+   );
    const itemNameDiv = isActive && editMode ? nameChangeArea : nameDisplayArea;
 
    return (
       <div className='controllerHeader'>
-         <div className={`activeToggle ${isActive ? 'active' : ''}`}
+         <div className={`noselect activeToggle ${isActive ? 'active' : ''}`}
             onClick={() => handleActivate(controllerId)}
          >{isActive ? '-' : '+'}</div>
          <div className='controllerInfo'>
