@@ -1,0 +1,52 @@
+import { getShaderProgram, buildProgramInfo } from './index';
+
+const buildShaderSuite = gl => {
+   const sliceShader = getShaderProgram(gl, 'Slice');
+   const sphereShader = getShaderProgram(gl, 'Sphere');
+   const surfaceShader = getShaderProgram(gl, 'Surface');
+   const programInfo = {
+      sliceShader: {
+         program: sliceShader,
+         attribs: { vertexPosition: 'aVertexPosition' },
+         uniforms: {
+            projectionMatrix: 'uProjectionMatrix',
+            modelViewMatrix: 'uModelViewMatrix',
+            translation: 'uTranslation',
+            rotation: 'uRotation',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
+         },
+      },
+      sphereShader: {
+         program: sphereShader,
+         attribs: { vertexPosition: 'aVertexPosition' },
+         uniforms: {
+            projectionMatrix: 'uProjectionMatrix',
+            modelViewMatrix: 'uModelViewMatrix',
+            translation: 'uTranslation',
+            eyePosition: 'uEyePos',
+            radius: 'uRadius',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
+         },
+      },
+      surfaceShader: {
+         program: surfaceShader,
+         attribs: { vertexPosition: 'aVertexPosition' },
+         uniforms: {
+            projectionMatrix: 'uProjectionMatrix',
+            modelViewMatrix: 'uModelViewMatrix',
+            eyePosition: 'uEyePos',
+            dataValue: 'uValue',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
+         },
+      },
+   }
+   return buildProgramInfo(gl, programInfo);
+}
+
+export default buildShaderSuite;
