@@ -6,6 +6,7 @@ const useGL2Canvas = (glRef, draw, scene, objects) => {
    useEffect(() => {
       const canvas = canvasRef.current;
       const gl = canvas.getContext('webgl2');
+      gl.getExtension('OES_texture_float_linear');
 
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width;

@@ -39,8 +39,8 @@ const useCamera = () => {
       setOptions({
          ...options,
          zoom: options.zoom + dz,
-         azi: options.azi + da,
-         pol: options.pol + dp,
+         azi: options.azi - da,
+         pol: options.pol - dp,
          queue: true,
       });
    }

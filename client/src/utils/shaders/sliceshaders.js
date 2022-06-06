@@ -19,12 +19,17 @@ const fs =
 
    in vec3 pos;
 
+   uniform highp sampler3D modelData;
+   uniform highp sampler2D colorMap;
+
    out vec4 color;
 
    void main(void) {
       float rayLength = length(pos);
       if (rayLength < 0.01 || rayLength > 0.98) discard;
-      color = vec4(1.0, 1.0, 1.0, 1.0);
+      float val = texture(modelData, 0.5*(pos+1.0))[0];
+      vec4 clr = texture(colorMap, vec2(val, 0.5));
+      color = vec4(clr.rgb, 1.0);
    }
 `;
 

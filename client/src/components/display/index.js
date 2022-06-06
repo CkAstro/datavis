@@ -2,9 +2,9 @@ import { useCamera } from '../../contexts/camera';
 import { useRenderables } from '../../contexts/renderables';
 import GL2Canvas from '../gl2canvas';
 import { getShaderProgram, buildProgramInfo } from '../../utils/shaders';
-import glhelper from '../../utils/glhelper';
+import glHelper from '../../utils/glhelper';
+import textureHelper from '../../utils/texturehelper';
 import './display.css';
-
 
 const buildShaderSuite = gl => {
    const sliceShader = getShaderProgram(gl, 'Slice');
@@ -18,6 +18,9 @@ const buildShaderSuite = gl => {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
             translation: 'uTranslation',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
          },
       },
       sphereShader: {
@@ -29,6 +32,9 @@ const buildShaderSuite = gl => {
             translation: 'uTranslation',
             eyePosition: 'uEyePos',
             radius: 'uRadius',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
          },
       },
       surfaceShader: {
@@ -39,22 +45,30 @@ const buildShaderSuite = gl => {
             modelViewMatrix: 'uModelViewMatrix',
             eyePosition: 'uEyePos',
             dataValue: 'uDataValue',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
          },
       },
    }
    return buildProgramInfo(gl, programInfo);
 }
 
+let texList = null;
 
 const drawScene = (gl, scene, objects, frameRate) => {
    
-   if (!glhelper.isInit) {
+   if (!textureHelper.isInit) {
+      textureHelper.init(gl);
+   }
+   
+   if (!glHelper.isInit) {
       const shaderSuite = buildShaderSuite(gl);
-      glhelper.init(gl, shaderSuite);
+      glHelper.init(gl, shaderSuite);
    }
 
-   glhelper.updateModelViewMatrix(scene.zoom, scene.azi, scene.pol);
-   glhelper.renderObjectList(objects);
+   glHelper.updateModelViewMatrix(scene.zoom, scene.azi, scene.pol);
+   glHelper.renderObjectList(objects, textureHelper.textureList, textureHelper.colorMapList);
 }
 
 const Display = () => {
