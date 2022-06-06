@@ -32,6 +32,9 @@ const fs =
 
    uniform float uRadius;
 
+   uniform highp sampler3D modelData;
+   uniform highp sampler2D colorMap;
+
    out vec4 color;
 
    // solving r^2 = (x-c)^2, where
@@ -96,11 +99,11 @@ const fs =
       gl_FragDepth = 1.0/depth;  
 
       // now that we know we want to draw, get pixel color
-      // float val = texture(modelData, 0.5*(pos+1.0))[uDataIndex];
-      // vec4 clr = texture(colorMap, vec2(val, 0.5));
+      float val = texture(modelData, 0.5*(pos+1.0))[0];
+      vec4 clr = texture(colorMap, vec2(val, 0.5));
       vec3 norm = normalize(pos-origin);
       float diffuse = 0.3 + abs(dot(norm, light));
-      color = vec4(vec3(1.0)*diffuse, 1.0);
+      color = vec4(clr.rgb*diffuse, 1.0);
    }
 `;
 

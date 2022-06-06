@@ -56,7 +56,7 @@ const useRenderables = () => {
       } else if (type === 'surface') {
          return [{
             variable: 'value',
-            trueValue: 0.0,
+            trueValue: 0.5,
             text: 'value',
             value: 50,
             min: 0,

@@ -44,7 +44,7 @@ const buildShaderSuite = gl => {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
             eyePosition: 'uEyePos',
-            dataValue: 'uDataValue',
+            dataValue: 'uValue',
             modelData: 'modelData',
             colorMap: 'colorMap',
             dataIndex: 'uDataIndex',
