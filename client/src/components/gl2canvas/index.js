@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 const useGL2Canvas = (glRef, draw, scene, objects) => {
    const canvasRef = useRef();
 
+   // const [ canvas, setCanvas ] = useState(null);
    useEffect(() => {
       const canvas = canvasRef.current;
       const gl = canvas.getContext('webgl2');
@@ -12,6 +13,11 @@ const useGL2Canvas = (glRef, draw, scene, objects) => {
       canvas.width = rect.width;
       canvas.height = rect.height;
       glRef.current = gl;
+
+      console.log(rect);
+   }, []);
+
+   useEffect(() => {
 
       const frameRate = 0.;
       draw(glRef.current, scene, objects, frameRate);
@@ -29,7 +35,11 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
    const [ canvasRect, setCanvasRect ] = useState(null);
 
    useEffect(() => {
-      setCanvasRect(glRef.current.canvas.getBoundingClientRect());
+      const canvas = glRef.current.canvas;
+
+      // this is necessary to get around 'passive' event listeners
+      // see more here: https://github.com/facebook/react/issues/19651
+      canvas.addEventListener('wheel', handleScroll);
    }, [])
 
    const handleMouseDown = ({ nativeEvent }) => {
@@ -48,16 +58,29 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
       if (!isActive) return;
       const deltaX = mouseLocation.x - nativeEvent.clientX;
       const deltaY = mouseLocation.y - nativeEvent.clientY;
-      moveCamera(clickLocation, canvasRect, 0.0, deltaX, deltaY);
+
+      // moveCamera(clickLocation, canvasRect, 0.0, deltaX, deltaY);
+      moveCamera(clickLocation, 0.0, deltaX, deltaY);
       setMouseLocation({ x: nativeEvent.clientX, y: nativeEvent.clientY });
+   }
+
+   const handleMouseLeave = () => setIsActive(false);
+
+   const handleScroll = event => {
+      event.preventDefault();
+      const deltaY = event.deltaY / 2000.0;
+      const mouse = {x: event.clientX, y: event.clientY};
+      moveCamera(mouse, deltaY, 0.0, 0.0);
    }
    
    return (
       <canvas 
          ref={canvasRef} 
+         id='glCanvas'
          onMouseDown={handleMouseDown}
          onMouseUp={handleMouseUp}
          onMouseMove={handleMouseMove}
+         onMouseLeave={handleMouseLeave}
          style={{width: '600px', height: '500px'}}
       />
    );

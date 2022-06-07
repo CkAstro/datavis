@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 
 const CameraContext = createContext();
 
@@ -41,19 +41,24 @@ const useCamera = () => {
       }
    }
 
-   const moveCamera = (clickLocation, canvasRect, dz, da, dp) => {
-      const activeCamera = (options.compare && !options.linked && clickLocation.x-canvasRect.left > canvasRect.width/2.0) ? 1 : 0;
-      const newCamera = options.camera.slice();
-      newCamera[activeCamera] = {
-         zoom: options.camera[activeCamera].zoom + dz,
-         azi: options.camera[activeCamera].azi - da,
-         pol: options.camera[activeCamera].pol - dp,
+   const moveCamera = (clickLocation, dz, da, dp) => {
+
+      const canvas = document.getElementById('glCanvas');
+      const location = {x: clickLocation.x-canvas.offsetLeft, y: clickLocation.y-canvas.offsetTop}
+
+      const newOptions = { ..._BUGFIX_options };   // see comment below for bugfix
+      const activeCamera = (newOptions.compare && !newOptions.linked && location.x > canvas.width/2.0) ? 1 : 0;
+      newOptions.camera[activeCamera] = {
+         zoom: newOptions.camera[activeCamera].zoom - dz,
+         azi: newOptions.camera[activeCamera].azi - da,
+         pol: newOptions.camera[activeCamera].pol - dp,
       }
-      setOptions({
-         ...options,
-         camera: newCamera,
-      });
+      setOptions(newOptions);
    }
+
+   useEffect(() => {
+      _BUGFIX_options = { ...options };      // see comment below for bugfix
+   }, [options]);
 
    return {
       options: options,
@@ -62,6 +67,27 @@ const useCamera = () => {
       handleCamera: moveCamera,
    }
 }
+
+
+// BUG FIX
+// note : this may be related to a 'passive event listener' issue
+//    with React; see https://github.com/facebook/react/issues/19651
+//
+// issue : any time moveCamera is called from 'handleScroll()' in
+//    'GL2Canvas' (it works fine from 'handleMouseMove()' even if
+//    'zoom' argument is non-zero), both 'options.compare' and 
+//    'options.linked' are reset to default values, while 
+//    'options.camera' is updated as normal. This reset occurs
+//    prior to the function call, so 'options.camera[0]' always
+//    receives the 'zoom' update.
+//     - canvas also seems to redraw on scroll and we cannot pass
+//       bounding rect info; we instead get via getElementById()
+//
+// fix : since 'options' keeps partially resetting, we copy it and
+//    use that copy to build 'newOptions' for 'setOptions()' call
+//    we then add a 'useEffect()' to watch for 'options' change and
+//    recopy options to '_BUGFIX_options' on update
+let _BUGFIX_options = { ...defaultOptions };
 
 export {
    CameraProvider,
