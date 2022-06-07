@@ -13,6 +13,7 @@ const Display = () => {
       <div className='displayArea'>
          <p><b>Display</b></p>
          <div className='actionBar'>
+            <div className='separator'/>
             <CompareButton/>
             <LinkedButton/>
          </div>
