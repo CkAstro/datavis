@@ -5,9 +5,10 @@ const CameraContext = createContext();
 const defaultOptions = {
    compare: false,
    linked: true,
-   zoom: -3.0,
-   azi: 0.0,
-   pol: 0.0,
+   camera: [
+      { zoom: -3.0, azi: 0.0, pol: 0.0 },
+      { zoom: -3.0, azi: 0.0, pol: 0.0 },
+   ],
 }
 
 const CameraProvider = ({ children }) => {
@@ -31,16 +32,26 @@ const useCamera = () => {
    const toggleLinked = () => {
       if (!options.compare) return;
       const linked = !options.linked;
-      setOptions({ ...options, linked: linked });
+      if (!linked) {
+         const newCamera = options.camera.slice();
+         newCamera[1] = newCamera[0];
+         setOptions({ ...options, linked: linked, camera: newCamera });
+      } else {
+         setOptions({ ...options, linked: linked });
+      }
    }
 
-   const moveCamera = (dz, da, dp) => {
+   const moveCamera = (clickLocation, canvasRect, dz, da, dp) => {
+      const activeCamera = (options.compare && !options.linked && clickLocation.x-canvasRect.left > canvasRect.width/2.0) ? 1 : 0;
+      const newCamera = options.camera.slice();
+      newCamera[activeCamera] = {
+         zoom: options.camera[activeCamera].zoom + dz,
+         azi: options.camera[activeCamera].azi - da,
+         pol: options.camera[activeCamera].pol - dp,
+      }
       setOptions({
          ...options,
-         zoom: options.zoom + dz,
-         azi: options.azi - da,
-         pol: options.pol - dp,
-         queue: true,
+         camera: newCamera,
       });
    }
 

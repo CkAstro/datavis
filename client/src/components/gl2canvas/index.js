@@ -25,10 +25,17 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
 
    const [ isActive, setIsActive ] = useState(false);
    const [ mouseLocation, setMouseLocation ] = useState({x: null, y: null});
+   const [ clickLocation, setClickLocation ] = useState({x: null, y: null});
+   const [ canvasRect, setCanvasRect ] = useState(null);
+
+   useEffect(() => {
+      setCanvasRect(glRef.current.canvas.getBoundingClientRect());
+   }, [])
 
    const handleMouseDown = ({ nativeEvent }) => {
       nativeEvent.preventDefault();
       setMouseLocation({ x: nativeEvent.clientX, y: nativeEvent.clientY });
+      setClickLocation({ x: nativeEvent.clientX, y: nativeEvent.clientY });
       setIsActive(true);
    }
 
@@ -41,9 +48,10 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
       if (!isActive) return;
       const deltaX = mouseLocation.x - nativeEvent.clientX;
       const deltaY = mouseLocation.y - nativeEvent.clientY;
-      moveCamera(0.0, deltaX, deltaY);
+      moveCamera(clickLocation, canvasRect, 0.0, deltaX, deltaY);
       setMouseLocation({ x: nativeEvent.clientX, y: nativeEvent.clientY });
    }
+   
    return (
       <canvas 
          ref={canvasRef} 

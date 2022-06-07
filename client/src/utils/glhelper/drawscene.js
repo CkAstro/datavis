@@ -9,8 +9,6 @@ const drawScene = (gl, scene, objects, frameRate) => {
       const shaderSuite = buildShaderSuite(gl);
       glHelper.init(gl, shaderSuite);
    }
-
-   glHelper.updateModelViewMatrix(scene);
    glHelper.renderObjectList(objects, scene, texHelper.textureList);
 }
 

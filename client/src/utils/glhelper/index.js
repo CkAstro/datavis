@@ -42,20 +42,28 @@ class GLHelper {
       );
    }
 
-   updateModelViewMatrix(scene) {
-      const zoom = scene.zoom;
-      const azi = scene.azi;
-      const pol = scene.pol;
-      if (this.zoom === zoom && this.azi === azi && this.pol === pol) return;
-      this.zoom = zoom;
-      this.azi = azi;
-      this.pol = pol;
+   enableShader(type) {
+      let shader;
+      if (type === 'slice') {
+         shader = this.shaderSuite.sliceShader;
+      } else if (type === 'sphere') {
+         shader = this.shaderSuite.sphereShader;
+      } else if (type === 'surface') {
+         shader = this.shaderSuite.surfaceShader;
+      } else {
+         throw new Error('object type not recognized');
+      }
+      this.glInstance.useProgram(shader.program);
+      return shader;
+   }
+
+   getModelViewMatrix(camera) {
       
-      const azimuthal = 2.0 * Math.PI * azi / 600.0;
-      const polar = 2.0 * Math.PI * pol / 500.0;
+      const azimuthal = 2.0 * Math.PI * camera.azi / 600.0;
+      const polar = 2.0 * Math.PI * camera.pol / 500.0;
 
       this.modelViewMatrix = mat4.create();
-      mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0.0, 0.0, zoom]);
+      mat4.translate(this.modelViewMatrix, this.modelViewMatrix, [0.0, 0.0, camera.zoom]);
       mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, azimuthal, [0.0, 1.0, 0.0]);
       mat4.rotate(this.modelViewMatrix, this.modelViewMatrix, polar, [Math.cos(azimuthal), 0.0, Math.sin(azimuthal)]);
 
@@ -67,6 +75,14 @@ class GLHelper {
       ];
    }
 
+   enableViewport(window, compare) {
+      const gl = this.glInstance;
+
+      if (!compare) return gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      if (window === 0) return gl.viewport(0, 0, gl.canvas.width/2.0, gl.canvas.height);
+      return gl.viewport(gl.canvas.width/2.0, 0, gl.canvas.width/2.0, gl.canvas.height);
+   }
+
    renderObjectList(objects, scene, tex) {
       const gl = this.glInstance;
 
@@ -76,54 +92,60 @@ class GLHelper {
       gl.enable(gl.DEPTH_TEST); 
       gl.depthFunc(gl.LEQUAL);
 
-      gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      for (let window=0; window<2; window++) {
+         if (window === 1 && !scene.compare) break;
 
-      for (const obj of objects) {
-         if (!obj.isVisible[0]) continue;
+         // enable viewport
+         this.enableViewport(window, scene.compare);
 
-         let shader;
-         if (obj.type === 'slice') {
-            shader = this.shaderSuite.sliceShader;
-            gl.useProgram(shader.program);
-            const translation = [obj.sliderList[0].trueValue, 0.0, 0.0, 0.0];
+         for (const obj of objects) {
+            if (!obj.isVisible[window]) continue;  // only draw visible objects
 
-            gl.uniform4fv(shader.uniformLocations.translation, translation);
-         } else if (obj.type === 'sphere') {
-            shader = this.shaderSuite.sphereShader;
-            gl.useProgram(shader.program);
-            const translation = [
-               obj.sliderList[0].trueValue,
-               obj.sliderList[1].trueValue,
-               obj.sliderList[2].trueValue,
-               0.0
-            ];
-            const radius = obj.sliderList[3].trueValue;
+            // enable correct shader
+            const shader = this.enableShader(obj.type);
 
-            gl.uniform4fv(shader.uniformLocations.translation, translation);
-            gl.uniform1f(shader.uniformLocations.radius, radius);
-            gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
-         } else if (obj.type === 'surface') {
-            shader = this.shaderSuite.surfaceShader;
-            gl.useProgram(shader.program);
-            const dataValue = obj.sliderList[0].trueValue;
+            // enable global matrices
+            const camera = scene.linked ? scene.camera[0] : scene.camera[window];
+            this.getModelViewMatrix(camera);
+            // this.getModelViewMatrix(scene.camera[scene.linked ? 0 : window]);
+            gl.uniformMatrix4fv(shader.uniformLocations.projectionMatrix, false, this.projectionMatrix);
+            gl.uniformMatrix4fv(shader.uniformLocations.modelViewMatrix, false, this.modelViewMatrix);
+            gl.uniform1i(shader.uniformLocations.dataIndex, obj.activeVarIndex);
 
-            gl.uniform1f(shader.uniformLocations.dataValue, dataValue);
-            gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
+            // enable data texture
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_3D, tex.textures[0]);
+            gl.uniform1i(shader.uniformLocations.modelData, 0);
+
+            // enable color map
+            gl.activeTexture(gl.TEXTURE1);
+            gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0]);
+            gl.uniform1i(shader.uniformLocations.colorMap, 1);
+
+            // enable type-dependent uniforms
+            const sliderVals = obj.sliderList.map(slider => slider.trueValue);
+            if (obj.type === 'slice') {
+               const translation = [sliderVals[0], 0.0, 0.0, 0.0];
+               gl.uniform4fv(shader.uniformLocations.translation, translation);
+            } else if (obj.type === 'sphere') {
+               const translation = [sliderVals[0], sliderVals[1], sliderVals[2], 0.0];
+               const radius = sliderVals[3];
+
+               gl.uniform4fv(shader.uniformLocations.translation, translation);
+               gl.uniform1f(shader.uniformLocations.radius, radius);
+               gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
+            } else if (obj.type === 'surface') {
+               const dataValue = sliderVals[0];
+
+               gl.uniform1f(shader.uniformLocations.dataValue, dataValue);
+               gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
+            } else {
+               throw new Error('object type not recognized');
+            }
+
+            // render object
+            this[obj.type].render();
          }
-
-         gl.uniformMatrix4fv(shader.uniformLocations.projectionMatrix, false, this.projectionMatrix);
-         gl.uniformMatrix4fv(shader.uniformLocations.modelViewMatrix, false, this.modelViewMatrix);
-         gl.uniform1i(shader.uniformLocations.dataIndex, obj.activeVarIndex)
-
-         gl.activeTexture(gl.TEXTURE0);
-         gl.bindTexture(gl.TEXTURE_3D, tex.textures[0]);
-         gl.uniform1i(shader.uniformLocations.modelData, 0);
-
-         gl.activeTexture(gl.TEXTURE1);
-         gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0]);
-         gl.uniform1i(shader.uniformLocations.colorMap, 1);
-
-         this[obj.type].render();
       }
    }
 }
