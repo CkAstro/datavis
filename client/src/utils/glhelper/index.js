@@ -42,7 +42,10 @@ class GLHelper {
       );
    }
 
-   updateModelViewMatrix(zoom, azi, pol) {
+   updateModelViewMatrix(scene) {
+      const zoom = scene.zoom;
+      const azi = scene.azi;
+      const pol = scene.pol;
       if (this.zoom === zoom && this.azi === azi && this.pol === pol) return;
       this.zoom = zoom;
       this.azi = azi;
@@ -64,7 +67,7 @@ class GLHelper {
       ];
    }
 
-   renderObjectList(objects, textures, cmaps) {
+   renderObjectList(objects, scene, tex) {
       const gl = this.glInstance;
 
       gl.clearColor(0.0, 0.0, 0.0, 0.0);
@@ -113,11 +116,11 @@ class GLHelper {
          gl.uniform1i(shader.uniformLocations.dataIndex, obj.activeVarIndex)
 
          gl.activeTexture(gl.TEXTURE0);
-         gl.bindTexture(gl.TEXTURE_3D, textures[0]);
+         gl.bindTexture(gl.TEXTURE_3D, tex.textures[0]);
          gl.uniform1i(shader.uniformLocations.modelData, 0);
 
          gl.activeTexture(gl.TEXTURE1);
-         gl.bindTexture(gl.TEXTURE_2D, cmaps[0]);
+         gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0]);
          gl.uniform1i(shader.uniformLocations.colorMap, 1);
 
          this[obj.type].render();

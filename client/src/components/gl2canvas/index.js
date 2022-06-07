@@ -13,18 +13,8 @@ const useGL2Canvas = (glRef, draw, scene, objects) => {
       canvas.height = rect.height;
       glRef.current = gl;
 
-      let animationFrameId;
-      let then = 0.0;
-      const render = now => {
-         now *= 0.001;
-         const frameRate = then ? 1.0 / (now - then) : 0.0;
-
-         draw(glRef.current, scene, objects, frameRate);
-         animationFrameId = requestAnimationFrame(render);
-      }
-      render();
-
-      return () => window.cancelAnimationFrame(animationFrameId);
+      const frameRate = 0.;
+      draw(glRef.current, scene, objects, frameRate);
    }, [draw, scene, objects]);
    return canvasRef;
 }

@@ -8,7 +8,6 @@ const defaultOptions = {
    zoom: -3.0,
    azi: 0.0,
    pol: 0.0,
-   queue: true,
 }
 
 const CameraProvider = ({ children }) => {

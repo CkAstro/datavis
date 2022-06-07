@@ -4,8 +4,10 @@ const colormap = require('./cmap.png');
 
 class TextureHelper {
    constructor() {
-      this.textureList = [];
-      this.colorMapList = [];
+      this.textureList = {
+         textures: [],
+         colormaps: [],
+      }
       this.glInstance = null;
       this.isInit = false;
    }
@@ -13,8 +15,8 @@ class TextureHelper {
    init(gl) {
       this.glInstance = gl;
 
-      this.textureList = this.textureList.concat(this.loadDataFromImage());
-      this.colorMapList = this.colorMapList.concat(this.loadCmapFromImage());
+      this.textureList.textures = this.textureList.textures.concat(this.loadDataFromImage());
+      this.textureList.colormaps = this.textureList.colormaps.concat(this.loadCmapFromImage());
       this.isInit = true;
    }
 
