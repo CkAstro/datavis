@@ -22,7 +22,7 @@ class GLHelper {
    init(gl, shaderSuite) {
       this.glInstance = gl;
       this.shaderSuite = shaderSuite;
-      this.projectionMatrix = this.createProjectionMatrix();
+      this.projectionMatrix = mat4.create();
       this.modelViewMatrix = mat4.create();
 
       this.slice = new Renderables.Slice(gl, shaderSuite.sliceShader);
@@ -32,11 +32,11 @@ class GLHelper {
       this.isInit = true;
    }
 
-   createProjectionMatrix() {
+   getProjectionMatrix(width, height) {
       return mat4.perspective(
-         mat4.create(),
+         this.projectionMatrix,
          this.viewingAngle * Math.PI / 180.0,
-         this.glInstance.canvas.width / this.glInstance.canvas.height,
+         width / height,
          this.zNear,
          this.zFar,
       );
@@ -91,6 +91,13 @@ class GLHelper {
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
       gl.enable(gl.DEPTH_TEST); 
       gl.depthFunc(gl.LEQUAL);
+
+      // update projection matrix
+      if (scene.compare) {
+         this.getProjectionMatrix(gl.canvas.width/2, gl.canvas.height);
+      } else {
+         this.getProjectionMatrix(gl.canvas.width, gl.canvas.height);
+      }
 
       for (let window=0; window<2; window++) {
          if (window === 1 && !scene.compare) break;
