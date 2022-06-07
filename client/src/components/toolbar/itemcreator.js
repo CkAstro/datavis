@@ -1,28 +1,17 @@
-import { useState } from 'react';
 import { useRenderables } from '../../contexts/renderables';
 import './toolbar.css'; 
 
 const ItemCreator = () => {
-   const [ selection, setSelection ] = useState('sphere');
-
-   const handleSelection = event => {
-      event.preventDefault();
-      setSelection(event.target.value);
-   }
-
    const { handleCreate } = useRenderables();
 
    return (
       <div className='itemCreator'>
-         <button onClick={() => handleCreate(selection)}>Create</button>
-         <select onChange={e => handleSelection(e)} defaultValue='sphere'>
-            <option value='xslice'>X Slice</option>
-            <option value='yslice'>Y Slice</option>
-            <option value='zslice'>Z Slice</option>
-            <option value='sphere'>Sphere</option>
-            <option value='surface'>Surface</option>
-         </select>
-         <p>Create Item</p>
+         <p>Create Items</p>
+         <img onClick={() => handleCreate('surface')} title='Isosurface' src={require('./surface.png')}/>
+         <img onClick={() => handleCreate('sphere')} title='Spherical Slice' src={require('./sphere.png')}/>
+         <img onClick={() => handleCreate('zslice')} title='Z-Planar Slice' src={require('./zyx_z.png')}/>
+         <img onClick={() => handleCreate('yslice')} title='Y-Planar Slice' src={require('./zyx_y.png')}/>
+         <img onClick={() => handleCreate('xslice')} title='X-Planar Slice' src={require('./zyx_x.png')}/>
       </div>
    );
 }

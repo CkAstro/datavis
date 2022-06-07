@@ -46,10 +46,29 @@
 }
 
 /* ----- item creator ----- */
-.itemCreator>button,.itemCreator>select {
-   float: right;
-   border: none;
+.itemCreator {
+   display: grid;
+   grid-template-columns: repeat(5, 1fr);
+   grid-gap: 5px;
+   padding: var(--main-padding) 0px;
 }
-.itemCreator>select {
-   margin-right: 6px;
+
+.itemCreator>p:first-child {
+   grid-column-start: 1;
+   grid-column-end: 6;
+   margin: 0px;
+   padding: 0px;
+   margin-bottom: 14px;
+   text-align: center;
+}
+
+.itemCreator>img {
+   width: 100%;
+   background: #888;
+   filter: brightness(100%);
+   transition: all 0.2s;
+}
+
+.itemCreator>img:hover {
+   filter: brightness(80%);
 }
