@@ -4,12 +4,13 @@ const vs =
    uniform vec4 uTranslation;
    uniform mat4 uProjectionMatrix;
    uniform mat4 uModelViewMatrix;
+   uniform mat4 uRotation;
 
    out vec3 pos;
 
    void main() {
-      gl_Position = uProjectionMatrix * uModelViewMatrix * (aVertexPosition + uTranslation);
-      pos = (aVertexPosition + uTranslation).xyz;
+      gl_Position = uProjectionMatrix * uModelViewMatrix * uRotation * (aVertexPosition + uTranslation);
+      pos = (uRotation * (aVertexPosition + uTranslation)).xyz;
    }
 `;
 

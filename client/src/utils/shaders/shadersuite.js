@@ -16,6 +16,7 @@ const buildShaderSuite = gl => {
             modelData: 'modelData',
             colorMap: 'colorMap',
             dataIndex: 'uDataIndex',
+            rotation: 'uRotation',
          },
       },
       sphereShader: {

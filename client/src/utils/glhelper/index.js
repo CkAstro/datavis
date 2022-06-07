@@ -31,6 +31,20 @@ class GLHelper {
 
       this.isInit = true;
    }
+   
+   getRotationMatrix(type) {
+      const rotationMatrix = mat4.create();
+      if (type === 'xslice') return rotationMatrix;
+      if (type === 'yslice') {
+         mat4.rotate(rotationMatrix, rotationMatrix, Math.PI/2.0, [0.0, 0.0, 1.0]);
+         return rotationMatrix;
+      }
+      if (type === 'zslice') {
+         mat4.rotate(rotationMatrix, rotationMatrix, -Math.PI/2.0, [0.0, 1.0, 0.0]);
+         return rotationMatrix;
+      }
+      throw new Error('how did we get here?');
+   }
 
    getProjectionMatrix(width, height) {
       return mat4.perspective(
@@ -44,7 +58,7 @@ class GLHelper {
 
    enableShader(type) {
       let shader;
-      if (type === 'slice') {
+      if (type.includes('slice')) {
          shader = this.shaderSuite.sliceShader;
       } else if (type === 'sphere') {
          shader = this.shaderSuite.sphereShader;
@@ -130,11 +144,17 @@ class GLHelper {
             gl.uniform1i(shader.uniformLocations.colorMap, 1);
 
             // enable type-dependent uniforms
+            let renderer;
             const sliderVals = obj.sliderList.map(slider => slider.trueValue);
-            if (obj.type === 'slice') {
+            if (obj.type.includes('slice')) {
+               renderer = 'slice';
                const translation = [sliderVals[0], 0.0, 0.0, 0.0];
+               const rotation = this.getRotationMatrix(obj.type);
+
                gl.uniform4fv(shader.uniformLocations.translation, translation);
+               gl.uniformMatrix4fv(shader.uniformLocations.rotation, false, rotation);
             } else if (obj.type === 'sphere') {
+               renderer = 'sphere';
                const translation = [sliderVals[0], sliderVals[1], sliderVals[2], 0.0];
                const radius = sliderVals[3];
 
@@ -142,6 +162,7 @@ class GLHelper {
                gl.uniform1f(shader.uniformLocations.radius, radius);
                gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
             } else if (obj.type === 'surface') {
+               renderer = 'surface';
                const dataValue = sliderVals[0];
 
                gl.uniform1f(shader.uniformLocations.dataValue, dataValue);
@@ -151,7 +172,7 @@ class GLHelper {
             }
 
             // render object
-            this[obj.type].render();
+            this[renderer].render();
          }
       }
    }

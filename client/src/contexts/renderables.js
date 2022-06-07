@@ -21,9 +21,9 @@ const useRenderables = () => {
    }
 
    const getSliderList = type => {
-      if (type === 'slice') {
+      if (type.includes('slice')) {
          return [{
-            variable: 'x offset',
+            variable: 'offset',
             trueValue: 0.0,
             text: 'offset',
             value: 0,
@@ -67,12 +67,8 @@ const useRenderables = () => {
       }
    }
 
-   const createRenderable = type => {
-      const newRenderables = renderables.map(item => {
-         item.isActive = false;
-         return item;
-      });
-      const renderable = {
+   const generateRenderable = type => {
+      return {
          id: getNewId(),
          itemName: type,
          type: type,
@@ -82,6 +78,14 @@ const useRenderables = () => {
          activeVar: 'density',
          activeVarIndex: 0,
       }
+   }
+
+   const createRenderable = type => {
+      const newRenderables = renderables.map(item => {
+         item.isActive = false;
+         return item;
+      });
+      const renderable = generateRenderable(type);
       setRenderables(newRenderables.concat(renderable));
    }
 
