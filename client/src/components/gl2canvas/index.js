@@ -75,7 +75,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
          onMouseUp={handleMouseUp}
          onMouseMove={handleMouseMove}
          onMouseLeave={handleMouseLeave}
-         style={{width: '600px', height: '500px'}}
+         style={{width: '100%', height: '500px'}}
       />
    );
 }

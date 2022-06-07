@@ -1,0 +1,36 @@
+.displayArea>p:first-child {
+   text-align: center;
+   margin: 0px;
+   padding: 0px;
+   padding-bottom: 12px;
+   border-bottom: 1px dotted var(--ncsu-dark-gray);
+}
+
+
+.actionBar {
+   display: grid;
+   grid-template-columns: repeat(14, 1fr);
+   grid-gap: 5px;
+   padding: var(--main-padding) 0px;
+}
+
+.actionBar>img {
+   width: 100%;
+   background: #966;
+   filter: brightness(100%);
+   transition: all 0.2s;
+   cursor: pointer;
+}
+
+.actionBar>img.active {
+   background: #696;
+}
+
+.actionBar>img.disabled {
+   background: #888;
+   cursor: not-allowed;
+}
+
+.actionBar>img:hover {
+   filter: brightness(80%);
+}
