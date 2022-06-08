@@ -33,7 +33,7 @@ const NameChange = ({ controller, disableEdit }) => {
    }
 
    const handleInput = event => setNameValue(event.target.value);
-   const clearInput = event => setNameValue('');
+   const handleFocus = event => event.target.select();
 
    const handleKeyPress = event => {
       if (event.keyCode === 27) disableEdit();
@@ -43,9 +43,9 @@ const NameChange = ({ controller, disableEdit }) => {
          <input autoFocus className='nameChangeArea'
             onChange={handleInput}
             value={nameValue}
-            onClick={clearInput}
             onKeyDown={handleKeyPress}
             onBlur={disableEdit}
+            onFocus={handleFocus}
          />
       </form>
    );

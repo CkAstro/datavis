@@ -6,7 +6,7 @@ const Slider = ({ props }) => {
    const [ input, setInput ] = useState('');
    const [ editMode, setEditMode ] = useState(false);
 
-   const { renderables, handleSliderChange } = useRenderables();
+   const { handleSliderChange } = useRenderables();
    const isActive = props.isActive;
 
    useEffect(() => {
@@ -29,6 +29,7 @@ const Slider = ({ props }) => {
 
    const requestValChange = event => {
       event.preventDefault();
+      if (input != Number(input)) return;    // must be number..
       const numberValue = Number(input) * 100;
       if (numberValue > 100 || numberValue < -100) return;
       if (numberValue < 0 && (props.variable === 'value' || props.variable === 'radius')) return;
@@ -37,21 +38,16 @@ const Slider = ({ props }) => {
    }
 
    const handleInput = event => setInput(event.target.value);
-   const clearInput = event => {
-      // NOTE: we don't want to use '===' here
-      if (event.target.value == props.trueValue) { 
-         setInput('');
-      }
-   }
+   const handleFocus = event => event.target.select();
 
    const valChangeArea = (
       <form onSubmit={requestValChange}>
          <input autoFocus className='valChangeArea'
             onChange={handleInput}
             value={input}
-            onClick={clearInput}
             onKeyDown={handleKeyPress}
             onBlur={() => disableEdit()}
+            onFocus={handleFocus}
          />
       </form>
    );
