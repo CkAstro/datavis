@@ -6,16 +6,27 @@ import { CompareButton, LinkedButton, ViewAxisX, ViewAxisY, ViewAxisZ } from './
 import './display.css';
 import { BinaryUploadButton, ImgUploadButton, LoadButton, SaveButton, UploadButton } from './fileoptions';
 import SceneOptions from './sceneoptions';
+import Modal from '../modal';
+import { useState, useEffect } from 'react';
 
 const Display = () => {
+   const [ modalContent, setModalContent ] = useState(null);
+   const [ modalActive, setModalActive ] = useState(false);
+
    const { options, handleCamera } = useCamera();
    const { renderables } = useRenderables();
+
+   const closeModal = () => setModalActive(false);
+   useEffect(() => {
+      if (modalContent) setModalActive(true);
+   }, [modalContent]);
 
    return (
       <div className='displayArea'>
          <p><b>Display</b></p>
+         <Modal closeModal={closeModal} isActive={modalActive}>{modalContent}</Modal>
          <div className='actionBar'>
-            <SaveButton/>
+            <SaveButton setModalContent={setModalContent}/>
             <LoadButton/>
             <div className='separator'/>
             <UploadButton/>

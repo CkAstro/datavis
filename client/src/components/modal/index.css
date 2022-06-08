@@ -1,0 +1,44 @@
+
+.modalContainer {
+   visibility: hidden;
+   opacity: 0.0;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: rgba(255, 255, 255, 0.6);
+   z-index: 100;
+   transition: all 0.4s;
+}
+
+.modalContainer.active {
+   visibility: visible;
+   opacity: 1.0;
+}
+
+.modal {
+   border: 2px solid var(--ncsu-dark-gray);
+   border-radius: 10px;
+   width: 500px;
+   background: var(--ncsu-light-gray);
+   padding: 20px;
+}
+
+.modal h1 {
+   margin: 0px;
+   padding: 0px;
+   padding-bottom: 6px;
+   border-bottom: 1px dotted var(--ncsu-dark-gray);
+   color: var(--ncsu-dark-red);
+}
+
+.modal p {
+   margin: 0px;
+   margin-top: 16px;
+   margin-bottom: 16px;
+   padding: 0px;
+}

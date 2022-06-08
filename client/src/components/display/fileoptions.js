@@ -9,12 +9,21 @@ const LoadButton = () => {
    />
 }
 
-const SaveButton = () => {
+const SaveButton = ({ setModalContent }) => {
+   const displaySaveModal = () => {
+      setModalContent(
+         <>
+            <h1>Save Session</h1>
+            <p>You are attempting to save your session.</p>
+            <p><b>Unfortunately, this feature is not yet enabled.</b></p>
+         </>
+      );
+   }
 
    return <img className='disabled'
       title='Save Session'
       src={require('./save.png')}
-      onClick={null}
+      onClick={() => displaySaveModal()}
    />
 }
 
