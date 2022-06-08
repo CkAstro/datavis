@@ -58,7 +58,6 @@ const useCamera = () => {
 
    const snapCamera = (cameraInd, direction) => {
       const newOptions = { ...options };
-
       if (direction === 'x' || direction === 'X') {
          newOptions.camera[cameraInd].azi = 150;
          newOptions.camera[cameraInd].pol = 0;
