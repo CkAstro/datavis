@@ -118,7 +118,7 @@
 
 
 /* ----- close icon ----- */
-.closeIcon {
+.closeButton {
    margin-left: 6px;
    padding: 2px;
    border: 1px solid var(--ncsu-dark-red);
@@ -128,7 +128,7 @@
    cursor: pointer;
 }
 
-.closeIcon:hover {
+.closeButton:hover {
    border-color: #500;
    background-color: rgba(143, 0, 0, 0.3);
 }
