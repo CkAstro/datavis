@@ -5,6 +5,7 @@ import Display from './components/display';
 import Toolbar from './components/toolbar';
 import { RenderablesProvider } from './contexts/renderables';
 import { CameraProvider } from './contexts/camera';
+import { ModalProvider } from './contexts/modal';
 import './index.css';
 
 const DataVis = () => {
@@ -12,8 +13,10 @@ const DataVis = () => {
       <div className='datavisContainer'>
          <RenderablesProvider>
             <CameraProvider>
-               <Display/>
-               <Toolbar/>
+               <ModalProvider>
+                  <Display/>
+                  <Toolbar/>
+               </ModalProvider>
             </CameraProvider>
          </RenderablesProvider>
       </div>
