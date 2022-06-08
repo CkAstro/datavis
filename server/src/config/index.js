@@ -1,6 +1,10 @@
-require('dotenv').config();
+// require('dotenv').config();
+import { config } from 'dotenv';
+
 'use strict';
 
-module.exports = {
-   port: process.env.PORT || 3002,
+const PORT = process.env.PORT || 3002;
+
+export {
+   PORT,
 }

@@ -1,9 +1,9 @@
-const compression = require('compression');
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
+import compression from 'compression';
+import express from 'express';
+import cors from 'cors';
+import fs from 'fs';
 
-const PORT = require('./config').port;
+import { PORT } from './config/index.js';
 'use strict';
 
 // ----- init ----- //
@@ -28,7 +28,7 @@ app.use(requestLogger);
 
 
 // ----- static serving ----- //
-app.use(express.static('../../client/build'));     // NOTE: this MUST come after API requests
+app.use(express.static('../client/build'));     // NOTE: this MUST come after API requests
 
 // ----- unknown endpoint ----- //
 const unknownEndpoint = (request, response) => {
