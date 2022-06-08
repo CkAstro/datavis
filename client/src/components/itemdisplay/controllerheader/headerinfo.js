@@ -54,7 +54,6 @@ const NameChange = ({ controller, disableEdit }) => {
 const HeaderInfo = ({ controller, isActive }) => {
    const [ editMode, setEditMode ] = useState(false);
 
-   const nameChangeArea = null;
    const enableEdit = () => setEditMode(true); 
    const disableEdit = () => setEditMode(false);
 
