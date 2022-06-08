@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { useRenderables } from '../../contexts/renderables';
 import './toolbar.css'; 
 
 const ItemCreator = () => {
-   const { handleCreate } = useRenderables();
+   const { renderables, handleCreate } = useRenderables();
+
+   useEffect(() => {
+      if (renderables.length === 0) handleCreate('sphere');
+   }, []);
 
    return (
       <div className='optionsArea'>
