@@ -1,9 +1,11 @@
 
 /* ----- index.js ----- */
+
 .header h1 {
    margin: 0px;
    padding: 0px;
-   font-size: 38px;
+   padding-top: 12px;
+   font-size: 36px;
    font-weight: bold;
    color: var(--ncsu-dark-red);
 }
@@ -11,9 +13,9 @@
 .header h2 {
    margin: 0px;
    padding: 0px;
-   font-size: 18px;
+   font-size: 16px;
    font-weight: bold;
-   padding: 12px 100px;
+   padding: 12px 60px;
    padding-top: 6px;
 }
 
@@ -25,12 +27,17 @@
 .navbar .mainContainer div {
    display: inline-block;
    margin: 0px;
-   padding: 6px 12px;
+   padding: 8px 16px;
    color: white;
-   background: var(--ncsu-light-red);
+   /* background: var(--ncsu-light-red); */
    transition: all 0.2s;
+   cursor: pointer;
+}
+
+.navbar .mainContainer .active {
+   background: var(--ncsu-light-red);
 }
  
-.navbar .mainContainer div:hover {
+.navbar .mainContainer div:hover:not(.active) {
    background: var(--ncsu-dark-red);
 }
