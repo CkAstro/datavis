@@ -35,6 +35,8 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
       // this is necessary to get around 'passive' event listeners
       // see more here: https://github.com/facebook/react/issues/19651
       canvas.addEventListener('wheel', handleScroll);
+      canvas.addEventListener('touchstart', e => e.preventDefault());
+      canvas.addEventListener('touchmove', e => e.preventDefault());
    }, [])
 
    const handleMouseDown = ({ nativeEvent }) => {
@@ -66,6 +68,26 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
       const mouse = {x: event.clientX, y: event.clientY};
       moveCamera(mouse, zoom, 0.0, 0.0);
    }
+
+   const handleTouchStart = ({ nativeEvent }) => {
+      const event = nativeEvent.changedTouches[0];
+      setMouseLocation({ x: event.clientX, y: event.clientY });
+      setClickLocation({ x: event.clientX, y: event.clientY });
+      setIsActive(true);
+   }
+
+   const handleTouchEnd = () => {
+      setIsActive(false);
+   }
+   const handleTouchMove = ({ nativeEvent }) => {
+      if (!isActive) return;
+      const event = nativeEvent.changedTouches[0];
+      const deltaX = mouseLocation.x - event.clientX;
+      const deltaY = mouseLocation.y - event.clientY;
+
+      moveCamera(clickLocation, 0.0, deltaX, deltaY);
+      setMouseLocation({ x: event.clientX, y: event.clientY });
+   }
    
    return (
       <canvas 
@@ -75,6 +97,11 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
          onMouseUp={handleMouseUp}
          onMouseMove={handleMouseMove}
          onMouseLeave={handleMouseLeave}
+
+         onTouchStart={handleTouchStart}
+         onTouchEnd={handleTouchEnd}
+         onTouchMove={handleTouchMove}
+
          style={{width: '100%', height: '500px'}}
       />
    );
