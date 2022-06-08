@@ -1,5 +1,5 @@
 import { useRenderables } from "../../../contexts/renderables"
-import './itemcontroller.css';
+import './index.css';
 
 const VariableSelector = ({ controllerId }) => {
    const { handleVarChange } = useRenderables();

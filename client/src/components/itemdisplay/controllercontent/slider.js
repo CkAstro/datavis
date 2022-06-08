@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRenderables } from '../../../contexts/renderables';
+import './index.css';
 
 const Slider = ({ props }) => {
    const [ input, setInput ] = useState('');

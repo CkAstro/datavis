@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCamera } from '../../../contexts/camera';
 import { useRenderables } from '../../../contexts/renderables';
-import './itemcontroller.css';
+import './controllerheader.css';
 
 const ControllerHeader = ({ controllerId }) => {
    const [ input, setInput ] = useState('');

@@ -1,7 +1,7 @@
 import { useRenderables } from '../../../contexts/renderables';
 import VariableSelector from './variableselector';
 import Slider from './slider';
-import './itemcontroller.css';
+import './index.css';
 
 const ControllerContent = ({ controllerId }) => {
    const { renderables } = useRenderables();

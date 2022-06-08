@@ -6,10 +6,7 @@ const Toolbar = () => {
    return (
       <div className='toolbarArea'>
          <p><b>Toolbar</b></p>
-         <div className='optionsArea'>
-            <ItemCreator/>
-         </div>
-         <p>Item Controller</p>
+         <ItemCreator/>
          <ItemDisplay/>
       </div>
    );

@@ -1,5 +1,5 @@
-import ControllerHeader from './controllerheader';
-import ControllerContent from './controllercontent';
+import ControllerHeader from '../controllerheader';
+import ControllerContent from '../controllercontent';
 import './itemcontroller.css';
 
 const ItemController = ({ props }) => {

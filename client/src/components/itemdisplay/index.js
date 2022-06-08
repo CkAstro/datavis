@@ -10,11 +10,14 @@ const ItemDisplay = () => {
    });
    
    return (
-      <div className='displayContainer'>
-         <div className='itemDisplay noscrollbar'>
-            {getItemList()}
+      <>
+         <p>ItemController</p>
+         <div className='displayContainer'>
+            <div className='itemDisplay noscrollbar'>
+               {getItemList()}
+            </div>
          </div>
-      </div>
+      </>
    );
 }
 
