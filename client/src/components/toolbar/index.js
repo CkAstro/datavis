@@ -9,7 +9,7 @@ const Toolbar = () => {
          <div className='optionsArea'>
             <ItemCreator/>
          </div>
-         <p>Control Items</p>
+         <p>Item Controller</p>
          <ItemDisplay/>
       </div>
    );

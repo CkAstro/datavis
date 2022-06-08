@@ -50,16 +50,16 @@
    display: grid;
    grid-template-columns: repeat(5, 1fr);
    grid-column-gap: 5px;
-   padding: var(--main-padding) 0px;
+   padding: var(--main-padding) 0px 6px 0px;
 }
 
-.itemCreator>p:first-child {
+.itemCreator>p:last-child {
    grid-column-start: 1;
    grid-column-end: 6;
    margin: 0px;
    padding: 0px;
-   margin-bottom: 12px;
-   text-align: center;
+   text-align: right;
+   font-size: 12px;
 }
 
 .itemCreator>img {
@@ -67,6 +67,7 @@
    background: #888;
    filter: brightness(100%);
    transition: all 0.2s;
+   cursor: pointer;
 }
 
 .itemCreator>img:hover {
