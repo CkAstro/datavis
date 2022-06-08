@@ -7,7 +7,7 @@ const ItemCreator = () => {
 
    useEffect(() => {
       // timeout gives texture time to load
-      if (renderables.length === 0) setTimeout(() => handleCreate('sphere'), 500);
+      if (renderables.length === 0) setTimeout(() => handleCreate('sphere'), 1000);
    }, []);
 
    return (
