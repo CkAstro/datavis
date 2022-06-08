@@ -11,7 +11,7 @@ const ItemDisplay = () => {
    
    return (
       <>
-         <p>ItemController</p>
+         <p>Item Controller</p>
          <div className='displayContainer'>
             <div className='itemDisplay noscrollbar'>
                {getItemList()}
