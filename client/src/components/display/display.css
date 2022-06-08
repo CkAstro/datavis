@@ -112,6 +112,10 @@
    filter:opacity(0.3);
 }
 
+.sceneController.hidden {
+   filter: opacity(0.0);
+}
+
 .sceneController>* {
    display: flex;
    justify-content: center;
