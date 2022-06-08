@@ -56,6 +56,24 @@ const useCamera = () => {
       setOptions(newOptions);
    }
 
+   const snapCamera = (cameraInd, direction) => {
+      const newOptions = { ...options };
+
+      if (direction === 'x' || direction === 'X') {
+         newOptions.camera[cameraInd].azi = 150;
+         newOptions.camera[cameraInd].pol = 0;
+      } else if (direction === 'y' || direction === 'Y') {
+         newOptions.camera[cameraInd].azi = 0;
+         newOptions.camera[cameraInd].pol = 125;
+      } else if (direction === 'z' || direction === 'Z') {
+         newOptions.camera[cameraInd].azi = 0;
+         newOptions.camera[cameraInd].pol = 0;
+      } else {
+         throw new Error('how did we get here?');
+      }
+      setOptions(newOptions);
+   }
+
    useEffect(() => {
       _BUGFIX_options = { ...options };      // see comment below for bugfix
    }, [options]);
@@ -65,6 +83,7 @@ const useCamera = () => {
       handleCompare: toggleCompare,
       handleLinked: toggleLinked,
       handleCamera: moveCamera,
+      handleSnap: snapCamera,
    }
 }
 
