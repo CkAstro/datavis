@@ -1,6 +1,4 @@
-// require('dotenv').config();
-import { config } from 'dotenv';
-
+import 'dotenv/config';
 'use strict';
 
 const PORT = process.env.PORT || 3002;
