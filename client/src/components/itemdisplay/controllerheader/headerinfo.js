@@ -3,9 +3,15 @@ import { useRenderables } from '../../../contexts/renderables';
 import Icons from '../../icons';
 import style from './controllerheader.module.css';
 
-const EditButton = ({ enableEdit }) => <div className={style.editButton} onClick={enableEdit}>
-   <Icons.Edit fill='black' size='12'/>
-</div>;
+const EditButton = ({ enableEdit }) => {
+   const handleClick = event => {
+      event.stopPropagation();
+      enableEdit();
+   }
+   return <div className={style.editButton} onClick={handleClick}>
+      <Icons.Edit fill='black' size='12' setStyle={{padding: '2px'}}/>
+   </div>;
+}
 
 const NameDisplay = ({ controller, enableEdit }) => {
    const [ showEditButton, setShowEditButton ] = useState(false);
@@ -15,10 +21,15 @@ const NameDisplay = ({ controller, enableEdit }) => {
       setShowEditButton(false);
    }, [controller.isActive]);
 
+   const handleClick = event => {
+      event.stopPropagation();
+      setShowEditButton(true);
+   }
+
    return <>
       <div className={`${style.controllerName} noselect`}
          title={controller.itemName}
-         onClick={controller.isActive ? () => setShowEditButton(true) : null}
+         onClick={controller.isActive ? handleClick : null}
          onDoubleClick={controller.isActive ? enableEdit : null}
       >{controller.id} - {controller.itemName}</div>
       {showEditButton ? <EditButton enableEdit={enableEdit}/> : null }
@@ -54,8 +65,9 @@ const NameChange = ({ controller, disableEdit }) => {
    );
 }
 
-const HeaderInfo = ({ controller, isActive }) => {
+const HeaderInfo = ({ controllerId, controller, isActive }) => {
    const [ editMode, setEditMode ] = useState(false);
+   const { activateRenderable } = useRenderables();
 
    const enableEdit = () => setEditMode(true); 
    const disableEdit = () => setEditMode(false);
@@ -65,8 +77,13 @@ const HeaderInfo = ({ controller, isActive }) => {
       : <NameDisplay controller={controller} enableEdit={enableEdit}/>
    ;
 
+   const handleClick = event => {
+      event.stopPropagation();
+      activateRenderable(controllerId);
+   }
+
    return (
-      <div className={style.controllerInfo}>
+      <div className={style.controllerInfo} onClick={handleClick}>
          <div className={style.infoContainer}>
             {itemNameDiv}
          </div>
