@@ -1,14 +1,13 @@
 import CompareButton from './comparebutton';
 import LinkedButton from './linkedbutton';
-import '../display.css';
 
 const CameraController = () => {
 
    return (
-      <>
+      <div>
          <CompareButton/>
          <LinkedButton/>
-      </>
+      </div>
    );
 }
 

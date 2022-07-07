@@ -1,0 +1,7 @@
+
+img { width: 100%; height: 100%; }
+.disabled { cursor: not-allowed; }
+.active { background: #696; }
+.inactive { background: #966; }
+
+.modalContent {}
