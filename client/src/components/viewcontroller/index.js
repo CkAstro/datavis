@@ -1,5 +1,5 @@
-import { useCamera } from '../../../contexts/camera';
-import '../display.css';
+import { useCamera } from '../../contexts/camera';
+import style from './viewcontroller.module.css';
 
 const ViewAxisX = () => {
    const { handleSnap } = useCamera();
@@ -39,11 +39,11 @@ const ViewAxisZ = () => {
 
 const ViewController = () => {
    return (
-      <>
+      <div>
          <ViewAxisX/>
          <ViewAxisY/>
          <ViewAxisZ/>
-      </>
+      </div>
    );
 }
 
