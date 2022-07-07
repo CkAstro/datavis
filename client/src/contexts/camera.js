@@ -32,13 +32,9 @@ const useCamera = () => {
    const toggleLinked = () => {
       if (!options.compare) return;
       const linked = !options.linked;
-      if (!linked) {
-         const newCamera = options.camera.slice();
-         newCamera[1] = newCamera[0];
-         setOptions({ ...options, linked: linked, camera: newCamera });
-      } else {
-         setOptions({ ...options, linked: linked });
-      }
+      const newCamera = options.camera.slice();
+      if (!linked) newCamera[1] = newCamera[0];
+      setOptions({ ...options, linked: linked, camera: newCamera });
    }
 
    const moveCamera = (clickLocation, dz, da, dp) => {
@@ -78,11 +74,11 @@ const useCamera = () => {
    }, [options]);
 
    return {
-      options: options,
-      handleCompare: toggleCompare,
-      handleLinked: toggleLinked,
-      handleCamera: moveCamera,
-      handleSnap: snapCamera,
+      options,
+      toggleCompare,
+      toggleLinked,
+      moveCamera,
+      snapCamera,
    }
 }
 
@@ -90,6 +86,9 @@ const useCamera = () => {
 // BUG FIX
 // note : this may be related to a 'passive event listener' issue
 //    with React; see https://github.com/facebook/react/issues/19651
+// note : this may also be related to bug in Reversi code where 'set'
+//    function is called multiple times too quickly;
+//    see 'client/src/contexts/gameinfo.js'
 //
 // issue : any time moveCamera is called from 'handleScroll()' in
 //    'GL2Canvas' (it works fine from 'handleMouseMove()' even if

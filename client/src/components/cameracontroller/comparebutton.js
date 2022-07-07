@@ -2,7 +2,7 @@ import { useCamera } from '../../contexts/camera';
 import style from './cameracontroller.module.css';
 
 const CompareButton = () => {
-   const { options, handleCompare } = useCamera();
+   const { options, toggleCompare } = useCamera();
 
    const compareClass = options.compare ? style.active : style.inactive;
 
@@ -10,7 +10,7 @@ const CompareButton = () => {
       <img className={compareClass}
          title='Compare Mode'
          src={require('./img/compare.png')} 
-         onClick={handleCompare}
+         onClick={toggleCompare}
       />
    </div>;
 }

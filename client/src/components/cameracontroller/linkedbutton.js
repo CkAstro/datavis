@@ -2,7 +2,7 @@ import { useCamera } from '../../contexts/camera';
 import style from './cameracontroller.module.css';
 
 const LinkedButton = () => {
-   const { options, handleLinked } = useCamera();
+   const { options, toggleLinked } = useCamera();
 
    const linkedClass = options.compare
       ? (options.linked ? style.active : style.inactive) 
@@ -13,7 +13,7 @@ const LinkedButton = () => {
       <img className={linkedClass} 
          title='Link Cameras'
          src={require('./img/linked.png')} 
-         onClick={handleLinked}
+         onClick={toggleLinked}
       />
    </div>;
 }

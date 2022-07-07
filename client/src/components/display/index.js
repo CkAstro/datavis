@@ -17,7 +17,7 @@ const Display = () => {
 
    const { modalContent } = useModal();
 
-   const { options, handleCamera } = useCamera();
+   const { options, moveCamera } = useCamera();
    const { renderables } = useRenderables();
 
    const closeModal = () => setModalActive(false);
@@ -40,7 +40,7 @@ const Display = () => {
             draw={drawScene} 
             scene={options} 
             objects={renderables} 
-            moveCamera={handleCamera}
+            moveCamera={moveCamera}
          />
          <SceneOptions/>
       </div>

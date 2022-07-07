@@ -2,36 +2,36 @@ import { useCamera } from '../../contexts/camera';
 import style from './viewcontroller.module.css';
 
 const ViewAxisX = () => {
-   const { handleSnap } = useCamera();
+   const { snapCamera } = useCamera();
    
    return (
       <div className={style.changeView}
          title='Snap view to X'
-         onClick={() => handleSnap(0, 'x')}
+         onClick={() => snapCamera(0, 'x')}
       ><div className={style.flexText}><span>View</span><span>X</span></div>
       </div>
    );
 }
 
 const ViewAxisY = () => {
-   const { handleSnap } = useCamera();
+   const { snapCamera } = useCamera();
    
    return (
       <div className={style.changeView}
          title='Snap view to Y'
-         onClick={() => handleSnap(0, 'y')}
+         onClick={() => snapCamera(0, 'y')}
       ><div className={style.flexText}><span>View</span><span>Y</span></div>
       </div>
    );
 }
 
 const ViewAxisZ = () => {
-   const { handleSnap } = useCamera();
+   const { snapCamera } = useCamera();
    
    return (
       <div className={style.changeView}
          title='Snap view to Z'
-         onClick={() => handleSnap(0, 'z')}
+         onClick={() => snapCamera(0, 'z')}
       ><div className={style.flexText}><span>View</span><span>Z</span></div>
       </div>
    );
