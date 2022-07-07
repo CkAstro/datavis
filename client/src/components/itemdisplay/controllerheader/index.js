@@ -2,7 +2,7 @@ import { useRenderables } from '../../../contexts/renderables';
 import CloseButton from './closebutton';
 import VisToggle from './vistoggle';
 import HeaderInfo from './headerinfo';
-import './index.css';
+import style from './controllerheader.module.css';
 
 const ControllerHeader = ({ controllerId }) => {
    const { renderables, handleActivate } = useRenderables();
@@ -11,13 +11,13 @@ const ControllerHeader = ({ controllerId }) => {
    const isActive = activeController.isActive;
 
    const displayToggle = () => {
-      return <div className={`noselect activeToggle ${isActive ? 'active' : ''}`}
+      return <div className={`noselect ${style.activeToggle} ${isActive ? style.active : ''}`}
          onClick={() => handleActivate(controllerId)}
       >{isActive ? '-' : '+'}</div>;
    }
 
    return (
-      <div className='controllerHeader'>
+      <div className={style.controllerHeader}>
          {displayToggle()}
          <HeaderInfo controller={activeController} isActive={isActive}/>
          <VisToggle controllerId={controllerId}/>

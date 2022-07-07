@@ -120,12 +120,15 @@
 /* ----- close icon ----- */
 .closeButton {
    margin-left: 6px;
-   padding: 2px;
+   /* padding: 2px; */
    border: 1px solid var(--ncsu-dark-red);
    border-radius: 3px;
    background-color: rgba(143, 0, 0, 0.1);
    transition: all 0.2s;
    cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .closeButton:hover {

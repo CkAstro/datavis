@@ -1,11 +1,11 @@
 import ControllerHeader from '../controllerheader';
 import ControllerContent from '../controllercontent';
-import './itemcontroller.css';
+import style from './itemcontroller.module.css';
 
 const ItemController = ({ props }) => {
 
    return (
-      <div className='itemController'>
+      <div className={style.itemController}>
          <ControllerHeader controllerId={props.id}/>
          <ControllerContent controllerId={props.id}/>
       </div>

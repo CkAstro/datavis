@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRenderables } from '../../../contexts/renderables';
-import './index.css';
+import style from './controllerheader.module.css';
 
 const EditButton = ({ enableEdit }) => <img className='editIcon'
    onClick={enableEdit}
@@ -12,7 +12,7 @@ const NameDisplay = ({ controller, enableEdit }) => {
 
    return (
       <>
-         <div className='controllerName noselect'
+         <div className={`${style.controllerName} noselect`}
             title={controller.itemName}
             onClick={controller.isActive ? () => setShowEditButton(true) : null}
             onDoubleClick={controller.isActive ? enableEdit : null}
@@ -40,7 +40,7 @@ const NameChange = ({ controller, disableEdit }) => {
    }
    return (
       <form onSubmit={requestNameChange}>
-         <input autoFocus className='nameChangeArea'
+         <input autoFocus className={style.nameChangeArea}
             onChange={handleInput}
             value={nameValue}
             onKeyDown={handleKeyPress}
@@ -61,8 +61,8 @@ const HeaderInfo = ({ controller, isActive }) => {
       <NameChange controller={controller} disableEdit={disableEdit}/> : 
       <NameDisplay controller={controller} enableEdit={enableEdit}/>;
    return (
-      <div className='controllerInfo'>
-         <div className='infoContainer'>
+      <div className={style.controllerInfo}>
+         <div className={style.infoContainer}>
             {itemNameDiv}
          </div>
       </div>

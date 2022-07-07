@@ -1,6 +1,6 @@
 import { useRenderables } from '../../../contexts/renderables';
 import { useCamera } from '../../../contexts/camera';
-import './index.css';
+import style from './controllerheader.module.css';
 
 const VisToggle = ({ controllerId }) => {
    const { renderables, handleVisible } = useRenderables();
@@ -15,7 +15,7 @@ const VisToggle = ({ controllerId }) => {
          const isEnabled = key === 0 ? true : options.compare;    // main viewport button always enabled
          return (
             <div key={key}
-               className={`toggleButton noselect ${isEnabled ? (isVisible ? 'active' : '') : 'disabled'}`}
+               className={`${style.toggleButton} noselect ${isEnabled ? (isVisible ? style.active : '') : style.disabled}`}
                onClick={() => handleVisible(controllerId, key)}
             >{val}</div>
          );
@@ -23,7 +23,7 @@ const VisToggle = ({ controllerId }) => {
    }
 
    return (
-      <div className='visToggle'>
+      <div className={style.visToggle}>
          {getButtons()}
       </div>
    );
