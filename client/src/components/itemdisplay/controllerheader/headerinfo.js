@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRenderables } from '../../../contexts/renderables';
 import Icons from '../../icons';
 import style from './controllerheader.module.css';
@@ -10,16 +10,19 @@ const EditButton = ({ enableEdit }) => <div className={style.editButton} onClick
 const NameDisplay = ({ controller, enableEdit }) => {
    const [ showEditButton, setShowEditButton ] = useState(false);
 
-   return (
-      <>
-         <div className={`${style.controllerName} noselect`}
-            title={controller.itemName}
-            onClick={controller.isActive ? () => setShowEditButton(true) : null}
-            onDoubleClick={controller.isActive ? enableEdit : null}
-         >{controller.id} - {controller.itemName}</div>
-         {showEditButton ? <EditButton enableEdit={enableEdit}/> : null }
-      </>
-   );
+   useEffect(() => {
+      if (controller.isActive) return;
+      setShowEditButton(false);
+   }, [controller.isActive]);
+
+   return <>
+      <div className={`${style.controllerName} noselect`}
+         title={controller.itemName}
+         onClick={controller.isActive ? () => setShowEditButton(true) : null}
+         onDoubleClick={controller.isActive ? enableEdit : null}
+      >{controller.id} - {controller.itemName}</div>
+      {showEditButton ? <EditButton enableEdit={enableEdit}/> : null }
+   </>;
 }
 
 const NameChange = ({ controller, disableEdit }) => {
