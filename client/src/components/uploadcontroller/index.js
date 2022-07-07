@@ -1,15 +1,14 @@
 import UploadButton from './uploadbutton';
 import ImgUploadButton from './imguploadbutton';
 import BinaryUploadButton from './binaryuploadbutton';
-import '../display.css';
 
 const UploadController = () => {
    return (
-      <>
+      <div>
          <UploadButton/>
          <ImgUploadButton/>
          <BinaryUploadButton/>
-      </>
+      </div>
    );
 }
 
