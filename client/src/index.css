@@ -6,6 +6,8 @@ body, html {
 /* ----- globals ----- */
 
 :root {
+   --color-black: #1e1e1e;
+
    --ncsu-dark-red: #900;
    --ncsu-light-red: #c00;
    --ncsu-dark-gray: #333;
@@ -64,7 +66,7 @@ body, html {
   box-sizing: border-box;
 }
 
-.datavisContainer .displayArea, .toolbarArea {
+.datavisContainer > * {
   background: var(--ncsu-light-gray);
   border-radius: var(--main-spacing);
   padding: var(--main-padding);

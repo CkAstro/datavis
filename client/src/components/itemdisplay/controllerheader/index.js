@@ -5,14 +5,14 @@ import HeaderInfo from './headerinfo';
 import style from './controllerheader.module.css';
 
 const ControllerHeader = ({ controllerId }) => {
-   const { renderables, handleActivate } = useRenderables();
+   const { renderables, activateRenderable } = useRenderables();
 
    const activeController = renderables.find(item => item.id === controllerId);
    const isActive = activeController.isActive;
 
    const displayToggle = () => {
       return <div className={`noselect ${style.activeToggle} ${isActive ? style.active : ''}`}
-         onClick={() => handleActivate(controllerId)}
+         onClick={() => activateRenderable(controllerId)}
       >{isActive ? '-' : '+'}</div>;
    }
 

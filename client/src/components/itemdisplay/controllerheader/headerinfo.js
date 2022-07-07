@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useRenderables } from '../../../contexts/renderables';
+import Icons from '../../icons';
 import style from './controllerheader.module.css';
 
-const EditButton = ({ enableEdit }) => <img className='editIcon'
-   onClick={enableEdit}
-   src={require('./img/edit.png')}
-/>;
+const EditButton = ({ enableEdit }) => <div className={style.editButton} onClick={enableEdit}>
+   <Icons.Edit fill='black' size='12'/>
+</div>;
 
 const NameDisplay = ({ controller, enableEdit }) => {
    const [ showEditButton, setShowEditButton ] = useState(false);
@@ -24,11 +24,11 @@ const NameDisplay = ({ controller, enableEdit }) => {
 
 const NameChange = ({ controller, disableEdit }) => {
    const [ nameValue, setNameValue ] = useState(controller.itemName);
-   const { handleNameChange } = useRenderables();
+   const { changeItemName } = useRenderables();
 
    const requestNameChange = event => {
       event.preventDefault();
-      handleNameChange(nameValue, controller.id);
+      changeItemName(nameValue, controller.id);
       disableEdit();
    }
 
@@ -57,9 +57,11 @@ const HeaderInfo = ({ controller, isActive }) => {
    const enableEdit = () => setEditMode(true); 
    const disableEdit = () => setEditMode(false);
 
-   const itemNameDiv = isActive && editMode ? 
-      <NameChange controller={controller} disableEdit={disableEdit}/> : 
-      <NameDisplay controller={controller} enableEdit={enableEdit}/>;
+   const itemNameDiv = isActive && editMode
+      ? <NameChange controller={controller} disableEdit={disableEdit}/>
+      : <NameDisplay controller={controller} enableEdit={enableEdit}/>
+   ;
+
    return (
       <div className={style.controllerInfo}>
          <div className={style.infoContainer}>

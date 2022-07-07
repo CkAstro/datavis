@@ -3,7 +3,7 @@ import { useCamera } from '../../../contexts/camera';
 import style from './controllerheader.module.css';
 
 const VisToggle = ({ controllerId }) => {
-   const { renderables, handleVisible } = useRenderables();
+   const { renderables, toggleVisible } = useRenderables();
    const { options } = useCamera();
 
    const activeController = renderables.find(item => item.id === controllerId);
@@ -16,7 +16,7 @@ const VisToggle = ({ controllerId }) => {
          return (
             <div key={key}
                className={`${style.toggleButton} noselect ${isEnabled ? (isVisible ? style.active : '') : style.disabled}`}
-               onClick={() => handleVisible(controllerId, key)}
+               onClick={() => toggleVisible(controllerId, key)}
             >{val}</div>
          );
       })

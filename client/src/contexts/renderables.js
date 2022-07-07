@@ -151,14 +151,14 @@ const useRenderables = () => {
    }
 
    return {
-      renderables: renderables,
-      handleCreate: createRenderable,
-      handleDelete: deleteRenderable,
-      handleVisible: toggleVisible,
-      handleActivate: activateRenderable,
-      handleVarChange: changeActiveVar,
-      handleSliderChange: changeSlideValue,
-      handleNameChange: changeItemName,
+      renderables,
+      createRenderable,
+      deleteRenderable,
+      toggleVisible,
+      activateRenderable,
+      changeActiveVar,
+      changeSlideValue,
+      changeItemName,
    }
 }
 

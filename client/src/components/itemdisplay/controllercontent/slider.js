@@ -6,7 +6,7 @@ const Slider = ({ props }) => {
    const [ input, setInput ] = useState('');
    const [ editMode, setEditMode ] = useState(false);
 
-   const { handleSliderChange } = useRenderables();
+   const { changeSlideValue } = useRenderables();
    const isActive = props.isActive;
 
    useEffect(() => {
@@ -33,7 +33,7 @@ const Slider = ({ props }) => {
       const numberValue = Number(input) * 100;
       if (numberValue > 100 || numberValue < -100) return;
       if (numberValue < 0 && (props.variable === 'value' || props.variable === 'radius')) return;
-      handleSliderChange(numberValue, props.ind, props.id);
+      changeSlideValue(numberValue, props.ind, props.id);
       setEditMode(false);
    }
 
@@ -63,7 +63,7 @@ const Slider = ({ props }) => {
       <div className='varSlider'>
          <span className='varSliderText noselect'>{props.text}</span>
          <input type='range'
-            onChange={e => handleSliderChange(e.target.value, props.ind, props.id)}
+            onChange={e => changeSlideValue(e.target.value, props.ind, props.id)}
             min={props.min}
             max={props.max}
             value={props.value}

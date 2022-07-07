@@ -41,10 +41,10 @@
    font-weight: bold;
 }
 
-.controllerInfo .editIcon {
+.controllerInfo .editButton {
    display: inline-block;
-   width: 12px;
-   height: 12px;
+   /* width: 12px; */
+   /* height: 12px; */
    transform: translate(2px, -8px);
 }
 

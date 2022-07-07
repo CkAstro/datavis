@@ -1,3 +1,4 @@
 import Delete from './delete';
+import Edit from './edit';
 
-export default { Delete, };
+export default { Delete, Edit, };

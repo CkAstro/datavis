@@ -2,11 +2,11 @@ import { useRenderables } from "../../../contexts/renderables"
 import './index.css';
 
 const VariableSelector = ({ controllerId }) => {
-   const { handleVarChange } = useRenderables();
+   const { changeActiveVar } = useRenderables();
 
    const handleSelection = event => {
       event.preventDefault();
-      handleVarChange(controllerId, event.target.value);
+      changeActiveVar(controllerId, event.target.value);
    }
 
    return (
