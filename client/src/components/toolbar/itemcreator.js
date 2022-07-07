@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRenderables } from '../../contexts/renderables';
-import './toolbar.css'; 
+import style from './toolbar.module.css'; 
 
 const ItemCreator = () => {
    const { renderables, handleCreate } = useRenderables();
@@ -11,8 +11,8 @@ const ItemCreator = () => {
    }, []);
 
    return (
-      <div className='optionsArea'>
-         <div className='itemCreator'>
+      <div className={style.optionsArea}>
+         <div className={style.itemCreator}>
             <img onClick={() => handleCreate('surface')} title='Isosurface' src={require('./img/surface.png')}/>
             <img onClick={() => handleCreate('sphere')} title='Spherical Slice' src={require('./img/sphere.png')}/>
             <img onClick={() => handleCreate('zslice')} title='Z-Planar Slice' src={require('./img/zyx_z.png')}/>

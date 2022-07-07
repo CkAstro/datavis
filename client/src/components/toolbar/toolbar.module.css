@@ -4,15 +4,16 @@
    grid-template-rows: repeat(3, auto) 1fr;
 }
 
-.toolbarArea>p:first-child {
+.toolbarArea > p:first-child {
    text-align: center;
    margin: 0px;
    padding: 0px;
    padding-bottom: 12px;
+   font-weight: bold;
    border-bottom: 1px dotted var(--ncsu-dark-gray);
 }
 
-.toolbarArea>p:not(:first-child) {
+.toolbarArea > p:not(:first-child) {
    text-align: center;
 }
 

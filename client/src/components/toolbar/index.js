@@ -1,11 +1,11 @@
 import ItemCreator from './itemcreator';
 import ItemDisplay from '../itemdisplay';
-import './toolbar.css';
+import style from './toolbar.module.css';
 
 const Toolbar = () => {
    return (
-      <div className='toolbarArea'>
-         <p><b>Toolbar</b></p>
+      <div className={style.toolbarArea}>
+         <p>Toolbar</p>
          <ItemCreator/>
          <ItemDisplay/>
       </div>
