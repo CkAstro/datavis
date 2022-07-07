@@ -1,0 +1,59 @@
+
+.displayArea > p:first-child {
+   text-align: center;
+   margin: 0px;
+   padding: 0px;
+   padding-bottom: 12px;
+   border-bottom: 1px dotted var(--color-black);
+}
+
+.actionbar {
+   display: flex;
+   padding: var(--main-padding) 0px;
+   flex-wrap: wrap;
+   gap: 12px;
+}
+
+.actionbar > div {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 6px;
+}
+
+.actionbar > div > div {
+   width: 48px;
+   height: 48px;
+   position: relative;
+   filter: brightness(100%);
+   background: #888;
+   transition: filter 0.2s;
+   cursor: pointer;
+}
+
+.actionbar > div > *:hover { filter: brightness(80%); }
+
+.sceneOptions {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+}
+
+.sceneController {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.sceneController:not(.active) { opacity: 0.3; }
+.sceneController.hidden { display: none; }
+
+.sceneController > span {
+   padding: 0 12px;
+   font-size: 24px;
+   font-weight: bold;
+}
+
+.sceneController > span.adjust {
+   font-size: 36px;
+   transform: translate(0, -3px);
+}

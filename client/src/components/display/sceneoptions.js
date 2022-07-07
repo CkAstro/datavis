@@ -1,16 +1,16 @@
 import { useRenderables } from '../../contexts/renderables';
 import { useCamera } from '../../contexts/camera';
-import './display.css';
+import style from './display.module.css';
 
 const SceneController = ({ cameraId }) => {
    const { renderables } = useRenderables();
-   const isHidden = renderables.length > 0 ? '' : 'hidden';
+   const isHidden = renderables.length > 0 ? '' : style.hidden;
 
    return (
-      <div className={`sceneController ${isHidden}`}>
-         <div><div>&#171;</div></div>
-         <div>1 of 1</div>
-         <div><div>&#187;</div></div>
+      <div className={`${style.sceneController} ${isHidden}`}>
+         <span className={style.adjust}>&#171;</span>
+         <span>1 <span style={{fontWeight: 'normal'}}>of</span> 1</span>
+         <span className={style.adjust}>&#187;</span>
       </div>
    );
 }
@@ -18,13 +18,10 @@ const SceneController = ({ cameraId }) => {
 const SceneOptions = () => {
    const { options } = useCamera();
 
-   const controllers = options.compare ? Array(2).fill(null) : Array(1).fill(null);
-
    return (
-      <div className='sceneOptions'>
-         {controllers.map((item, key) => {
-            return <SceneController key={key}/>
-         })}
+      <div className={style.sceneOptions}>
+         <SceneController cameraId={0}/>
+         {options.compare ? <SceneController cameraId={1}/> : null}
       </div>
    );
 }
