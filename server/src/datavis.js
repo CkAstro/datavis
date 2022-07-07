@@ -25,6 +25,10 @@ const requestLogger = (request, response, next) => {
 app.use(requestLogger);
 
 // ----- REST API ----- //
+app.get('/api/img/:fileId', (req, res) => {
+   const { fileId } = req.params;
+   res.sendFile(`./src/data/img/${fileId}`, {root: '.'});
+});
 
 
 // ----- static serving ----- //
