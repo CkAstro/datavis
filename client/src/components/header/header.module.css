@@ -22,6 +22,7 @@
 /* ----- navbar.js ----- */
 .navbar {
    background: var(--ncsu-dark-gray);
+   border-bottom: 3px solid var(--ncsu-light-red);
 }
  
 .navbar * div {
