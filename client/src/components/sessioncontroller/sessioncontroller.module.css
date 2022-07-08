@@ -2,4 +2,98 @@
 img { width: 100%; height: 100%; }
 .disabled { cursor: not-allowed; }
 
-.modalContent {}
+/* .modalContent {} */
+
+.nameContainer {
+   display: flex;
+   gap: 2px;
+}
+
+.nameArea { width: 50%; }
+.nameArea.disabled { color: #999; }
+
+.saveButton {
+   padding: 6px 12px;
+   background: #888; 
+   transition: all 0.2s;
+   cursor: pointer;
+}
+
+.saveButton:hover { background: #777; }
+
+
+.sessionContainer {
+   --container-size: 32px;
+   --gap: 2px;
+   display: flex;
+   flex-direction: column;
+   gap: var(--gap);
+}
+
+.session {
+   display: flex;
+   gap: var(--gap);
+   width: 100%;
+   height: var(--container-size);
+}
+
+.session .sessionName {
+   background: #999;
+   width: calc(40% - var(--container-size) - 4px);
+   height: var(--container-size);
+   cursor: pointer;
+   filter: brightness(100%);
+   transition: all 0.2s;
+
+   display: flex;
+   align-items: center;
+   padding: 0 6px;
+}
+
+.session .sessionName > div {
+   display: inline-block;
+   width: 100%; 
+
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+}
+
+
+
+.session .deleteButton {
+   width: var(--container-size);
+   height: var(--container-size);
+   font-size: 24px;
+   cursor: pointer;
+   background: #999; 
+   filter: brightness(100%);
+   transition: all 0.2s;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.session .deleteButton > div { transform: translate(0, -2px); }
+
+
+
+.session .confirmDelete {
+   width: calc(60% - 2*var(--gap) - var(--container-size));
+   height: var(--container-size);
+   color: #955;
+
+   display: none;
+   align-items: center;
+   justify-content: center;
+}
+
+.session .confirmDelete.active { display: flex; }
+
+
+.session:nth-child(2n) .sessionName { background: #888; }
+.session:nth-child(2n) .closeButton { background: #888; }
+
+.session .sessionName:hover { filter: brightness(80%); }
+.session .closeButton:hover { filter: brightness(70%); }

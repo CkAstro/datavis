@@ -24,6 +24,11 @@ const CameraProvider = ({ children }) => {
 const useCamera = () => {
    const [ options, setOptions ] = useContext(CameraContext);
 
+   const setAllOptions = opts => {
+      const newOptions = { ...opts };
+      setOptions(newOptions);
+   }
+
    const toggleCompare = () => {
       const compare = !options.compare;
       setOptions({ ...options, compare: compare });
@@ -75,6 +80,7 @@ const useCamera = () => {
 
    return {
       options,
+      setAllOptions,
       toggleCompare,
       toggleLinked,
       moveCamera,

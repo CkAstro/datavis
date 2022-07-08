@@ -15,6 +15,11 @@ const RenderablesProvider = ({ children }) => {
 const useRenderables = () => {
    const [ renderables, setRenderables ] = useContext(RenderablesContext);
 
+   const setAllRenderables = rends => {
+      const newRenderables = [ ...rends ];
+      setRenderables(newRenderables);
+   }
+
    const getNewId = () => {
       const length = renderables.length;
       return length ? renderables[length-1].id + 1 : 0;
@@ -152,6 +157,7 @@ const useRenderables = () => {
 
    return {
       renderables,
+      setAllRenderables,
       createRenderable,
       deleteRenderable,
       toggleVisible,
