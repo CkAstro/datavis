@@ -10,6 +10,7 @@ const ModalContent = () => {
    const [ sessionName, setSessionName ] = useState(defaultSessionName);
    const { renderables } = useRenderables();
    const { options } = useCamera();
+   const { closeModal } = useModal();
 
    const handleInput = event => setSessionName(event.target.value);
    const handleFocus = event => event.target.select();
@@ -18,6 +19,7 @@ const ModalContent = () => {
       const cookies = new Cookies;
       const session = {renderables, options};
       cookies.set(sessionName, session, {path: '/', sameSite: 'strict'});
+      closeModal();
    }
 
    return <div className={style.modalContent}>
@@ -31,20 +33,17 @@ const ModalContent = () => {
          />
          <div className={style.saveButton} onClick={handleSave}>save</div>
       </div>
-   </div>
+   </div>;
 }
 
 const SaveButton = () => {
    const { setModalContent } = useModal();
-   const displayModal = () => {
-      setModalContent( <ModalContent/> );
-   }
 
    return <div>
       <img className={null}
          title='Save Session'
          src={require('./img/save.png')}
-         onClick={() => displayModal()}
+         onClick={() => setModalContent( <ModalContent/> )}
       />
    </div>;
 }
