@@ -61,7 +61,7 @@ const ImgUploadButton = () => {
    const { updateModal } = useModal();
 
    return <div>
-      <img className='disabled'
+      <img className={null}
          title='Upload Data from Image'
          src={require('./img/imgupload.png')}
          onClick={() => updateModal( <ModalContent/> )}
