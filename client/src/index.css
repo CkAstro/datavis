@@ -1,6 +1,15 @@
-body, html {
-  margin: 0px;
-  padding: 0px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body, html, a {
+   margin: 0px;
+   padding: 0px;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   font-family: 'Roboto', sans-serif;
+   color: var(--color-black);
+   width: 100vw;
+   height: 100vh;
+   text-decoration: none;
 }
 
 /* ----- globals ----- */
@@ -43,31 +52,30 @@ body, html {
 
 
 .mainContainer {
-  width: 1000px;
-  margin: auto;
-  height: 100%;
-  box-sizing: border-box;
+   width: 1000px;
+   margin: auto;
+   height: 100%;
+   box-sizing: border-box;
 }
 
 .mainLayout {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100vh;
-  font-family: 'Roboto', sans-serif;
-  color: var(--ncsu-dark-gray);
+   display: grid;
+   grid-template-rows: auto 1fr;
+   height: 100vh;
+   color: var(--ncsu-dark-gray);
 }
 
 .datavisContainer {
-  display: grid;
-  grid-template-columns: 9fr 4fr;
-  height: 100%;
-  grid-gap: var(--main-spacing);
-  padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
-  box-sizing: border-box;
+   display: grid;
+   grid-template-columns: 9fr 4fr;
+   height: 100%;
+   grid-gap: var(--main-spacing);
+   padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
+   box-sizing: border-box;
 }
 
 .datavisContainer > * {
-  background: var(--ncsu-light-gray);
-  border-radius: var(--main-spacing);
-  padding: var(--main-padding);
+   background: var(--ncsu-light-gray);
+   border-radius: var(--main-spacing);
+   padding: var(--main-padding);
 }
