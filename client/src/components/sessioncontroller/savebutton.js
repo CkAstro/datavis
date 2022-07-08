@@ -15,7 +15,8 @@ const ModalContent = () => {
    const handleInput = event => setSessionName(event.target.value);
    const handleFocus = event => event.target.select();
 
-   const handleSave = () => {
+   const handleSave = event => {
+      event.preventDefault();
       const cookies = new Cookies;
       const session = {renderables, options};
       cookies.set(sessionName, session, {path: '/', sameSite: 'strict'});
@@ -25,14 +26,14 @@ const ModalContent = () => {
    return <div className={style.modalContent}>
       <h1>Save Session</h1>
       <p>Save your session and start exactly where you left off!</p>
-      <div className={style.nameContainer}>
+      <form className={style.nameContainer} onSubmit={handleSave}>
          <input autoFocus className={`${style.nameArea} ${sessionName === defaultSessionName ? style.disabled : null}`}
             onChange={handleInput}
             value={sessionName}
             onFocus={handleFocus}
          />
          <div className={style.saveButton} onClick={handleSave}>save</div>
-      </div>
+      </form>
    </div>;
 }
 
