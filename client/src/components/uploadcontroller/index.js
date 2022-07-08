@@ -5,8 +5,8 @@ import BinaryUploadButton from './binaryuploadbutton';
 const UploadController = () => {
    return (
       <div>
-         <UploadButton/>
          <ImgUploadButton/>
+         <UploadButton/>
          <BinaryUploadButton/>
       </div>
    );

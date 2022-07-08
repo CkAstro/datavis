@@ -12,5 +12,10 @@ const getImageData = imageId => {
    return request.then(response => response.data);
 }
 
-export default { baseUrl, getImageData };
-export { baseUrl, getImageData };
+const postImageData = (data, name) => {
+   const request = axios.post(`${baseUrl}/img/${name}`, data, {responseType: 'blob'});
+   return request.then(response => response.data);
+}
+
+export default { baseUrl, getImageData, postImageData };
+export { baseUrl, getImageData, postImageData };
