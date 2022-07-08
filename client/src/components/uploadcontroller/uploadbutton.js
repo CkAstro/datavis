@@ -2,9 +2,9 @@ import { useModal } from '../../contexts/modal';
 import style from './uploadcontroller.module.css';
 
 const UploadButton = () => {
-   const { updateModal } = useModal();
+   const { setModalContent } = useModal();
    const displayModal = () => {
-      updateModal(
+      setModalContent(
          <div className={style.modalContent}>
             <h1>Upload from Text</h1>
             <p>You are attempting to upload data from text.</p>

@@ -61,9 +61,9 @@ const ModalContent = () => {
 }
 
 const LoadButton = () => {
-   const { updateModal } = useModal();
+   const { setModalContent } = useModal();
    const displayModal = () => {
-      updateModal( <ModalContent/> );
+      setModalContent( <ModalContent/> );
    }
 
    return <div>

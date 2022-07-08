@@ -58,13 +58,13 @@ const ModalContent = () => {
 }
 
 const ImgUploadButton = () => {
-   const { updateModal } = useModal();
+   const { setModalContent } = useModal();
 
    return <div>
       <img className={null}
          title='Upload Data from Image'
          src={require('./img/imgupload.png')}
-         onClick={() => updateModal( <ModalContent/> )}
+         onClick={() => setModalContent( <ModalContent/> )}
       />
    </div>;
 }

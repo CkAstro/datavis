@@ -1,25 +1,32 @@
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useState, useContext, createContext } from 'react';
 
-const ModalContext = createContext();
+const ModalContext = createContext(); 
+
+const defaultParams = {
+   content: '',
+   isActive: false,
+}
 
 const ModalProvider = ({ children }) => {
-   const [ modalContent, setModalContent ] = useState(null);
+   const [ modalParams, setModalParams ] = useState(defaultParams);
 
    return (
-      <ModalContext.Provider value={[modalContent, setModalContent]}>
+      <ModalContext.Provider value={[modalParams, setModalParams]}>
          {children}
       </ModalContext.Provider>
    );
 }
 
 const useModal = () => {
-   const [ modalContent, setModalContent ] = useContext(ModalContext);
+   const [ modalParams, setModalParams ] = useContext(ModalContext);
 
-   const updateModal = content => setModalContent(content);
+   const setModalContent = content => setModalParams({ content: content, isActive: true });
+   const closeModal = () => setModalParams({ ...modalParams, isActive: false });
 
    return {
-      modalContent,
-      updateModal,
+      modalParams,
+      setModalContent,
+      closeModal,
    }
 }
 
