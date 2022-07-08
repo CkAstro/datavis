@@ -135,7 +135,7 @@ class GLHelper {
 
             // enable data texture
             gl.activeTexture(gl.TEXTURE0);
-            gl.bindTexture(gl.TEXTURE_3D, tex.textures[0]);
+            gl.bindTexture(gl.TEXTURE_3D, tex.textures[tex.textures.length-1]);
             gl.uniform1i(shader.uniformLocations.modelData, 0);
 
             // enable color map
