@@ -2,7 +2,7 @@
 .modalContainer {
    visibility: hidden;
    opacity: 0.0;
-   position: absolute;
+   position: fixed;
    top: 0;
    bottom: 0;
    left: 0;
@@ -21,11 +21,21 @@
 }
 
 .modal {
+   position: relative;
    border: 2px solid var(--ncsu-dark-gray);
    border-radius: 10px;
    width: 500px;
    background: var(--ncsu-light-gray);
    padding: 20px;
+}
+
+.modal .closeButton {
+   position: absolute;
+   top: 12px;
+   right: 12px;
+   font-size: 24px;
+   line-height: 0.5;
+   cursor: pointer;
 }
 
 .modal h1 {

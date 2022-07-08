@@ -7,6 +7,7 @@ const Modal = ({ children, closeModal, isActive }) => {
       <div className={`${style.modalContainer} ${isActive ? style.active : ''}`} onClick={closeModal}>
          <div className={style.modal} onClick={handleClick}>
             {children}
+            <div className={style.closeButton} onClick={closeModal}>&times;</div>
          </div>
       </div>
    );
