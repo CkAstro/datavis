@@ -24,7 +24,7 @@ const ModalContent = () => {
             formData.append('image', file);
 
             await api.postImageData(formData, file.name)
-               .then(data => texHelper.loadTextureFromData(data))
+               .then(data => texHelper.loadTextureFromData(data, file.name))
                .then(() => uploadSuccess = uploadSuccess.concat(file.name))
                .catch(err => {
                   console.log(err);

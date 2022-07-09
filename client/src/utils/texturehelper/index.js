@@ -13,20 +13,23 @@ class TextureHelper {
    async init(gl) {
       this.glInstance = gl;
 
-      await getImageData('default_data.png').then(data => this.loadTextureFromData(data));
-      await getImageData('default_cmap.png').then(data => this.loadCmapFromData(data));
+      const default_data = 'default_data.png';
+      const default_cmap = 'default_cmap.png';
+
+      await getImageData(default_data).then(data => this.loadTextureFromData(data, default_data));
+      await getImageData(default_cmap).then(data => this.loadCmapFromData(data, default_cmap));
 
       return this.isInit = true;
    }
 
-   loadTextureFromData(data) {
+   loadTextureFromData(data, texId) {
       const texture = this.loadImageData3D(data);
-      this.textureList.textures = this.textureList.textures.concat(texture);
+      this.textureList.textures = this.textureList.textures.concat({texture, texId});
    }
 
-   loadCmapFromData(data) {
+   loadCmapFromData(data, texId) {
       const texture = this.loadImageData2D(data);
-      this.textureList.colormaps = this.textureList.colormaps.concat(texture);
+      this.textureList.colormaps = this.textureList.colormaps.concat({texture, texId, data});
    }
 
    loadImageData2D(imageData) {
