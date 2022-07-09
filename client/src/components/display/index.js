@@ -19,17 +19,21 @@ const Display = () => {
    const { options, moveCamera } = useCamera();
    const { renderables } = useRenderables();
 
+   // ensure canvas touch events don't move screen
    const divRef = useRef(null);
    useEffect(() => {
+      divRef.current.addEventListener('wheel', e => e.preventDefault());
       divRef.current.addEventListener('touchstart', e => e.preventDefault());
       divRef.current.addEventListener('touchmove', e => e.preventDefault());
 
       return () => {
+         divRef.current.removeEventListener('wheel', e => e.preventDefault());
          divRef.current.removeEventListener('touchstart', e => e.preventDefault());
          divRef.current.removeEventListener('touchmove', e => e.preventDefault());
       }
    }, []);
 
+   // we have a 2D canvas overlaid, this will register mouse events in the container and pass to GL2Canvas
    const handleMouseDown = event => setPassThroughEvent({event, eventType: 'mouseDown'});
    const handleMouseUp = event => setPassThroughEvent({event, eventType: 'mouseUp'});
    const handleMouseMove = event => setPassThroughEvent({event, eventType: 'mouseMove'});
@@ -39,6 +43,7 @@ const Display = () => {
    const handleTouchMove = event => setPassThroughEvent({event, eventType: 'touchMove'});
    const handleScroll = event => setPassThroughEvent({event, eventType: 'scroll'});
 
+   // update 2D canvas if cmap changes
    useEffect(() => {
       const cmaps = texHelper.cmaps;
       if (cmaps.length === 0) return;

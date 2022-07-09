@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 const useGL2Canvas = (glRef, draw, scene, objects, texHelper, glHelper) => {
    const canvasRef = useRef();
 
+   // init the canvas on load
    useEffect(() => {
       const canvas = canvasRef.current;
       const gl = canvas.getContext('webgl2');
@@ -14,6 +15,7 @@ const useGL2Canvas = (glRef, draw, scene, objects, texHelper, glHelper) => {
       glRef.current = gl;
    }, []);
 
+   // only call draw if scene (camera), objects, or textures are changed
    useEffect(() => {
       draw(glRef.current, scene, objects, texHelper, glHelper);
    }, [draw, scene, objects, texHelper.cmaps, texHelper.data]);
@@ -28,6 +30,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera, texHelper, glHelper, pass
    const [ mouseLocation, setMouseLocation ] = useState({x: null, y: null});
    const [ clickLocation, setClickLocation ] = useState({x: null, y: null});
 
+   // event handler when input is given via passThroughEvent
    useEffect(() => {
       const { event, eventType } = passThroughEvent;
       if (eventType === 'mouseDown') handleMouseDown(event);
@@ -40,6 +43,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera, texHelper, glHelper, pass
       if (eventType === 'touchMove') handleTouchMove(event);
    }, [passThroughEvent]);
 
+   // prevent default for mouse wheel and touch
    useEffect(() => {
       const canvas = glRef.current.canvas;
 
@@ -81,7 +85,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera, texHelper, glHelper, pass
 
    const handleScroll = event => {
       event.preventDefault();
-      const zoom = event.deltaY / 2000.0;
+      const zoom = event.deltaY / 1000.0;
       const mouse = {x: event.clientX, y: event.clientY};
       moveCamera(mouse, zoom, 0.0, 0.0);
    }
