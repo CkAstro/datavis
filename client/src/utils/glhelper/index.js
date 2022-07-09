@@ -135,12 +135,12 @@ class GLHelper {
 
             // enable data texture
             gl.activeTexture(gl.TEXTURE0);
-            gl.bindTexture(gl.TEXTURE_3D, tex.textures[tex.textures.length-1]);
+            gl.bindTexture(gl.TEXTURE_3D, tex.textures[tex.textures.length-1].texture);
             gl.uniform1i(shader.uniformLocations.modelData, 0);
 
             // enable color map
             gl.activeTexture(gl.TEXTURE1);
-            gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0]);
+            gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0].texture);
             gl.uniform1i(shader.uniformLocations.colorMap, 1);
 
             // enable type-dependent uniforms
