@@ -70,6 +70,7 @@
    width: 100%;
    height: var(--canvas-height);
    position: relative;
+   background: var(--canvas-background);
 }
 
 .canvasContainer canvas {
