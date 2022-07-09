@@ -2,6 +2,8 @@
 .toolbarArea {
    display: grid;
    grid-template-rows: repeat(3, auto) 1fr;
+   width: var(--toolbar-width);
+   box-sizing: border-box;
 }
 
 .toolbarArea > p:first-child {

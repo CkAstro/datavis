@@ -1,4 +1,6 @@
 
+.displayArea { width: var(--display-width); box-sizing: border-box; }
+
 .displayArea > p:first-child {
    text-align: center;
    margin: 0px;
@@ -66,7 +68,7 @@
 /* ----- canvas container ----- */
 .canvasContainer {
    width: 100%;
-   height: 500px;
+   height: var(--canvas-height);
    position: relative;
 }
 

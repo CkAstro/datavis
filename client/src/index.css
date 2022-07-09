@@ -10,6 +10,7 @@ body, html, a {
    width: 100vw;
    height: 100vh;
    text-decoration: none;
+   overflow-x: hidden;
 }
 
 /* ----- globals ----- */
@@ -22,6 +23,11 @@ body, html, a {
    --ncsu-dark-gray: #333;
    --ncsu-mid-gray: #555;
    --ncsu-light-gray: #cacaca;
+
+   --content-max-width: 1000px;
+   --content-fallback-width: 700px;
+   --canvas-height: 500px;
+
    --main-spacing: 20px;
    --main-padding: 20px;
 }
@@ -52,26 +58,43 @@ body, html, a {
 
 
 .mainContainer {
-   width: 1000px;
+   width: var(--content-max-width);
    margin: auto;
-   height: 100%;
-   box-sizing: border-box;
-}
-
-.mainLayout {
-   display: grid;
-   grid-template-rows: auto 1fr;
-   height: 100vh;
-   color: var(--ncsu-dark-gray);
 }
 
 .datavisContainer {
-   display: grid;
-   grid-template-columns: 9fr 4fr;
-   height: 100%;
-   grid-gap: var(--main-spacing);
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: var(--main-spacing);
    padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
    box-sizing: border-box;
+
+   --display-width: calc( 9 / 13 * (var(--content-max-width) - var(--main-spacing)));
+   --toolbar-width: calc( 4 / 13 * (var(--content-max-width) - var(--main-spacing)));
+}
+
+@media only screen and (max-width: 1000px) {
+   .mainContainer { width: var(--content-fallback-width); }
+   .datavisContainer {
+      --custom-padding: calc((700px - var(--toolbar-width))/2);
+      --display-width: 100%;
+      width: var(--content-fallback-width);
+   }
+   .datavisContainer > *:last-child {
+      --toolbar-width: 100%;
+      padding: var(--main-padding) var(--custom-padding);
+      min-height: 500px;
+   }
+}
+
+@media only screen and (max-width: 700px) {
+   .mainContainer { width: 100vw; }
+   .datavisContainer {
+      --custom-padding: calc((100vw - var(--toolbar-width))/2);
+      --canvas-height: calc((100vw / 1.618));
+      width: 100%;
+   }
 }
 
 .datavisContainer > * {
