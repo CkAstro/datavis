@@ -30,6 +30,7 @@ class GLHelper {
       this.surface = new Renderables.Surface(gl, shaderSuite.surfaceShader);
 
       this.isInit = true;
+      return Promise.resolve();
    }
    
    getRotationMatrix(type) {
@@ -97,8 +98,11 @@ class GLHelper {
       return gl.viewport(gl.canvas.width/2.0, 0, gl.canvas.width/2.0, gl.canvas.height);
    }
 
-   renderObjectList(objects, scene, tex) {
+   renderObjectList(objects, scene, data, cmaps) {
       const gl = this.glInstance;
+      const dataInd = data.length-1;
+      const cmapInd = 0;
+      if (!data[dataInd] || !cmaps[cmapInd]) return;
 
       gl.clearColor(0.0, 0.0, 0.0, 0.0);
       gl.clearDepth(1.0);
@@ -135,12 +139,12 @@ class GLHelper {
 
             // enable data texture
             gl.activeTexture(gl.TEXTURE0);
-            gl.bindTexture(gl.TEXTURE_3D, tex.textures[tex.textures.length-1].texture);
+            gl.bindTexture(gl.TEXTURE_3D, data[dataInd].texture);
             gl.uniform1i(shader.uniformLocations.modelData, 0);
 
             // enable color map
             gl.activeTexture(gl.TEXTURE1);
-            gl.bindTexture(gl.TEXTURE_2D, tex.colormaps[0].texture);
+            gl.bindTexture(gl.TEXTURE_2D, cmaps[cmapInd].texture);
             gl.uniform1i(shader.uniformLocations.colorMap, 1);
 
             // enable type-dependent uniforms

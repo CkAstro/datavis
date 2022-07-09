@@ -1,15 +1,9 @@
-import glHelper from './index';
-import texHelper from '../texturehelper';
 import buildShaderSuite from '../shaders/shadersuite';
 
-const drawScene = (gl, scene, objects, frameRate) => {
-   
+const drawScene = (gl, scene, objects, texHelper, glHelper) => {
+   if (!glHelper.isInit) buildShaderSuite(gl).then(shaderSuite => glHelper.init(gl, shaderSuite));
    if (!texHelper.isInit) texHelper.init(gl);
-   if (!glHelper.isInit) {
-      const shaderSuite = buildShaderSuite(gl);
-      glHelper.init(gl, shaderSuite);
-   }
-   glHelper.renderObjectList(objects, scene, texHelper.textureList);
+   glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
 }
 
 

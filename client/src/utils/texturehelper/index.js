@@ -2,34 +2,33 @@ import { getImageData } from '../../api';
 
 class TextureHelper {
    constructor() {
-      this.textureList = {
-         textures: [],
-         colormaps: [],
-      }
+      this.data = [];
+      this.cmaps = [];
       this.glInstance = null;
       this.isInit = false;
    }
 
-   async init(gl) {
+   init(gl) {
       this.glInstance = gl;
 
       const default_data = 'default_data.png';
       const default_cmap = 'default_cmap.png';
 
-      await getImageData(default_data).then(data => this.loadTextureFromData(data, default_data));
-      await getImageData(default_cmap).then(data => this.loadCmapFromData(data, default_cmap));
+      getImageData(default_data).then(data => this.loadTextureFromData(data, default_data));
+      getImageData(default_cmap).then(data => this.loadCmapFromData(data, default_cmap));
 
-      return this.isInit = true;
+      this.isInit = true;
+      return Promise.resolve();
    }
 
    loadTextureFromData(data, texId) {
       const texture = this.loadImageData3D(data);
-      this.textureList.textures = this.textureList.textures.concat({texture, texId});
+      this.data = this.data.concat({texture, texId});
    }
 
    loadCmapFromData(data, texId) {
       const texture = this.loadImageData2D(data);
-      this.textureList.colormaps = this.textureList.colormaps.concat({texture, texId, data});
+      this.cmaps = this.cmaps.concat({texture, texId, data});
    }
 
    loadImageData2D(imageData) {

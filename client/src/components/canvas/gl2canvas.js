@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useGL2Canvas = (glRef, draw, scene, objects) => {
+const useGL2Canvas = (glRef, draw, scene, objects, texHelper, glHelper) => {
    const canvasRef = useRef();
 
    useEffect(() => {
@@ -15,15 +15,14 @@ const useGL2Canvas = (glRef, draw, scene, objects) => {
    }, []);
 
    useEffect(() => {
-      const frameRate = 0.;
-      draw(glRef.current, scene, objects, frameRate);
-   }, [draw, scene, objects]);
+      draw(glRef.current, scene, objects, texHelper, glHelper);
+   }, [draw, scene, objects, texHelper.cmaps, texHelper.data]);
    return canvasRef;
 }
 
-const GL2Canvas = ({ draw, scene, objects, moveCamera, passThroughEvent }) => {
+const GL2Canvas = ({ draw, scene, objects, moveCamera, texHelper, glHelper, passThroughEvent }) => {
    const glRef = useRef();
-   const canvasRef = useGL2Canvas(glRef, draw, scene, objects);
+   const canvasRef = useGL2Canvas(glRef, draw, scene, objects, texHelper, glHelper);
 
    const [ isActive, setIsActive ] = useState(false);
    const [ mouseLocation, setMouseLocation ] = useState({x: null, y: null});

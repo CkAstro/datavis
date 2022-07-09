@@ -10,6 +10,7 @@ import UploadController from '../uploadcontroller';
 import CameraController from '../cameracontroller';
 import ViewController from '../viewcontroller';
 import texHelper from '../../utils/texturehelper';
+import glHelper from '../../utils/glhelper';
 import style from './display.module.css';
 
 const Display = () => {
@@ -39,10 +40,10 @@ const Display = () => {
    const handleScroll = event => setPassThroughEvent({event, eventType: 'scroll'});
 
    useEffect(() => {
-      const cmaps = texHelper.textureList.colormaps;
+      const cmaps = texHelper.cmaps;
       if (cmaps.length === 0) return;
       setCmapData(cmaps[cmaps.length-1].data);
-   }, [texHelper.textureList.colormaps]);
+   }, [texHelper.cmaps]);
 
    return (
       <div className={style.displayArea}>
@@ -70,6 +71,8 @@ const Display = () => {
                scene={options} 
                objects={renderables} 
                moveCamera={moveCamera}
+               texHelper={texHelper}
+               glHelper={glHelper}
                passThroughEvent={passThroughEvent}
             />
             <Canvas2D

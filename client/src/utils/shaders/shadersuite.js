@@ -1,6 +1,6 @@
 import { getShaderProgram, buildProgramInfo } from './index';
 
-const buildShaderSuite = gl => {
+const buildShaderSuite = async gl => {
    const sliceShader = getShaderProgram(gl, 'Slice');
    const sphereShader = getShaderProgram(gl, 'Sphere');
    const surfaceShader = getShaderProgram(gl, 'Surface');
@@ -47,7 +47,9 @@ const buildShaderSuite = gl => {
          },
       },
    }
-   return buildProgramInfo(gl, programInfo);
+   
+   const shaderSuite = buildProgramInfo(gl, programInfo)
+   return Promise.resolve(shaderSuite);
 }
 
 export default buildShaderSuite;
