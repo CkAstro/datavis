@@ -21,13 +21,25 @@ const useGL2Canvas = (glRef, draw, scene, objects) => {
    return canvasRef;
 }
 
-const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
+const GL2Canvas = ({ draw, scene, objects, moveCamera, passThroughEvent }) => {
    const glRef = useRef();
    const canvasRef = useGL2Canvas(glRef, draw, scene, objects);
 
    const [ isActive, setIsActive ] = useState(false);
    const [ mouseLocation, setMouseLocation ] = useState({x: null, y: null});
    const [ clickLocation, setClickLocation ] = useState({x: null, y: null});
+
+   useEffect(() => {
+      const { event, eventType } = passThroughEvent;
+      if (eventType === 'mouseDown') handleMouseDown(event);
+      if (eventType === 'mouseUp') handleMouseUp(event);
+      if (eventType === 'mouseMove') handleMouseMove(event);
+      if (eventType === 'mouseLeave') handleMouseLeave(event);
+      if (eventType === 'scroll') handleScroll(event);
+      if (eventType === 'touchStart') handleTouchStart(event);
+      if (eventType === 'touchEnd') handleTouchEnd(event);
+      if (eventType === 'touchMove') handleTouchMove(event);
+   }, [passThroughEvent]);
 
    useEffect(() => {
       const canvas = glRef.current.canvas;
@@ -37,7 +49,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
       canvas.addEventListener('wheel', handleScroll);
       canvas.addEventListener('touchstart', e => e.preventDefault());
       canvas.addEventListener('touchmove', e => e.preventDefault());
-   }, [])
+   }, []);
 
    const handleMouseDown = ({ nativeEvent }) => {
       nativeEvent.preventDefault();
@@ -79,6 +91,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
    const handleTouchEnd = () => {
       setIsActive(false);
    }
+
    const handleTouchMove = ({ nativeEvent }) => {
       if (!isActive) return;
       const event = nativeEvent.changedTouches[0];
@@ -102,7 +115,7 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera }) => {
          onTouchEnd={handleTouchEnd}
          onTouchMove={handleTouchMove}
 
-         style={{width: '100%', height: '500px'}}
+         style={{width: '100%', height: '100%'}}
       />
    );
 }
