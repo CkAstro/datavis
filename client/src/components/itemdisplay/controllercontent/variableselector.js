@@ -1,5 +1,5 @@
 import { useRenderables } from "../../../contexts/renderables"
-import './index.css';
+import style from './controllercontent.module.css';
 
 const VariableSelector = ({ controllerId }) => {
    const { changeActiveVar } = useRenderables();
@@ -10,7 +10,7 @@ const VariableSelector = ({ controllerId }) => {
    }
 
    return (
-      <div className='varSelectContainer'>
+      <div className={style.varSelectContainer}>
          <span>Variable:</span>
          <select onChange={e => handleSelection(e)}>
             <option value='density'>Density</option>

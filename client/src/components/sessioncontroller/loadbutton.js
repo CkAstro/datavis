@@ -5,17 +5,23 @@ import { useCamera } from '../../contexts/camera';
 import Cookies from 'universal-cookie';
 import style from './sessioncontroller.module.css';
 
+// loadButton opens a modal which allows user to load sessions stored via cookie
+// todo: need to also load data/colormap IDs so we can request from server
+// todo: need to also store session info on server so we can request if cookies
+//    are not available
 const ModalContent = () => {
    const [ sessions, setSessions ] = useState({});
    const [ deleteQueue, setDeleteQueue ] = useState(null);
    const { setAllRenderables } = useRenderables();
    const { setAllOptions } = useCamera();
 
+   // grab all cookies on init
    useEffect(() => {
       const cookies = new Cookies;
       setSessions(cookies.getAll());
    }, []);
 
+   // build a list of sessions; clicking will auto-load
    const buildSessions = () => {
       if (!sessions) return null;
       let sessionMap = [];
@@ -38,11 +44,13 @@ const ModalContent = () => {
       setDeleteQueue(null);
    }
 
+   // calling this once queues; calling twice in a row deletes
    const queueDelete = sessionName => {
       if (sessionName !== deleteQueue) return setDeleteQueue(sessionName);
       return deleteSession(sessionName);
    }
 
+   // delete session and remove from cookies
    const deleteSession = sessionName => {
       const cookies = new Cookies;
       cookies.remove(sessionName, {path: '/'});

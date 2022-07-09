@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRenderables } from '../../../contexts/renderables';
-import './index.css';
+import style from './controllercontent.module.css';
 
 const Slider = ({ props }) => {
    const [ input, setInput ] = useState('');
@@ -42,7 +42,7 @@ const Slider = ({ props }) => {
 
    const valChangeArea = (
       <form onSubmit={requestValChange}>
-         <input autoFocus className='valChangeArea'
+         <input autoFocus className={style.valChangeArea}
             onChange={handleInput}
             value={input}
             onKeyDown={handleKeyPress}
@@ -53,15 +53,15 @@ const Slider = ({ props }) => {
    );
 
    const valDisplayArea = (
-      <span className='varSliderValue noselect'
+      <span className={`noselect ${style.varSliderValue}`}
          onDoubleClick={() => enableEdit()}
       >{props.trueValue}</span>
    );
    const valDisplay = editMode ? valChangeArea : valDisplayArea;
 
    return (
-      <div className='varSlider'>
-         <span className='varSliderText noselect'>{props.text}</span>
+      <div className={style.varSlider}>
+         <span className={`noselect ${style.varSliderText}`}>{props.text}</span>
          <input type='range'
             onChange={e => changeSlideValue(e.target.value, props.ind, props.id)}
             min={props.min}

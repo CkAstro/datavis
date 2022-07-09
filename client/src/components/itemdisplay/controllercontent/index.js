@@ -1,7 +1,7 @@
 import { useRenderables } from '../../../contexts/renderables';
 import VariableSelector from './variableselector';
 import Slider from './slider';
-import './index.css';
+import style from './controllercontent.module.css';
 
 const ControllerContent = ({ controllerId }) => {
    const { renderables } = useRenderables();
@@ -29,8 +29,8 @@ const ControllerContent = ({ controllerId }) => {
    }
 
    return (
-      <div className={`controllerContent ${isActive ? 'active' : ''}`}>
-         <div className='sliderContainer'>
+      <div className={`${style.controllerContent} ${isActive ? style.active : null}`}>
+         <div className={style.sliderContainer}>
             {sliderList()}
          </div>
          <VariableSelector controllerId={controllerId}/>

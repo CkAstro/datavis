@@ -1,6 +1,9 @@
 import { useCamera } from '../../contexts/camera';
 import style from './cameracontroller.module.css';
 
+// this button toggles compare mode
+// initial state: inactive (red coloring)
+// toggles to active (green coloring)
 const CompareButton = () => {
    const { options, toggleCompare } = useCamera();
 

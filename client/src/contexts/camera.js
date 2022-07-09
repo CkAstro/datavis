@@ -24,16 +24,19 @@ const CameraProvider = ({ children }) => {
 const useCamera = () => {
    const [ options, setOptions ] = useContext(CameraContext);
 
+   // should only be used for loading from saved session
    const setAllOptions = opts => {
       const newOptions = { ...opts };
       setOptions(newOptions);
    }
 
+   // toggle compare mode (1 vs 2 viewports)
    const toggleCompare = () => {
       const compare = !options.compare;
       setOptions({ ...options, compare: compare });
    }
 
+   // toggle linked mode (viewports work together or separately)
    const toggleLinked = () => {
       if (!options.compare) return;
       const linked = !options.linked;
@@ -42,8 +45,11 @@ const useCamera = () => {
       setOptions({ ...options, linked: linked, camera: newCamera });
    }
 
+   // move camera (rotate/zoom)
    const moveCamera = (clickLocation, dz, da, dp) => {
       const canvas = document.getElementById('glCanvas');
+
+      // use click location to determine which viewport we are on
       const {top, left, width } = canvas.getBoundingClientRect();
       const location = {x: clickLocation.x-left, y: clickLocation.y-top}
 
@@ -57,6 +63,7 @@ const useCamera = () => {
       setOptions(newOptions);
    }
 
+   // snap camera to axis
    const snapCamera = (cameraInd, direction) => {
       const newOptions = { ...options };
       if (direction === 'x' || direction === 'X') {

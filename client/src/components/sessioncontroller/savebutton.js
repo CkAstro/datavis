@@ -5,6 +5,11 @@ import { useCamera } from '../../contexts/camera';
 import Cookies from 'universal-cookie';
 import style from './sessioncontroller.module.css';
 
+
+// saveButton opens a modal which allows user to save sessions stored via cookie
+// todo: need to also save data/colormap IDs so we can request from server
+// todo: need to also store session info on server so we can request if cookies
+//    are not available
 const ModalContent = () => {
    const defaultSessionName = 'session name...';
    const [ sessionName, setSessionName ] = useState(defaultSessionName);

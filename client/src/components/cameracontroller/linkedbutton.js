@@ -1,6 +1,10 @@
 import { useCamera } from '../../contexts/camera';
 import style from './cameracontroller.module.css';
 
+
+// this button toggles camera link mode
+// initial state: disabled (gray coloring)
+// toggles from active (green coloring) to inactive (red coloring)
 const LinkedButton = () => {
    const { options, toggleLinked } = useCamera();
 

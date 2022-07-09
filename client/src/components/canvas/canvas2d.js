@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 const useCanvas2D = (glRef, draw, objects) => {
    const canvasRef = useRef();
 
+   // init the canvas on load
    useEffect(() => {
       const canvas = canvasRef.current;
       const gl = canvas.getContext('2d');
@@ -13,6 +14,7 @@ const useCanvas2D = (glRef, draw, objects) => {
       glRef.current = gl;
    }, []);
 
+   // only call draw if objects are updated
    useEffect(() => {
       draw(glRef.current, objects);
    }, [draw, objects]);

@@ -7,6 +7,7 @@ import api from '../../api';
 const ModalContent = () => {
    const [ image, setImage ] = useState(null);
 
+   // we will request sample image immediately, so we can use HTML5 download to download on link click 
    useEffect(() => {
       api.getImageData('sample_data.png').then(data => setImage(URL.createObjectURL(data)));
    }, []);
