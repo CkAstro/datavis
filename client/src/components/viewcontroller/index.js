@@ -8,7 +8,7 @@ const ViewAxisX = () => {
    return (
       <div className={style.changeView}
          title='Snap view to X'
-         onClick={() => snapCamera(0, 'x')}
+         onClick={() => snapCamera('x')}
       ><div className={style.flexText}><span>View</span><span>X</span></div>
       </div>
    );
@@ -20,7 +20,7 @@ const ViewAxisY = () => {
    return (
       <div className={style.changeView}
          title='Snap view to Y'
-         onClick={() => snapCamera(0, 'y')}
+         onClick={() => snapCamera('y')}
       ><div className={style.flexText}><span>View</span><span>Y</span></div>
       </div>
    );
@@ -32,7 +32,7 @@ const ViewAxisZ = () => {
    return (
       <div className={style.changeView}
          title='Snap view to Z'
-         onClick={() => snapCamera(0, 'z')}
+         onClick={() => snapCamera('z')}
       ><div className={style.flexText}><span>View</span><span>Z</span></div>
       </div>
    );

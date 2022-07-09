@@ -5,6 +5,7 @@ const CameraContext = createContext();
 const defaultOptions = {
    compare: false,
    linked: true,
+   lastActive: 0,
    camera: [
       { zoom: -3.0, azi: 0.0, pol: 0.0 },
       { zoom: -3.0, azi: 0.0, pol: 0.0 },
@@ -55,6 +56,7 @@ const useCamera = () => {
 
       const newOptions = { ..._BUGFIX_options };   // see comment below for bugfix
       const activeCamera = (newOptions.compare && !newOptions.linked && location.x > width/2.0) ? 1 : 0;
+      newOptions.lastActive = activeCamera;
       newOptions.camera[activeCamera] = {
          zoom: newOptions.camera[activeCamera].zoom - dz,
          azi: newOptions.camera[activeCamera].azi - da,
@@ -64,8 +66,9 @@ const useCamera = () => {
    }
 
    // snap camera to axis
-   const snapCamera = (cameraInd, direction) => {
-      const newOptions = { ...options };
+   const snapCamera = direction => {
+      const newOptions = { ..._BUGFIX_options };   // see comment below for bugfix
+      const cameraInd = newOptions.compare && !newOptions.linked ? newOptions.lastActive : 0;
       if (direction === 'x' || direction === 'X') {
          newOptions.camera[cameraInd].azi = 150;
          newOptions.camera[cameraInd].pol = 0;
