@@ -43,12 +43,12 @@ const useCamera = () => {
    }
 
    const moveCamera = (clickLocation, dz, da, dp) => {
-
       const canvas = document.getElementById('glCanvas');
-      const location = {x: clickLocation.x-canvas.offsetLeft, y: clickLocation.y-canvas.offsetTop}
+      const {top, left, width } = canvas.getBoundingClientRect();
+      const location = {x: clickLocation.x-left, y: clickLocation.y-top}
 
       const newOptions = { ..._BUGFIX_options };   // see comment below for bugfix
-      const activeCamera = (newOptions.compare && !newOptions.linked && location.x > canvas.width/2.0) ? 1 : 0;
+      const activeCamera = (newOptions.compare && !newOptions.linked && location.x > width/2.0) ? 1 : 0;
       newOptions.camera[activeCamera] = {
          zoom: newOptions.camera[activeCamera].zoom - dz,
          azi: newOptions.camera[activeCamera].azi - da,
