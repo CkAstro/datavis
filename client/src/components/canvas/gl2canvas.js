@@ -49,6 +49,12 @@ const GL2Canvas = ({ draw, scene, objects, moveCamera, passThroughEvent }) => {
       canvas.addEventListener('wheel', handleScroll);
       canvas.addEventListener('touchstart', e => e.preventDefault());
       canvas.addEventListener('touchmove', e => e.preventDefault());
+
+      return () => {
+         canvas.removeEventListener('wheel', handleScroll);
+         canvas.removeEventListener('touchstart', e => e.preventDefault());
+         canvas.removeEventListener('touchmove', e => e.preventDefault());
+      }
    }, []);
 
    const handleMouseDown = ({ nativeEvent }) => {

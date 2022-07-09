@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCamera } from '../../contexts/camera';
 import { useRenderables } from '../../contexts/renderables';
 import { GL2Canvas, Canvas2D } from '../canvas';
@@ -17,6 +17,17 @@ const Display = () => {
    const [ passThroughEvent, setPassThroughEvent ] = useState({event: null, eventType: null});
    const { options, moveCamera } = useCamera();
    const { renderables } = useRenderables();
+
+   const divRef = useRef(null);
+   useEffect(() => {
+      divRef.current.addEventListener('touchstart', e => e.preventDefault());
+      divRef.current.addEventListener('touchmove', e => e.preventDefault());
+
+      return () => {
+         divRef.current.removeEventListener('touchstart', e => e.preventDefault());
+         divRef.current.removeEventListener('touchmove', e => e.preventDefault());
+      }
+   }, []);
 
    const handleMouseDown = event => setPassThroughEvent({event, eventType: 'mouseDown'});
    const handleMouseUp = event => setPassThroughEvent({event, eventType: 'mouseUp'});
@@ -44,6 +55,7 @@ const Display = () => {
             <ViewController/>
          </div>
          <div className={style.canvasContainer}
+            ref={divRef}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
