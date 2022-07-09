@@ -2,6 +2,7 @@ import { useRenderables } from '../../../contexts/renderables';
 import Icons from '../../icons';
 import style from './controllerheader.module.css';
 
+// close button : clicking will cause the item to delete itself from renderables list
 const CloseButton = ({ controllerId }) => {
    const { deleteRenderable } = useRenderables();
 
