@@ -1,4 +1,4 @@
-import Icons from '../../icons';
+import Icons from 'components/icons';
 import style from './controllerheader.module.css';
 
 const EditButton = ({ enableEdit }) => {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useModal } from '../../contexts/modal';
+import { useModal } from 'contexts/modal';
 import style from './uploadcontroller.module.css';
-import texHelper from '../../utils/texturehelper';
-import api from '../../api';
+import texHelper from 'utils/texturehelper';
+import api from 'api';
 
 const ModalContent = () => {
    const [ image, setImage ] = useState(null);
@@ -64,7 +64,7 @@ const ImgUploadButton = () => {
    return <div>
       <img className={null}
          title='Upload Data from Image'
-         src={require('./img/imgupload.png')}
+         src={require('assets/img/img_upload_icon.png')}
          onClick={() => setModalContent( <ModalContent/> )}
       />
    </div>;

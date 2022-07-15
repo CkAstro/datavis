@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useRenderables } from '../../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import style from './controllercontent.module.css';
 
 const Slider = ({ props }) => {

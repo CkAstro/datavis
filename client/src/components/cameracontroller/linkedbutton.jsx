@@ -1,4 +1,4 @@
-import { useCamera } from '../../contexts/camera';
+import { useCamera } from 'contexts/camera';
 import style from './cameracontroller.module.css';
 
 
@@ -16,7 +16,7 @@ const LinkedButton = () => {
    return <div>
       <img className={linkedClass} 
          title='Link Cameras'
-         src={require('./img/linked.png')} 
+         src={require('assets/img/linked_icon.png')} 
          onClick={toggleLinked}
       />
    </div>;

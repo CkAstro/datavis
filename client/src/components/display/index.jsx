@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { useCamera } from '../../contexts/camera';
-import { useRenderables } from '../../contexts/renderables';
-import { GL2Canvas, Canvas2D } from '../canvas';
-import { drawScene, drawColorMap } from '../../utils/glhelper/drawscene';
+import { useCamera } from 'contexts/camera';
+import { useRenderables } from 'contexts/renderables';
+import { GL2Canvas, Canvas2D } from 'components/canvas';
+import { drawScene, drawColorMap } from 'utils/glhelper/drawscene';
 import SceneOptions from './sceneoptions';
-import Modal from '../modal';
-import SessionController from '../sessioncontroller';
-import UploadController from '../uploadcontroller';
-import CameraController from '../cameracontroller';
-import ViewController from '../viewcontroller';
-import texHelper from '../../utils/texturehelper';
-import glHelper from '../../utils/glhelper';
+import Modal from 'components/modal';
+import SessionController from 'components/sessioncontroller';
+import UploadController from 'components/uploadcontroller';
+import CameraController from 'components/cameracontroller';
+import ViewController from 'components/viewcontroller';
+import texHelper from 'utils/texturehelper';
+import glHelper from 'utils/glhelper';
 import style from './display.module.css';
 
 const Display = () => {

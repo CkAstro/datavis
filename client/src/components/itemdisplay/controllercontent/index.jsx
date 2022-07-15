@@ -1,4 +1,4 @@
-import { useRenderables } from '../../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import VariableSelector from './variableselector';
 import Slider from './slider';
 import style from './controllercontent.module.css';

@@ -1,5 +1,5 @@
 import ItemCreator from './itemcreator';
-import ItemDisplay from '../itemdisplay';
+import ItemDisplay from 'components/itemdisplay';
 import style from './toolbar.module.css';
 
 const Toolbar = () => {

@@ -1,5 +1,5 @@
-import { useRenderables } from '../../contexts/renderables';
-import { useCamera } from '../../contexts/camera';
+import { useRenderables } from 'contexts/renderables';
+import { useCamera } from 'contexts/camera';
 import style from './display.module.css';
 
 const SceneController = ({ cameraId }) => {

@@ -1,4 +1,4 @@
-import { useModal } from '../../contexts/modal';
+import { useModal } from 'contexts/modal';
 import style from './modal.module.css';
 
 const Modal = () => {

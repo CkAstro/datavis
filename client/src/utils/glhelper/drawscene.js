@@ -1,4 +1,4 @@
-import buildShaderSuite from '../shaders/shadersuite';
+import buildShaderSuite from 'utils/shaders/shadersuite';
 
 const drawScene = (gl, scene, objects, texHelper, glHelper) => {
    if (!glHelper.isInit) buildShaderSuite(gl).then(shaderSuite => glHelper.init(gl, shaderSuite));

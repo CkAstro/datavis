@@ -1,4 +1,4 @@
-import { useCamera } from '../../contexts/camera';
+import { useCamera } from 'contexts/camera';
 import style from './viewcontroller.module.css';
 // clicking buttons will snap to appropriate axis
 

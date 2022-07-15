@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { useModal } from '../../contexts/modal';
-import { useRenderables } from '../../contexts/renderables';
-import { useCamera } from '../../contexts/camera';
+import { useModal } from 'contexts/modal';
+import { useRenderables } from 'contexts/renderables';
+import { useCamera } from 'contexts/camera';
 import Cookies from 'universal-cookie';
 import style from './sessioncontroller.module.css';
 
@@ -77,7 +77,7 @@ const LoadButton = () => {
    return <div>
       <img className={null}
          title='Load Session'
-         src={require('./img/load.png')}
+         src={require('assets/img/load_icon.png')}
          onClick={displayModal}
       />
    </div>;

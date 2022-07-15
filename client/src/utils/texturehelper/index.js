@@ -1,4 +1,4 @@
-import { getImageData } from '../../api';
+import { getImageData } from 'api';
 
 class TextureHelper {
    constructor() {

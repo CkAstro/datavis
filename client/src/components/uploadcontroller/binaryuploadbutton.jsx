@@ -1,4 +1,4 @@
-import { useModal } from '../../contexts/modal';
+import { useModal } from 'contexts/modal';
 import style from './uploadcontroller.module.css';
 
 const BinaryUploadButton = () => {
@@ -16,7 +16,7 @@ const BinaryUploadButton = () => {
    return <div>
       <img className={style.disabled}
          title='Upload Data from Binary'
-         src={require('./img/binaryupload.png')}
+         src={require('assets/img/binary_upload_icon.png')}
          onClick={displayModal}
       />
    </div>;

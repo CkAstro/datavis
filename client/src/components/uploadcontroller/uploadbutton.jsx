@@ -1,4 +1,4 @@
-import { useModal } from '../../contexts/modal';
+import { useModal } from 'contexts/modal';
 import style from './uploadcontroller.module.css';
 
 const UploadButton = () => {
@@ -16,7 +16,7 @@ const UploadButton = () => {
    return <div>
       <img className={style.disabled}
          title='Upload Data from Text'
-         src={require('./img/upload.png')}
+         src={require('assets/img/upload_icon.png')}
          onClick={displayModal}
       />
    </div>;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRenderables } from '../../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import NameDisplay from './namedisplay';
 import NameChange from './namechange';
 import style from './controllerheader.module.css';

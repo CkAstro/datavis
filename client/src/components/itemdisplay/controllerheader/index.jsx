@@ -1,4 +1,4 @@
-import { useRenderables } from '../../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import CloseButton from './closebutton';
 import VisToggle from './vistoggle';
 import HeaderInfo from './headerinfo';

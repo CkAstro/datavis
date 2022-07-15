@@ -1,5 +1,5 @@
 import ItemController from './itemcontroller';
-import { useRenderables } from '../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import style from './itemdisplay.module.css';
 
 const ItemDisplay = () => {

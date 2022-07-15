@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useRenderables } from '../../../contexts/renderables';
+import { useRenderables } from 'contexts/renderables';
 import style from './controllerheader.module.css';
 
 const NameChange = ({ controller, disableEdit }) => {
