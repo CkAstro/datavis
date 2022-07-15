@@ -57,7 +57,7 @@ class Surface extends Renderable {
    }
 }
 
-export const Renderables = {
+export default {
    Slice,
    Sphere,
    Surface,

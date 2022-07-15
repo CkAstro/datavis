@@ -1,5 +1,5 @@
 import { mat4 } from "gl-matrix";
-import { Renderables } from "utils/renderables";
+import { Renderables } from "utils";
 
 class GLHelper {
    constructor() {

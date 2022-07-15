@@ -1,26 +1,21 @@
 import ReactDOM from 'react-dom/client';
-import Header from 'components/header';
-import Display from 'components/display';
-import Toolbar from 'components/toolbar';
-import { RenderablesProvider } from 'contexts/renderables';
-import { CameraProvider } from 'contexts/camera';
-import { ModalProvider } from 'contexts/modal';
+import { CameraProvider, ModalProvider, RenderablesProvider } from 'contexts';
+import { Display, Toolbar } from 'features';
+import { Header } from 'components/elements';
 import './index.css';
 
-const DataVis = () => {
-   return (
-      <div className='datavisContainer'>
-         <RenderablesProvider>
-            <CameraProvider>
-               <ModalProvider>
-                  <Display/>
-                  <Toolbar/>
-               </ModalProvider>
-            </CameraProvider>
-         </RenderablesProvider>
-      </div>
-   );
-}
+const DataVis = () => (
+   <div className='datavisContainer'>
+      <RenderablesProvider>
+         <CameraProvider>
+            <ModalProvider>
+               <Display/>
+               <Toolbar/>
+            </ModalProvider>
+         </CameraProvider>
+      </RenderablesProvider>
+   </div>
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

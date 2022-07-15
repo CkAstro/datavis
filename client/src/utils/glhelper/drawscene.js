@@ -1,11 +1,10 @@
-import buildShaderSuite from 'utils/shaders/shadersuite';
+import { buildShaderSuite } from 'utils';
 
 const drawScene = (gl, scene, objects, texHelper, glHelper) => {
    if (!glHelper.isInit) buildShaderSuite(gl).then(shaderSuite => glHelper.init(gl, shaderSuite));
    if (!texHelper.isInit) texHelper.init(gl);
    glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
 }
-
 
 const drawColorMap = (ctx, cmapData) => {
    const _cbarWidth = 25;
