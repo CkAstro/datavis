@@ -1,6 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+   font-family: 'Roboto';
+   src: url('fonts/Roboto-Regular.ttf');
+}
+@font-face {
+   font-family: 'Roboto';
+   src: url('fonts/Roboto-Bold.ttf');
+   font-weight: 700;
+}
 
-body, html, a {
+body, html {
    margin: 0px;
    padding: 0px;
    -webkit-font-smoothing: antialiased;
@@ -9,9 +17,10 @@ body, html, a {
    color: var(--color-black);
    width: 100vw;
    height: 100vh;
-   text-decoration: none;
    overflow-x: hidden;
 }
+
+a { margin: 0; padding: 0; text-decoration: none; color: var(--color-black); }
 
 /* ----- globals ----- */
 
