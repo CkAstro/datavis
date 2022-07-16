@@ -1,5 +1,5 @@
 import { useCamera } from 'contexts';
-import style from './cameracontroller.module.css';
+import { Button } from 'components/elements';
 
 // this button toggles compare mode
 // initial state: inactive (red coloring)
@@ -7,16 +7,14 @@ import style from './cameracontroller.module.css';
 const CompareButton = () => {
    const { options, toggleCompare } = useCamera();
 
-   const compareClass = options.compare ? style.active : style.inactive;
-
    return (
-      <div>
-         <img className={compareClass}
-            title='Compare Mode'
-            src={require('assets/img/compare_icon.png')} 
-            onClick={toggleCompare}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/compare_icon.png')} 
+         hoverText='Compare Mode' 
+         enabled
+         active={options.compare}
+         onClick={toggleCompare}
+      />
    );
 }
 

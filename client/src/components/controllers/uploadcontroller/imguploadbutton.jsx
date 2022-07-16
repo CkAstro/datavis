@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useModal } from 'contexts';
 import { texHelper } from 'utils';
+import { Button } from 'components/elements';
 import api from 'api';
 import style from './uploadcontroller.module.css';
 
@@ -64,13 +65,13 @@ const ImgUploadButton = () => {
    const { setModalContent } = useModal();
 
    return (
-      <div>
-         <img className={null}
-            title='Upload Data from Image'
-            src={require('assets/img/img_upload_icon.png')}
-            onClick={() => setModalContent( <ModalContent/> )}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/img_upload_icon.png')} 
+         hoverText='Upload Data from Image' 
+         enabled
+         active
+         onClick={() => setModalContent(<ModalContent/>)}
+      />
    );
 }
 

@@ -1,49 +1,47 @@
 import { useCamera } from 'contexts';
-import style from './viewcontroller.module.css';
+import { Button } from 'components/elements';
+
 // clicking buttons will snap to appropriate axis
 
 const ViewAxisX = () => {
    const { snapCamera } = useCamera();
-   
+
    return (
-      <div className={style.changeView}
-         title='Snap view to X'
+      <Button 
+         text={<><span>View</span><span>X</span></>}
+         hoverText='Snap view to X' 
+         enabled
+         active
          onClick={() => snapCamera('x')}
-      >
-         <div className={style.flexText}>
-            <span>View</span><span>X</span>
-         </div>
-      </div>
+      />
    );
 }
 
 const ViewAxisY = () => {
    const { snapCamera } = useCamera();
-   
+
    return (
-      <div className={style.changeView}
-         title='Snap view to Y'
+      <Button 
+         text={<><span>View</span><span>Y</span></>}
+         hoverText='Snap view to Y' 
+         enabled
+         active
          onClick={() => snapCamera('y')}
-      >
-         <div className={style.flexText}>
-            <span>View</span><span>Y</span>
-         </div>
-      </div>
+      />
    );
 }
 
 const ViewAxisZ = () => {
    const { snapCamera } = useCamera();
-   
+
    return (
-      <div className={style.changeView}
-         title='Snap view to Z'
+      <Button 
+         text={<><span>View</span><span>Z</span></>}
+         hoverText='Snap view to Z' 
+         enabled
+         active
          onClick={() => snapCamera('z')}
-      >
-         <div className={style.flexText}>
-            <span>View</span><span>Z</span>
-         </div>
-      </div>
+      />
    );
 }
 

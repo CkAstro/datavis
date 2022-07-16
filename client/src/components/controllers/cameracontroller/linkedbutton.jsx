@@ -1,6 +1,5 @@
 import { useCamera } from 'contexts';
-import style from './cameracontroller.module.css';
-
+import { Button } from 'components/elements';
 
 // this button toggles camera link mode
 // initial state: disabled (gray coloring)
@@ -8,19 +7,14 @@ import style from './cameracontroller.module.css';
 const LinkedButton = () => {
    const { options, toggleLinked } = useCamera();
 
-   const linkedClass = options.compare
-      ? (options.linked ? style.active : style.inactive) 
-      : style.disabled
-   ;
-
    return (
-      <div>
-         <img className={linkedClass} 
-            title='Link Cameras'
-            src={require('assets/img/linked_icon.png')} 
-            onClick={toggleLinked}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/linked_icon.png')} 
+         hoverText='Link Cameras' 
+         enabled={options.compare}
+         active={options.linked}
+         onClick={toggleLinked}
+      />
    );
 }
 

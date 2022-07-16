@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useModal, useCamera, useRenderables } from 'contexts';
+import { Button } from 'components/elements';
 import Cookies from 'universal-cookie';
 import style from './sessioncontroller.module.css';
 
@@ -46,13 +47,13 @@ const SaveButton = () => {
    const { setModalContent } = useModal();
 
    return (
-      <div>
-         <img className={null}
-            title='Save Session'
-            src={require('assets/img/save_icon.png')}
-            onClick={() => setModalContent( <ModalContent/> )}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/save_icon.png')} 
+         hoverText='Save Session' 
+         enabled
+         active
+         onClick={() => setModalContent( <ModalContent/> )}
+      />
    );
 }
 

@@ -24,19 +24,6 @@
    gap: 6px;
 }
 
-.actionbar > div > div {
-   width: 48px;
-   height: 48px;
-   position: relative;
-   filter: brightness(100%);
-   background: #888;
-   transition: filter 0.2s;
-   cursor: pointer;
-}
-
-.actionbar > div > *:hover { filter: brightness(80%); }
-
-
 /* ----- scene controller ----- */
 .sceneOptions {
    display: flex;

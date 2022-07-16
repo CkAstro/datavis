@@ -1,4 +1,5 @@
 import { useModal } from 'contexts';
+import { Button } from 'components/elements';
 import style from './uploadcontroller.module.css';
 
 const BinaryUploadButton = () => {
@@ -14,13 +15,11 @@ const BinaryUploadButton = () => {
    }
 
    return (
-      <div>
-         <img className={style.disabled}
-            title='Upload Data from Binary'
-            src={require('assets/img/binary_upload_icon.png')}
-            onClick={displayModal}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/binary_upload_icon.png')} 
+         hoverText='Upload Data from Binary' 
+         onClick={displayModal}
+      />
    );
 }
 

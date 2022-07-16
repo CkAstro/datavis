@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useModal, useCamera, useRenderables } from 'contexts';
+import { Button } from 'components/elements';
 import Cookies from 'universal-cookie';
 import style from './sessioncontroller.module.css';
 
@@ -21,7 +22,7 @@ const ModalContent = () => {
 
    // build a list of sessions; clicking will auto-load
    const buildSessions = () => {
-      if (!sessions) return null;
+      if (!sessions || Object.keys(sessions).length === 0) return <div>No sessions found</div>;
       let sessionMap = [];
       for (const session in sessions) {
          sessionMap = sessionMap.concat(
@@ -70,18 +71,15 @@ const ModalContent = () => {
 
 const LoadButton = () => {
    const { setModalContent } = useModal();
-   const displayModal = () => {
-      setModalContent( <ModalContent/> );
-   }
 
    return (
-      <div>
-         <img className={null}
-            title='Load Session'
-            src={require('assets/img/load_icon.png')}
-            onClick={displayModal}
-         />
-      </div>
+      <Button 
+         image={require('assets/img/load_icon.png')} 
+         hoverText='Load Session'
+         enabled
+         active
+         onClick={() => setModalContent(<ModalContent/>)}
+      />
    );
 }
 
