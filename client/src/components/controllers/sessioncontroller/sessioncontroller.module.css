@@ -2,8 +2,6 @@
 img { width: 100%; height: 100%; }
 .disabled { cursor: not-allowed; }
 
-/* .modalContent {} */
-
 .nameContainer {
    display: flex;
    gap: 2px;
