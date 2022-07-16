@@ -1,7 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useGL2Canvas = (glRef, draw, scene, objects, texHelper, glHelper) => {
-   const canvasRef = useRef();
+const useGL2Canvas = (glRef, draw, args) => {
+   const canvasRef = useRef(null);
+   const renderRef = useRef(null);
+
+   const animate = time => {
+      draw(glRef.current, args);
+      renderRef.current = requestAnimationFrame(animate);
+   }
 
    // init the canvas on load
    useEffect(() => {
@@ -13,18 +19,17 @@ const useGL2Canvas = (glRef, draw, scene, objects, texHelper, glHelper) => {
       canvas.width = rect.width;
       canvas.height = rect.height;
       glRef.current = gl;
+      
+      renderRef.current = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(renderRef.current);
    }, []);
 
-   // only call draw if scene (camera), objects, or textures are changed
-   useEffect(() => {
-      draw(glRef.current, scene, objects, texHelper, glHelper);
-   }, [draw, scene, objects, texHelper.cmaps, texHelper.data]);
    return canvasRef;
 }
 
-const GL2Canvas = ({ draw, scene, objects, moveCamera, texHelper, glHelper, passThroughEvent }) => {
+const GL2Canvas = ({ draw, moveCamera, passThroughEvent, ...args }) => {
    const glRef = useRef();
-   const canvasRef = useGL2Canvas(glRef, draw, scene, objects, texHelper, glHelper);
+   const canvasRef = useGL2Canvas(glRef, draw, args);
 
    const [ isActive, setIsActive ] = useState(false);
    const [ mouseLocation, setMouseLocation ] = useState({x: null, y: null});

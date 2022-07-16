@@ -17,6 +17,21 @@ const Display = () => {
    const { options, moveCamera } = useCamera();
    const { renderables } = useRenderables();
 
+   const sceneRef = useRef(options);
+   useEffect(() => {
+      sceneRef.current = options;
+   }, [options]);
+
+   const objsRef = useRef(renderables);
+   useEffect(() => {
+      objsRef.current = renderables;
+   }, [renderables]);
+
+   // these two reference do not need to be updated
+   // since the object is never replaced
+   const texRef = useRef(texHelper);
+   const renderRef = useRef(glHelper);
+
    // ensure canvas touch events don't move screen
    const divRef = useRef(null);
    useEffect(() => {
@@ -71,12 +86,12 @@ const Display = () => {
          >
             <GL2Canvas 
                draw={drawScene} 
-               scene={options} 
-               objects={renderables} 
                moveCamera={moveCamera}
-               texHelper={texHelper}
-               glHelper={glHelper}
                passThroughEvent={passThroughEvent}
+               sceneRef={sceneRef}
+               objsRef={objsRef}
+               texRef={texRef}
+               renderRef={renderRef}
             />
             <Canvas2D
                draw={drawColorMap}

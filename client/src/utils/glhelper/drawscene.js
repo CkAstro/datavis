@@ -1,6 +1,18 @@
 import { buildShaderSuite } from 'utils';
 
-const drawScene = (gl, scene, objects, texHelper, glHelper) => {
+let _lastScene = null;     // scene comparison to determine re-render
+let _lastObjs = null;      // object comparison to determine re-render
+
+const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
+   const scene = sceneRef.current;
+   const objects = objsRef.current;
+   const texHelper = texRef.current;
+   const glHelper = renderRef.current;
+
+   if (_lastScene === scene && _lastObjs === objects) return;
+   _lastScene = scene;
+   _lastObjs = objects;
+
    if (!glHelper.isInit) buildShaderSuite(gl).then(shaderSuite => glHelper.init(gl, shaderSuite));
    if (!texHelper.isInit) texHelper.init(gl);
    glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
