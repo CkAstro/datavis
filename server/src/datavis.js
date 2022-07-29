@@ -1,3 +1,13 @@
+// imports not working? 
+// 
+// `jsconfig.json` may have issues with the `baseUrl` and `path` compiler options.
+// Since node will always check `node_modules` for an import, a simple work-around 
+//    is to add symlinks pointing back to the `src` directory. e.g.,
+//       >: cd server/node_modules
+//       >: ln -s ../src/ @
+//    and now you may use absolute imports: 
+//       import { gameService } from '@/services';
+
 import compression from 'compression';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -5,7 +15,7 @@ import multer from 'multer';
 import cors from 'cors';
 import fs from 'fs';
 
-import { PORT } from './config/index.js';
+import { PORT } from '@/config';
 'use strict';
 
 // ----- init ----- //
