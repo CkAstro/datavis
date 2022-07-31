@@ -1,6 +1,7 @@
 import Slice from './sliceshaders';
 import Sphere from './sphereshaders';
 import Surface from './surfaceshaders';
+import MCube from './mcubeshaders';
 
 const loadShader = (gl, type, source) => {
    const shader = gl.createShader(type);
@@ -35,6 +36,7 @@ const getShaderProgram = (gl, type) => {
    if (type === 'Slice' || type === 'slice') return initShaderProgram(gl, Slice);
    if (type === 'Sphere' || type === 'sphere') return initShaderProgram(gl, Sphere);
    if (type === 'Surface' || type === 'surface') return initShaderProgram(gl, Surface);
+   if (type === 'MCube' || type === 'mcube') return initShaderProgram(gl, MCube);
    throw new Error(`initShader called using unrecognized shader type ${type}`);
 }
 

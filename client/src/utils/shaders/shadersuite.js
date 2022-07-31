@@ -4,6 +4,7 @@ const buildShaderSuite = async gl => {
    const sliceShader = getShaderProgram(gl, 'Slice');
    const sphereShader = getShaderProgram(gl, 'Sphere');
    const surfaceShader = getShaderProgram(gl, 'Surface');
+   const mcubeShader = getShaderProgram(gl, 'MCube');
    const programInfo = {
       sliceShader: {
          program: sliceShader,
@@ -16,7 +17,6 @@ const buildShaderSuite = async gl => {
             modelData: 'modelData',
             colorMap: 'colorMap',
             dataIndex: 'uDataIndex',
-            rotation: 'uRotation',
          },
       },
       sphereShader: {
@@ -46,6 +46,17 @@ const buildShaderSuite = async gl => {
             dataIndex: 'uDataIndex',
          },
       },
+      mcubeShader: {
+         program: mcubeShader,
+         attribs: { vertexPosition: 'aVertexPosition' },
+         uniforms: {
+            projectionMatrix: 'uProjectionMatrix',
+            modelViewMatrix: 'uModelViewMatrix',
+            modelData: 'modelData',
+            colorMap: 'colorMap',
+            dataIndex: 'uDataIndex',
+         },
+      }
    }
    
    const shaderSuite = buildProgramInfo(gl, programInfo)

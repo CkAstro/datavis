@@ -1,3 +1,4 @@
+import marchingCubes from './marchingcubes';
 import shapes from './shapes';
 
 const initBuffers = (gl, shape) => {
@@ -57,8 +58,32 @@ class Surface extends Renderable {
    }
 }
 
+class MarchingCube {
+   constructor(gl, shaderProgram) {
+      this.glInstance = gl;
+      this.shaderProgram = shaderProgram;
+      this.buffers = marchingCubes.map(buffer => initBuffers(gl, buffer));
+      console.log(this.buffers)
+   }
+
+   render(ind) {
+      const gl = this.glInstance;
+      const buffer = this.buffers[ind];
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer.vertices);
+      gl.vertexAttribPointer(
+         this.shaderProgram.attribLocations.vertexPosition, 
+         3, gl.FLOAT, false, 0, 0,
+      );
+      gl.enableVertexAttribArray(this.shaderProgram.attribLocations.vertexPosition);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer.indices);
+      gl.drawElements(gl.TRIANGLES, buffer.indexCount, gl.UNSIGNED_SHORT, 0);
+   }
+}
+
 export default {
    Slice,
    Sphere,
    Surface,
+   MarchingCube,
 }

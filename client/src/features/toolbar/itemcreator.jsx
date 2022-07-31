@@ -14,7 +14,7 @@ const ItemCreator = () => {
    return (
       <div className={style.optionsArea}>
          <div className={style.itemCreator}>
-            <Button onClick={() => createRenderable('surface')} enabled active title='Isosurface' image={require('assets/img/surface_icon.png')}/>
+            <Button onClick={() => createRenderable('mcube')} enabled active title='Isosurface' image={require('assets/img/surface_icon.png')}/>
             <Button onClick={() => createRenderable('sphere')} enabled active title='Spherical Slice' image={require('assets/img/sphere_icon.png')}/>
             <Button onClick={() => createRenderable('zslice')} enabled active title='Z-Planar Slice' image={require('assets/img/zyx_z_icon.png')}/>
             <Button onClick={() => createRenderable('yslice')} enabled active title='Y-Planar Slice' image={require('assets/img/zyx_y_icon.png')}/>

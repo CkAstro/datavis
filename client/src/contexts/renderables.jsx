@@ -67,6 +67,15 @@ const useRenderables = () => {
             min: 0,
             max: 100,
          }];
+      } else if (type === 'mcube') {
+         return [{
+            variable: 'value',
+            trueValue: 0.5,
+            text: 'value',
+            value: 50,
+            min: 0,
+            max: 100,
+         }];
       } else {
          throw new Error('how did we get here?');
       }

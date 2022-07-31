@@ -28,6 +28,7 @@ class GLHelper {
       this.slice = new Renderables.Slice(gl, shaderSuite.sliceShader);
       this.sphere = new Renderables.Sphere(gl, shaderSuite.sphereShader);
       this.surface = new Renderables.Surface(gl, shaderSuite.surfaceShader);
+      this.mcube = new Renderables.MarchingCube(gl, shaderSuite.mcubeShader);
 
       this.isInit = true;
       return Promise.resolve();
@@ -65,6 +66,8 @@ class GLHelper {
          shader = this.shaderSuite.sphereShader;
       } else if (type === 'surface') {
          shader = this.shaderSuite.surfaceShader;
+      } else if (type === 'mcube') {
+         shader = this.shaderSuite.mcubeShader;
       } else {
          throw new Error('object type not recognized');
       }
@@ -171,12 +174,22 @@ class GLHelper {
 
                gl.uniform1f(shader.uniformLocations.dataValue, dataValue);
                gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
+            } else if (obj.type === 'mcube') {
+               renderer = 'mcube';
             } else {
                throw new Error('object type not recognized');
             }
 
             // render object
-            this[renderer].render();
+            if (obj.type === 'mcube') {
+               this[renderer].render(0);
+               this[renderer].render(1);
+               this[renderer].render(2);
+               this[renderer].render(3);
+               this[renderer].render(4);
+            } else {
+               this[renderer].render();
+            }
          }
       }
    }
