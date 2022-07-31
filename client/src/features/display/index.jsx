@@ -6,7 +6,8 @@ import {
    SessionController,
    UploadController,
    CameraController,
-   ViewController
+   ViewController,
+   HelpController
 } from 'components/controllers';
 import SceneOptions from './sceneoptions';
 import style from './display.module.css';
@@ -68,6 +69,7 @@ const Display = () => {
          <p><b>Display</b></p>
          <Modal/>
          <div className={style.actionbar}>
+            <HelpController/>
             <SessionController/>
             <UploadController/>
             <CameraController/>
