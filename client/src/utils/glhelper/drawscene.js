@@ -2,6 +2,7 @@ import { buildShaderSuite } from 'utils';
 
 let _lastScene = null;     // scene comparison to determine re-render
 let _lastObjs = null;      // object comparison to determine re-render
+let _isInit = false;
 
 const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
    const scene = sceneRef.current;
@@ -13,9 +14,17 @@ const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
    _lastScene = scene;
    _lastObjs = objects;
 
-   if (!glHelper.isInit) buildShaderSuite(gl).then(shaderSuite => glHelper.init(gl, shaderSuite));
-   if (!texHelper.isInit) texHelper.init(gl);
-   glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
+   if (!_isInit) {
+      texHelper.init(gl)
+         .then(() => buildShaderSuite(gl))
+         .then(shaderSuite => glHelper.init(gl, shaderSuite))
+         .then(() => _isInit = true)
+         .then(() => glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps))
+      ;
+   } else {
+      glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
+   }
+   
 }
 
 const drawColorMap = (ctx, cmapData) => {

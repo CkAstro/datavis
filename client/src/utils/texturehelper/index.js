@@ -1,4 +1,6 @@
 import { getImageData } from 'api';
+import { MCUBE_SIZE } from 'config';
+import loadImageData from './loadtexture';
 
 class TextureHelper {
    constructor() {
@@ -14,16 +16,28 @@ class TextureHelper {
       const default_data = 'default_data.png';
       const default_cmap = 'default_cmap.png';
 
-      getImageData(default_data).then(data => this.loadTextureFromData(data, default_data));
-      getImageData(default_cmap).then(data => this.loadCmapFromData(data, default_cmap));
-
-      this.isInit = true;
-      return Promise.resolve();
+      return new Promise((resolve, reject) => {
+         // load cmap
+         getImageData(default_cmap)
+            .then(data => this.loadCmapFromData(data, default_cmap))
+            .catch(err => reject(err))
+         ;
+         
+         // load data
+         getImageData(default_data)
+            .then(data => this.loadTextureFromData(data, default_data))
+            .then(() => resolve())
+            .catch(err => reject(err))
+         ;
+      });
    }
 
    loadTextureFromData(data, texId) {
-      const texture = this.loadImageData3D(data);
-      this.data = this.data.concat({texture, texId});
+      return new Promise((resolve, reject) => {
+         const { texture, values } = loadImageData(this.glInstance, data);
+         this.data = this.data.concat({texture, texId, values});
+         setTimeout(() => resolve(values[600]), 1000);
+      });
    }
 
    loadCmapFromData(data, texId) {
@@ -45,6 +59,10 @@ class TextureHelper {
       }
       image.src = URL.createObjectURL(imageData);
       return texture;
+   }
+
+   getValues(ind) {
+      return this.data[ind].values;
    }
 
    getVolRes(image) {
@@ -69,6 +87,7 @@ class TextureHelper {
    loadImageData3D(imageData) {
       const gl = this.glInstance;
       const texture = gl.createTexture();
+      const values = new Float32Array(MCUBE_SIZE*MCUBE_SIZE*MCUBE_SIZE);
 
       const image = new Image;
       image.onload = () => {
@@ -79,11 +98,13 @@ class TextureHelper {
          ctx.drawImage(image, 0, 0);
 
          const volRes = this.getVolRes(image);
+         const valStep = Math.floor(volRes/MCUBE_SIZE);
          this.init3DTexture(gl, texture, volRes);
 
          let sliceCount = Math.floor(volRes**0.5);
          if (volRes%sliceCount) sliceCount++;
 
+         let pos = 0;
          const dataBuffer = new Float32Array(3*volRes*volRes);
          for (let k=0; k<volRes; k++) {
             const sliceX = k % sliceCount;
@@ -95,13 +116,17 @@ class TextureHelper {
                   for (let n=0; n<3; n++) {
                      dataBuffer[3*(j*volRes+i)+n] = img.data[4*(j*volRes+i)+n] / 255.0;   // should range 0-1
                   }
+                  if (!i%valStep && !j%valStep && !k%valStep) {
+                     values[pos] = img.data[4*(j*volRes+i)] / 255.0;
+                     pos++;
+                  }
                }
             }
             gl.texSubImage3D(gl.TEXTURE_3D, 0, 0, 0, k, volRes, volRes, 1, gl.RGB, gl.FLOAT, dataBuffer);
          }
       }
       image.src = URL.createObjectURL(imageData);
-      return texture;
+      return { texture, values };
    }
 }
 

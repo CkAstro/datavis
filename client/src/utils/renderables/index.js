@@ -1,4 +1,5 @@
-import marchingCubes from './marchingcubes';
+import { buildCubeGrid, updatePointValues, march } from '../marchingcubes';
+import { texHelper } from 'utils';
 import shapes from './shapes';
 
 const initBuffers = (gl, shape) => {
@@ -62,8 +63,22 @@ class MarchingCube {
    constructor(gl, shaderProgram) {
       this.glInstance = gl;
       this.shaderProgram = shaderProgram;
-      this.buffers = marchingCubes.map(buffer => initBuffers(gl, buffer));
-      console.log(this.buffers)
+      this.buffers = [null];
+      this.isInit = false;
+   }
+   
+   async init(val) {
+      buildCubeGrid
+         .then(({grid, points}) => {
+            this.grid = grid;
+            this.points = points;
+            this.isInit = true;
+         })
+         .then(() => texHelper.getValues(0))
+         .then(vals => updatePointValues(this.points, vals))
+         .then(() => march(this.grid, val))
+         .then(cubes => this.buffers = cubes.map(buffer => initBuffers(this.glInstance, buffer)))
+      ;
    }
 
    render(ind) {

@@ -19,7 +19,7 @@ class GLHelper {
       this.zFar = 100.0;
    }
 
-   init(gl, shaderSuite) {
+   async init(gl, shaderSuite) {
       this.glInstance = gl;
       this.shaderSuite = shaderSuite;
       this.projectionMatrix = mat4.create();
@@ -29,6 +29,7 @@ class GLHelper {
       this.sphere = new Renderables.Sphere(gl, shaderSuite.sphereShader);
       this.surface = new Renderables.Surface(gl, shaderSuite.surfaceShader);
       this.mcube = new Renderables.MarchingCube(gl, shaderSuite.mcubeShader);
+      await this.mcube.init(0.2);
 
       this.isInit = true;
       return Promise.resolve();
@@ -182,11 +183,10 @@ class GLHelper {
 
             // render object
             if (obj.type === 'mcube') {
-               this[renderer].render(0);
-               this[renderer].render(1);
-               this[renderer].render(2);
-               this[renderer].render(3);
-               this[renderer].render(4);
+               for (let i=0; i<this[renderer].buffers.length; i++) {
+                  this[renderer].render(i);
+               }
+               // this[renderer].render(0);
             } else {
                this[renderer].render();
             }
