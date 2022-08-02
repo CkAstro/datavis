@@ -15,35 +15,34 @@ body, html {
    -moz-osx-font-smoothing: grayscale;
    font-family: 'Roboto', sans-serif;
    color: var(--color-black);
+   background: var(--color-white);
    width: 100vw;
    height: 100vh;
    overflow-x: hidden;
+   overscroll-behavior-y: contain;     /* no refresh on pull-down in mobile */
 }
 
-a { margin: 0; padding: 0; text-decoration: none; color: var(--color-black); }
+/* ----- layout troubleshooting (uncomment to view all borders) ----- */
+/* * {
+   background: #000 !important;
+   color: #0f0 !important;
+   outline: solid #f00 1px !important;
+} */
+
 
 /* ----- globals ----- */
-
 :root {
    --color-black: #1e1e1e;
+   --color-primary: #113377;
+   --color-white: #fbf9ff;
 
    --ncsu-dark-red: #900;
    --ncsu-light-red: #c00;
    --ncsu-dark-gray: #333;
    --ncsu-mid-gray: #555;
    --ncsu-light-gray: #cacaca;
-
-   --content-max-width: 1000px;
-   --content-fallback-width: 700px;
-
-   --canvas-height: 500px;
-   --canvas-background: none;
-
-   --main-spacing: 20px;
-   --main-padding: 20px;
 }
 
-/* remove text selection */
 .noselect {
    -webkit-touch-callout: none;
    -webkit-user-select: none;
@@ -56,61 +55,73 @@ a { margin: 0; padding: 0; text-decoration: none; color: var(--color-black); }
    scrollbar-width: none;
    -ms-overflow-style: none;
 }
-.noscrollbar::-webkit-scrollbar {
-   display: none;
+.noscrollbar::-webkit-scrollbar { display: none; }
+
+a { 
+   margin: 0; 
+   padding: 0; 
+   text-decoration: none; 
+   color: var(--color-primary); 
 }
 
-/* ----- layout troubleshooting (uncomment to view all borders) ----- */
-/* * {
-   background: #000 !important;
-   color: #0f0 !important;
-   outline: solid #f00 1px !important;
-} */
 
-
-.mainContainer {
-   width: var(--content-max-width);
-   margin: auto;
-}
-
-.datavisContainer {
+/* ----- main layout ----- */
+.mainLayout {
+   width: 100vw;
+   height: 100vh;
    display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   gap: var(--main-spacing);
-   padding: var(--main-spacing) 0px; /* main spacing, still for grid gap */
+   flex-direction: column;
+}
+
+.mainContainer { width: calc( min(1000px, 100vw) ); margin: auto; }
+
+.datavis {
+   --display-background: #484848;
+   --toolbar-background: #dbd9dd;
+   --divider-background: var(--color-black); 
+   --display-darker: #333333;
+   --toolbar-darker: #7b797d;
+
+   height: 100%;
+}
+
+.datavis__flex {
+   --display-width: 0;
+   display: flex;
+   width: 100vw;
+   height: 100%;
+}
+
+.datavis__divider {
+   flex-shrink: 0;
    box-sizing: border-box;
-
-   --display-width: calc( 9 / 13 * (var(--content-max-width) - var(--main-spacing)));
-   --toolbar-width: calc( 4 / 13 * (var(--content-max-width) - var(--main-spacing)));
+   width: 1rem;
+   cursor: ew-resize;
+   background: var(--divider-background);
+   border-left:  4px solid var(--display-darker);
+   border-right: 4px solid var(--toolbar-darker);
 }
 
-@media only screen and (max-width: 1000px) {
-   .mainContainer { width: var(--content-fallback-width); }
-   .datavisContainer {
-      --custom-padding: calc((700px - var(--toolbar-width))/2);
-      --display-width: 100%;
-      width: var(--content-fallback-width);
-   }
-   .datavisContainer > *:last-child {
-      --toolbar-width: 100%;
-      padding: var(--main-padding) var(--custom-padding);
-      min-height: 500px;
-   }
-}
 
+/* ----- resizing ----- */
 @media only screen and (max-width: 700px) {
-   .mainContainer { width: 100vw; }
-   .datavisContainer {
-      --custom-padding: calc((100vw - var(--toolbar-width))/2);
-      --canvas-height: calc((100vw / 1.618));
-      --canvas-background: #c0c0c0;
-      width: 100%;
+   .datavis__flex { flex-direction: column; }
+   .datavis__divider {
+      cursor: ns-resize;
+      border: none;
+      border-top: 4px solid var(--display-darker);
+      border-bottom: 3px solid var(--toolbar-darker);
+      width: 100vw;
+      height: 1rem;
    }
 }
 
-.datavisContainer > * {
-   background: var(--ncsu-light-gray);
-   border-radius: var(--main-spacing);
-   padding: var(--main-padding);
+/* ----- change global sizing ----- */
+@media only screen and (max-width: 525px) {
+   :root { font-size: 12px;}
+}
+
+/* don't center header on large screens */
+@media only screen and (min-width: 1450px) {
+   .mainContainer { margin: 0; margin-left: 225px}
 }

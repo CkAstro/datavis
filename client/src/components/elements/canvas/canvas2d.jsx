@@ -1,7 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const useCanvas2D = (glRef, draw, objects) => {
-   const canvasRef = useRef();
+const useCanvas2D = (glRef, draw, args) => {
+   const canvasRef = useRef(null);
+   const renderRef = useRef(null);
+
+   const animate = time => {
+      draw(glRef.current, args);
+      renderRef.current = requestAnimationFrame(animate);
+   }
 
    // init the canvas on load
    useEffect(() => {
@@ -12,23 +18,21 @@ const useCanvas2D = (glRef, draw, objects) => {
       canvas.width = rect.width;
       canvas.height = rect.height;
       glRef.current = gl;
+      
+      renderRef.current = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(renderRef.current);
    }, []);
-
-   // only call draw if objects are updated
-   useEffect(() => {
-      draw(glRef.current, objects);
-   }, [draw, objects]);
 
    return canvasRef;
 }
 
 
-const Canvas2D = ({ draw, objects }) => {
+const Canvas2D = ({ draw, className, style, ...args }) => {
    const glRef = useRef();
-   const canvasRef = useCanvas2D(glRef, draw, objects);
+   const canvasRef = useCanvas2D(glRef, draw, args);
 
    return (
-      <canvas ref={canvasRef} style={{width: '100%', height: '100%'}}/>
+      <canvas ref={canvasRef} className={className} style={style}/>
    );
 }
 

@@ -1,10 +1,12 @@
 
 /* ----- item display ----- */
 .displayContainer {
+   flex: 1;
    position: relative;
    height: auto;
    box-sizing: border-box;
 }
+
 .itemDisplay {
    position: absolute;
    top: 0px;

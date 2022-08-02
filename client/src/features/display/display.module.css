@@ -1,28 +1,70 @@
+.display {  
+   width: var(--display-width); 
+   background: var(--display-background); 
+   padding: 1rem;
+   min-width: 350px;
+   display: flex;
+   flex-direction: column;
+   min-height: 400px;
+   box-sizing: border-box;
+}
 
-.displayArea { width: var(--display-width); box-sizing: border-box; }
+@media only screen and (min-width: 1700px) {
+   .display { min-width: 650px; }
+}
 
-.displayArea > p:first-child {
-   text-align: center;
-   margin: 0px;
-   padding: 0px;
-   padding-bottom: 12px;
-   border-bottom: 1px dotted var(--color-black);
+@media only screen and (min-width: 3400px) {
+   .display { min-width: 1300px; }
+}
+
+@media only screen and (max-width: 700px) {
+   .display { 
+      width: 100vw; 
+      height: var(--display-height);
+      min-height: 250px;
+      padding-bottom: 0;
+   }
 }
 
 
 /* ----- action bar ----- */
-.actionbar {
+.display__actionbar {
    display: flex;
-   padding: var(--main-padding) 0px;
+   padding-bottom: 1rem;
    flex-wrap: wrap;
-   gap: 12px;
+   gap: 0.25rem;
 }
 
-.actionbar > div {
+.display__actionbar > div {
    display: flex;
    flex-wrap: wrap;
-   gap: 6px;
+   gap: 0.25rem;
 }
+
+
+/* ----- canvas container ----- */
+.display__container {
+   flex: 1;
+   width: 100%;
+   position: relative;
+}
+
+.display__container canvas:not(.display__colorbar) {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+}
+
+.display__colorbar {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   width: 75px;
+   height: 200px;
+}
+
 
 /* ----- scene controller ----- */
 .sceneOptions {
@@ -41,29 +83,12 @@
 .sceneController.hidden { visibility: hidden; }
 
 .sceneController > span {
-   padding: 0 12px;
-   font-size: 24px;
+   padding: 0 0.75rem;
+   font-size: 1.5rem;
    font-weight: bold;
 }
 
 .sceneController > span.adjust {
-   font-size: 36px;
+   font-size: 2.25rem;
    transform: translate(0, -3px);
-}
-
-
-/* ----- canvas container ----- */
-.canvasContainer {
-   width: 100%;
-   height: var(--canvas-height);
-   position: relative;
-   background: var(--canvas-background);
-}
-
-.canvasContainer canvas {
-   position: absolute;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
 }

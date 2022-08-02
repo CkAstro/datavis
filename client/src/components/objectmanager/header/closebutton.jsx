@@ -6,8 +6,13 @@ import style from './header.module.css';
 const CloseButton = ({ controllerId }) => {
    const { deleteRenderable } = useRenderables();
 
+   const handleClick = event => {
+      event.stopPropagation();
+      deleteRenderable(controllerId);
+   }
+
    return (
-      <div className={style.closeButton} onClick={() => deleteRenderable(controllerId)}>
+      <div className={style.closeButton} onClick={handleClick}>
          <Icons.Delete size={16} fill='black' setStyle={{padding: '0px 2px'}}/>
       </div>
    );
