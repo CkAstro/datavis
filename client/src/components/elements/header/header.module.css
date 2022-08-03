@@ -1,6 +1,5 @@
 
 /* ----- index.js ----- */
-
 .header h1 {
    margin: 0px;
    padding: 0px;
@@ -19,27 +18,37 @@
    padding-top: 6px;
 }
 
+
 /* ----- navbar.js ----- */
 .navbar {
    background: var(--ncsu-dark-gray);
    border-bottom: 3px solid var(--ncsu-light-red);
 }
- 
-.navbar * div {
-   display: inline-block;
+
+.navbar__container { display: flex; }
+
+.navbar__item {
    margin: 0px;
    padding: 8px 16px;
    width: 75px;
    text-align: center;
-   color: white;
-   transition: all 0.2s;
+   color: var(--color-white);
    cursor: pointer;
+   transition: all 0.2s;
 }
 
-.navbar .active {
-   background: var(--ncsu-light-red);
+.navbar__item.active { background: var(--ncsu-light-red); }
+.navbar__item:hover:not(.active) { background: var(--ncsu-dark-red); }
+
+.navbar__brand {
+   display: none;
+   padding: 8px 16px;
+   flex: 1;
+   text-align: right;
+   color: var(--color-white);
 }
- 
-.navbar * div:hover:not(.active) {
-   background: var(--ncsu-dark-red);
+
+@media only screen and (max-width: 700px) {
+   .header { display: none; }
+   .navbar__brand { display: inline-block; }
 }

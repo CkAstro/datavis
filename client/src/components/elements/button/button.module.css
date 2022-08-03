@@ -1,8 +1,9 @@
 
 .buttonContainer {
+   --size: 48px;
    position: relative;
-   width: 48px;
-   height: 48px;
+   width: var(--size);
+   height: var(--size);
    background: #888;
    cursor: pointer;
    filter: brightness(100%);
@@ -30,3 +31,15 @@
 .active { background: #696; }
 .inactive { background: #966; }
 .disabled { cursor: not-allowed; }
+
+
+/* ----- resizing ----- */
+@media only screen and (max-width: 700px) {
+   .buttonContainer { --size: 36px; }
+   .buttonContainer .textContainer { font-size: 12px; }
+}
+
+@media only screen and (max-width: 525px) {
+   .buttonContainer { --size: 24px; }
+   .buttonContainer .textContainer { font-size: 9px; }
+}

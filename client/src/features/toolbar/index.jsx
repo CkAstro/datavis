@@ -3,9 +3,9 @@ import ItemCreator from './itemcreator';
 import style from './toolbar.module.css';
 
 const Toolbar = () => (
-   <div className={style.toolbarArea}>
-      <p>Toolbar</p>
+   <div className={style.toolbar}>
       <ItemCreator/>
+      <p>Object Controllers</p>
       <ObjectManager/>
    </div>
 );

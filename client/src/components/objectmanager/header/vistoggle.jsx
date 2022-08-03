@@ -7,21 +7,26 @@ const VisToggle = ({ controllerId }) => {
 
    const activeController = renderables.find(item => item.id === controllerId);
 
-   const visButtons = [1, 2];
-   const getButtons = () => visButtons.map((val, key) => {
+   const handleClick = (event, key) => {
+      event.stopPropagation();
+      if (key !== 0 && !options.compare) return;
+      toggleVisible(controllerId, key);
+   }
+
+   const buttons = [1, 2].map((val, key) => {
       const isVisible = activeController.isVisible[key];
       const isEnabled = key === 0 ? true : options.compare;    // main viewport button always enabled
       return (
          <div key={key}
             className={`${style.toggleButton} noselect ${isEnabled ? (isVisible ? style.active : '') : style.disabled}`}
-            onClick={() => toggleVisible(controllerId, key)}
+            onClick={e => handleClick(e, key)}
          >{val}</div>
       );
    });
 
    return (
       <div className={style.visToggle}>
-         {getButtons()}
+         {buttons}
       </div>
    );
 }

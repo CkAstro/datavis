@@ -2,6 +2,8 @@ import { buildShaderSuite } from 'utils';
 
 let _lastScene = null;     // scene comparison to determine re-render
 let _lastObjs = null;      // object comparison to determine re-render
+let _lastWidth = null;
+let _lastHeight = null;
 let _isInit = false;
 
 const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
@@ -10,9 +12,19 @@ const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
    const texHelper = texRef.current;
    const glHelper = renderRef.current;
 
-   if (_lastScene === scene && _lastObjs === objects) return;
+   const { width, height } = gl.canvas.getBoundingClientRect();
+   if (
+      _lastScene === scene && 
+      _lastObjs === objects && 
+      _lastWidth === width && 
+      _lastHeight === height
+   ) return;
+
+   // set new comparisons if something changed
    _lastScene = scene;
    _lastObjs = objects;
+   _lastWidth = width;
+   _lastHeight = height;
 
    if (!_isInit) {
       texHelper.init(gl)
@@ -24,27 +36,37 @@ const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
    } else {
       glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
    }
-   
 }
 
-const drawColorMap = (ctx, cmapData) => {
-   const _cbarWidth = 25;
-   const _xBuffer = 3;
-   const _cbarHeight = 150;
-   const _yBuffer = 10;
-   const _nTicks = 6;
-   if (!cmapData) return;
+const _cbarWidth = 25;        // static cbar properties
+const _xBuffer = 3;
+const _cbarHeight = 150;
+const _yBuffer = 10;
+const _nTicks = 6;
+
+let _firstDraw = false;
+const drawColorMap = (ctx, {cmapRef}) => {
+   const cmapData = cmapRef.current;
+
+   // only need to draw once until we implement new colormaps
+   if (_firstDraw || !cmapData) return;
+   _firstDraw = true;
+
    const { width, height } = ctx.canvas;
    ctx.clearRect(0, 0, width, height);
 
    const image = new Image;
    image.onload = () => {
+
+      ctx.fillStyle = '#b4b4b4';
+      ctx.strokeStyle = '#b4b4b4';
+
       // draw cmap
       ctx.save();                                                 // save current context
       ctx.translate(width-_xBuffer-_cbarWidth, height-_yBuffer);  // position canvas center
       ctx.rotate(-Math.PI/2.0);                                   // rotate about center
       ctx.drawImage(image, 0, 0, _cbarHeight, _cbarWidth);        // and draw at (0,0)
-      
+
       // outline cmap
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -68,8 +90,9 @@ const drawColorMap = (ctx, cmapData) => {
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'right';
       for (let i=0; i<_nTicks; i++) {
-         ctx.fillText(i*dy/_cbarHeight, x-10, y-i*dy+1);
-
+         let text = (i*dy/_cbarHeight).toString().slice(0, 3);
+         if (text.length === 1) text += '.0';
+         ctx.fillText(text, x-10, y-i*dy+1);
       }
    }
    image.src = URL.createObjectURL(cmapData);

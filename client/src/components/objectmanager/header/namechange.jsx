@@ -14,6 +14,7 @@ const NameChange = ({ controller, disableEdit }) => {
 
    const handleInput = event => setNameValue(event.target.value);
    const handleFocus = event => event.target.select();
+   const handleClick = event => event.stopPropagation();
 
    const handleKeyPress = event => {
       if (event.keyCode === 27) disableEdit();
@@ -27,6 +28,7 @@ const NameChange = ({ controller, disableEdit }) => {
             onKeyDown={handleKeyPress}
             onBlur={disableEdit}
             onFocus={handleFocus}
+            onClick={handleClick}
          />
       </form>
    );

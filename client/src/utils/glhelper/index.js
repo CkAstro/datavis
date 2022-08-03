@@ -114,11 +114,15 @@ class GLHelper {
       gl.enable(gl.DEPTH_TEST); 
       gl.depthFunc(gl.LEQUAL);
 
+
       // update projection matrix
+      const { width, height } = gl.canvas.getBoundingClientRect();
+      if (gl.canvas.width !== width) gl.canvas.width = width;
+      if (gl.canvas.height !== height) gl.canvas.height = height;
       if (scene.compare) {
-         this.getProjectionMatrix(gl.canvas.width/2, gl.canvas.height);
+         this.getProjectionMatrix(width/2, height);
       } else {
-         this.getProjectionMatrix(gl.canvas.width, gl.canvas.height);
+         this.getProjectionMatrix(width, height);
       }
 
       for (let window=0; window<2; window++) {
@@ -136,7 +140,6 @@ class GLHelper {
             // enable global matrices
             const camera = scene.linked ? scene.camera[0] : scene.camera[window];
             this.getModelViewMatrix(camera);
-            // this.getModelViewMatrix(scene.camera[scene.linked ? 0 : window]);
             gl.uniformMatrix4fv(shader.uniformLocations.projectionMatrix, false, this.projectionMatrix);
             gl.uniformMatrix4fv(shader.uniformLocations.modelViewMatrix, false, this.modelViewMatrix);
             gl.uniform1i(shader.uniformLocations.dataIndex, obj.activeVarIndex);

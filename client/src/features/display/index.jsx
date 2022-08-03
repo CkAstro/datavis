@@ -28,6 +28,11 @@ const Display = () => {
       objsRef.current = renderables;
    }, [renderables]);
 
+   const cmapRef = useRef(cmapData);
+   useEffect(() => {
+      cmapRef.current = cmapData;
+   }, [cmapData]);
+
    // these two reference do not need to be updated
    // since the object is never replaced
    const texRef = useRef(texHelper);
@@ -65,17 +70,16 @@ const Display = () => {
    }, [texHelper.cmaps]);
 
    return (
-      <div className={style.displayArea}>
-         <p><b>Display</b></p>
+      <div className={style.display}>
          <Modal/>
-         <div className={style.actionbar}>
+         <div className={style.display__actionbar}>
             <HelpController/>
             <SessionController/>
             <UploadController/>
             <CameraController/>
             <ViewController/>
          </div>
-         <div className={style.canvasContainer}
+         <div className={style.display__container}
             ref={divRef}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
@@ -96,8 +100,9 @@ const Display = () => {
                renderRef={renderRef}
             />
             <Canvas2D
+               className={style.display__colorbar}
                draw={drawColorMap}
-               objects={cmapData}
+               cmapRef={cmapRef}
             />
          </div>
          <SceneOptions/>
