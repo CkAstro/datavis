@@ -180,6 +180,7 @@ class GLHelper {
                gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
             } else if (obj.type === 'mcube') {
                renderer = 'mcube';
+               gl.uniform3fv(shader.uniformLocations.eyePosition, this.eyePosition);
             } else {
                throw new Error('object type not recognized');
             }
@@ -189,7 +190,6 @@ class GLHelper {
                for (let i=0; i<this[renderer].buffers.length; i++) {
                   this[renderer].render(i);
                }
-               // this[renderer].render(0);
             } else {
                this[renderer].render();
             }

@@ -52,6 +52,7 @@ const buildShaderSuite = async gl => {
          uniforms: {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
+            eyePosition: 'uEyePos',
             modelData: 'modelData',
             colorMap: 'colorMap',
             dataIndex: 'uDataIndex',
