@@ -1,6 +1,6 @@
 import { getShaderProgram, buildProgramInfo } from './index';
 
-const buildShaderSuite = async gl => {
+const buildShaderSuite = gl => {
    const sliceShader = getShaderProgram(gl, 'Slice');
    const sphereShader = getShaderProgram(gl, 'Sphere');
    const surfaceShader = getShaderProgram(gl, 'Surface');
@@ -13,6 +13,7 @@ const buildShaderSuite = async gl => {
             projectionMatrix: 'uProjectionMatrix',
             modelViewMatrix: 'uModelViewMatrix',
             translation: 'uTranslation',
+            eyePosition: 'uEyePos',
             rotation: 'uRotation',
             modelData: 'modelData',
             colorMap: 'colorMap',

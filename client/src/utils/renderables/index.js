@@ -68,17 +68,21 @@ class MarchingCube {
    }
 
    async init(val) {
-      buildCubeGrid
-         .then(({grid, points}) => {
-            this.grid = grid;
-            this.points = points;
-            this.isInit = true;
-         })
-         .then(() => texHelper.getValues(0))
-         .then(vals => updatePointValues(this.points, vals))
-         .then(() => march(this.grid, val))
-         .then(cubes => this.buffers = cubes.map(buffer => initBuffers(this.glInstance, buffer)))
-      ;
+      return new Promise((resolve, reject) => {
+         buildCubeGrid
+            .then(({grid, points}) => {
+               this.grid = grid;
+               this.points = points;
+               this.isInit = true;
+            })
+            .then(() => texHelper.getValues(0))
+            .then(vals => updatePointValues(this.points, vals))
+            .then(() => march(this.grid, val))
+            .then(cubes => this.buffers = cubes.map(buffer => initBuffers(this.glInstance, buffer)))
+            .then(() => resolve())
+            .catch(err => reject(err))
+         ;
+      });
    }
 
    render() {
