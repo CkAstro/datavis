@@ -66,7 +66,7 @@ class MarchingCube {
       this.buffers = [null];
       this.isInit = false;
    }
-   
+
    async init(val) {
       buildCubeGrid
          .then(({grid, points}) => {
@@ -81,7 +81,11 @@ class MarchingCube {
       ;
    }
 
-   render(ind) {
+   render() {
+      for (let i=0; i<this.buffers.length; i++) this.renderCubePart(i);
+   }
+
+   renderCubePart(ind) {
       const gl = this.glInstance;
       const buffer = this.buffers[ind];
 

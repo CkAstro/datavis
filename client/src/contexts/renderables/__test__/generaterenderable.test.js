@@ -9,6 +9,7 @@ const expectedKeys = [
    'sliderList', 
    'activeVar', 
    'activeVarIndex',
+   'renderer',
 ];
 
 describe('getNewId', () => {
@@ -45,6 +46,7 @@ describe('generateRenderable', () => {
       expect(renderable.sliderList.length).toEqual(1);
       expect(renderable.activeVar).toEqual('density');
       expect(renderable.activeVarIndex).toEqual(0);
+      expect(renderable.renderer).toEqual('slice');
    });
 
    test('slice', () => {
@@ -52,21 +54,31 @@ describe('generateRenderable', () => {
       expect(() => generateRenderable('yslice', [])).not.toThrow();
       expect(() => generateRenderable('zslice', [])).not.toThrow();
 
-      const renderable = generateRenderable('xslice', []);
-      expect(renderable.itemName).toEqual('xslice');
+      const renderable = generateRenderable('zslice', []);
+      expect(renderable.itemName).toEqual('zslice');
       expect(renderable.sliderList.length).toEqual(1);
+      expect(renderable.renderer).toEqual('slice');
    });
 
    test('sphere', () => {
       const renderable = generateRenderable('sphere', []);
       expect(renderable.itemName).toEqual('sphere');
       expect(renderable.sliderList.length).toEqual(4);
+      expect(renderable.renderer).toEqual('sphere');
    });
 
    test('surface', () => {
       const renderable = generateRenderable('surface', []);
       expect(renderable.itemName).toEqual('surface');
       expect(renderable.sliderList.length).toEqual(1);
+      expect(renderable.renderer).toEqual('surface');
+   });
+
+   test('mcube', () => {
+      const renderable = generateRenderable('mcube', []);
+      expect(renderable.itemName).toEqual('mcube');
+      expect(renderable.sliderList.length).toEqual(1);
+      expect(renderable.renderer).toEqual('mcube');
    });
 
    test('multiple', () => {
