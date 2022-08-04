@@ -31,11 +31,21 @@ const drawScene = (gl, {sceneRef, objsRef, texRef, renderRef}) => {
          .then(() => buildShaderSuite(gl))
          .then(shaderSuite => glHelper.init(gl, shaderSuite))
          .then(() => _isInit = true)
-         .then(() => glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps))
+         .then(() => glHelper.renderObjects(
+            objects, 
+            scene, 
+            texHelper.data[0].texture, 
+            texHelper.cmaps[0].texture
+         ))
       ;
    } else {
-      glHelper.renderObjectList(objects, scene, texHelper.data, texHelper.cmaps);
-   }
+      glHelper.renderObjects(
+         objects, 
+         scene, 
+         texHelper.data[0].texture, 
+         texHelper.cmaps[0].texture
+      );
+   }  
 }
 
 const _cbarWidth = 25;        // static cbar properties
