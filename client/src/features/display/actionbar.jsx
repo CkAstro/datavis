@@ -3,13 +3,13 @@ import {
    UploadController,
    CameraController,
    ViewController,
-   HelpController
+   AboutController
 } from 'components/controllers';
 import style from './display.module.css';
 
 const ActionBar = () => (
    <div className={style.display__actionbar}>
-      <HelpController/>
+      <AboutController/>
       <SessionController/>
       <UploadController/>
       <CameraController/>

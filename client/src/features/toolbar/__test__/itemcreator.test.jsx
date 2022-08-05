@@ -21,20 +21,30 @@ describe('ItemCreator', () => {
       act(() => render(<ItemCreator/>, container));
       const { renderables } = useRenderables();
 
-      const buttons = document.querySelector('.options__itemCreator');
-      const surface = buttons.children[0];
+      const buttons = document.querySelectorAll('.buttonContainer');
+      const baseBtn = buttons[0];
+      const rayBtn = buttons[1];
+      const triBtn = buttons[2];
 
-      await userEvent.click(surface);
+      // click base button (nothing created)
+      await userEvent.click(baseBtn);
+      expect(renderables.length).toEqual(1);
+
+      await userEvent.click(rayBtn);
       expect(renderables.length).toEqual(2);
       expect(renderables[1].type).toEqual('surface');
+
+      await userEvent.click(triBtn);
+      expect(renderables.length).toEqual(3);
+      expect(renderables[2].type).toEqual('mcube');
    });
 
    test('create sphere', async () => {
       act(() => render(<ItemCreator/>, container));
       const { renderables } = useRenderables();
 
-      const buttons = document.querySelector('.options__itemCreator');
-      const sphere = buttons.children[1];
+      const buttons = document.querySelectorAll('.buttonContainer');
+      const sphere = buttons[3];
 
       await userEvent.click(sphere);
       expect(renderables.length).toEqual(2);
@@ -45,8 +55,8 @@ describe('ItemCreator', () => {
       act(() => render(<ItemCreator/>, container));
       const { renderables } = useRenderables();
 
-      const buttons = document.querySelector('.options__itemCreator');
-      const zslice = buttons.children[2];
+      const buttons = document.querySelectorAll('.buttonContainer');
+      const zslice = buttons[4];
 
       await userEvent.click(zslice);
       expect(renderables.length).toEqual(2);
@@ -57,8 +67,8 @@ describe('ItemCreator', () => {
       act(() => render(<ItemCreator/>, container));
       const { renderables } = useRenderables();
 
-      const buttons = document.querySelector('.options__itemCreator');
-      const yslice = buttons.children[3];
+      const buttons = document.querySelectorAll('.buttonContainer');
+      const yslice = buttons[5];
 
       await userEvent.click(yslice);
       expect(renderables.length).toEqual(2);
@@ -69,8 +79,8 @@ describe('ItemCreator', () => {
       act(() => render(<ItemCreator/>, container));
       const { renderables } = useRenderables();
 
-      const buttons = document.querySelector('.options__itemCreator');
-      const xslice = buttons.children[4];
+      const buttons = document.querySelectorAll('.buttonContainer');
+      const xslice = buttons[6];
 
       await userEvent.click(xslice);
       expect(renderables.length).toEqual(2);

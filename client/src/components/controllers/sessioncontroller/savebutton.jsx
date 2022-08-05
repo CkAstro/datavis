@@ -3,7 +3,8 @@ import { Button } from 'components/elements';
 import SaveSessionForm from './savesessionform';
 import style from './sessioncontroller.module.css';
 
-// saveButton opens a modal which allows user to save sessions stored via cookie
+// saveButton opens a modal which allows user to save sessions 
+//    stored via cookie
 const ModalContent = () => (
    <div className={style.modalContent}>
       <h1>Save Session</h1>
@@ -18,10 +19,9 @@ const SaveButton = () => {
    return (
       <Button 
          image={require('assets/img/save_icon.png')} 
-         hoverText='Save Session' 
          enabled
          active
-         onClick={() => setModalContent( <ModalContent/> )}
+         onClick={() => setModalContent(<ModalContent/>)}
       />
    );
 }

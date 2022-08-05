@@ -1,5 +1,5 @@
 import { useCamera } from 'contexts';
-import { Button } from 'components/elements';
+import { Button, DropDown } from 'components/elements';
 
 // clicking buttons will snap to appropriate axis
 
@@ -9,7 +9,6 @@ const ViewAxisX = () => {
    return (
       <Button 
          text={<><span>View</span><span>X</span></>}
-         hoverText='Snap view to X' 
          enabled
          active
          onClick={() => snapCamera('x')}
@@ -23,7 +22,6 @@ const ViewAxisY = () => {
    return (
       <Button 
          text={<><span>View</span><span>Y</span></>}
-         hoverText='Snap view to Y' 
          enabled
          active
          onClick={() => snapCamera('y')}
@@ -37,7 +35,6 @@ const ViewAxisZ = () => {
    return (
       <Button 
          text={<><span>View</span><span>Z</span></>}
-         hoverText='Snap view to Z' 
          enabled
          active
          onClick={() => snapCamera('z')}
@@ -47,9 +44,9 @@ const ViewAxisZ = () => {
 
 const ViewController = () => (
    <div>
-      <ViewAxisX/>
-      <ViewAxisY/>
-      <ViewAxisZ/>
+      <DropDown baseItem={<ViewAxisX/>} header='Snap to X-Axis'/>
+      <DropDown baseItem={<ViewAxisY/>} header='Snap to Y-Axis'/>
+      <DropDown baseItem={<ViewAxisZ/>} header='Snap to Z-Axis'/>
    </div>
 );
 

@@ -33,7 +33,6 @@ const ImgUploadButton = () => {
    return (
       <Button 
          image={require('assets/img/img_upload_icon.png')} 
-         hoverText='Upload Data from Image' 
          enabled
          active
          onClick={() => setModalContent(<ModalContent/>)}

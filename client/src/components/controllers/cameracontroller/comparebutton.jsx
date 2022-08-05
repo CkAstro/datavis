@@ -10,7 +10,6 @@ const CompareButton = () => {
    return (
       <Button 
          image={require('assets/img/compare_icon.png')} 
-         hoverText='Compare Mode' 
          enabled
          active={options.compare}
          onClick={toggleCompare}

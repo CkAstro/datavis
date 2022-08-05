@@ -1,10 +1,11 @@
+import { DropDown } from 'components/elements';
 import CompareButton from './comparebutton';
 import LinkedButton from './linkedbutton';
 
 const CameraController = () => (
    <div>
-      <CompareButton/>
-      <LinkedButton/>
+      <DropDown baseItem={<CompareButton/>} header='Compare Mode'/>
+      <DropDown baseItem={<LinkedButton/>} header='Link Cameras'/>
    </div>
 );
 

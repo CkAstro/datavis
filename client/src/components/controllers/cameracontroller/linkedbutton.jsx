@@ -10,7 +10,6 @@ const LinkedButton = () => {
    return (
       <Button 
          image={require('assets/img/linked_icon.png')} 
-         hoverText='Link Cameras' 
          enabled={options.compare}
          active={options.linked}
          onClick={toggleLinked}

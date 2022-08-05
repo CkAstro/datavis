@@ -21,7 +21,6 @@ const LoadButton = () => {
    return (
       <Button 
          image={require('assets/img/load_icon.png')} 
-         hoverText='Load Session'
          enabled
          active
          onClick={() => setModalContent(<ModalContent/>)}
