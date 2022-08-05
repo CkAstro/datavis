@@ -34,13 +34,11 @@ body, html {
 :root {
    --color-black: #1e1e1e;
    --color-primary: #113377;
+   --color-secondary: #194cb3;
    --color-white: #fbf9ff;
-
-   --ncsu-dark-red: #900;
-   --ncsu-light-red: #c00;
-   --ncsu-dark-gray: #333;
-   --ncsu-mid-gray: #555;
-   --ncsu-light-gray: #cacaca;
+   --color-light-gray: #dbd9dd;
+   --color-dark-gray: #333333;
+   --color-dark-red: #900;
 }
 
 .noselect {
@@ -77,7 +75,7 @@ a {
 
 .datavis {
    --display-background: #484848;
-   --toolbar-background: #dbd9dd;
+   --toolbar-background: var(--color-light-gray);
    --divider-background: var(--color-black); 
    --display-darker: #333333;
    --toolbar-darker: #7b797d;

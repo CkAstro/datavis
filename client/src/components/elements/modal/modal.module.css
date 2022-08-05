@@ -22,11 +22,12 @@
 
 .modal {
    position: relative;
-   border: 2px solid var(--ncsu-dark-gray);
+   border: 2px solid var(--color-dark-gray);
    border-radius: 10px;
    width: 500px;
-   background: var(--ncsu-light-gray);
+   background: var(--color-light-gray);
    padding: 20px;
+   text-align: justify;
 }
 
 .modal .closeButton {
@@ -42,8 +43,8 @@
    margin: 0px;
    padding: 0px;
    padding-bottom: 6px;
-   border-bottom: 1px dotted var(--ncsu-dark-gray);
-   color: var(--ncsu-dark-red);
+   border-bottom: 1px dotted var(--color-dark-gray);
+   color: var(--color-primary);
 }
 
 .modal p {

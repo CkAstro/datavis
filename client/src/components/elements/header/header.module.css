@@ -6,7 +6,7 @@
    padding-top: 12px;
    font-size: 36px;
    font-weight: bold;
-   color: var(--ncsu-dark-red);
+   color: var(--color-primary);
 }
 
 .header h2 {
@@ -21,8 +21,8 @@
 
 /* ----- navbar.js ----- */
 .navbar {
-   background: var(--ncsu-dark-gray);
-   border-bottom: 3px solid var(--ncsu-light-red);
+   background: var(--color-black);
+   border-bottom: 3px solid var(--color-primary);
 }
 
 .navbar__container { display: flex; }
@@ -37,8 +37,8 @@
    transition: all 0.2s;
 }
 
-.navbar__item.active { background: var(--ncsu-light-red); }
-.navbar__item:hover:not(.active) { background: var(--ncsu-dark-red); }
+.navbar__item.active { background: var(--color-primary); }
+.navbar__item:hover:not(.active) { background: var(--color-secondary); }
 
 .navbar__brand {
    display: none;

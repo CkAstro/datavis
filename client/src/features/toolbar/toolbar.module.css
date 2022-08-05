@@ -17,7 +17,7 @@
 
 /* ----- options section ----- */
 .options {
-   border-bottom: 1px dotted var(--ncsu-dark-gray);
+   border-bottom: 1px dotted var(--color-dark-gray);
    padding: 0 0 0.5rem 0;
 }
 

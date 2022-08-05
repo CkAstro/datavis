@@ -9,7 +9,7 @@
 .controllerHeader>.activeToggle {
    font-weight: bold;
    width: 16px;
-   color: var(--ncsu-dark-red);
+   color: var(--color-dark-red);
    cursor: pointer;
 }
 
@@ -60,7 +60,7 @@
    top: 10%;
    width: 1.1px;
    height: 80%;
-   border-left: 1px dotted var(--ncsu-dark-gray);
+   border-left: 1px dotted var(--color-dark-gray);
    content: ''; 
 }
 
@@ -70,7 +70,7 @@
    top: 10%;
    width: 1.1px;
    height: 80%;
-   border-right: 1px dotted var(--ncsu-dark-gray);
+   border-right: 1px dotted var(--color-dark-gray);
    content: '';
 }
 
@@ -78,7 +78,7 @@
    display: inline-block;
    margin: 0px;
    padding: 0px 6px;
-   border: 1px solid var(--ncsu-dark-red);
+   border: 1px solid var(--color-dark-red);
    border-radius: 3px;
    background: rgba(143, 0, 0, 0.1);
    color: #500;
@@ -120,7 +120,7 @@
 .closeButton {
    margin-left: 6px;
    /* padding: 2px; */
-   border: 1px solid var(--ncsu-dark-red);
+   border: 1px solid var(--color-dark-red);
    border-radius: 3px;
    background-color: rgba(143, 0, 0, 0.1);
    transition: all 0.2s;
