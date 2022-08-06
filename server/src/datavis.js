@@ -3,8 +3,8 @@
 // `jsconfig.json` may have issues with the `baseUrl` and `path` compiler options.
 // Since node will always check `node_modules` for an import, a simple work-around 
 //    is to add symlinks pointing back to the `src` directory. e.g.,
-//       >: cd server/node_modules
-//       >: ln -s ../src/ @
+//       >: cd server/src/node_modules
+//       >: ln -s .. @
 //    and now you may use absolute imports: 
 //       import { gameService } from '@/services';
 

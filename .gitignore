@@ -1,9 +1,9 @@
 
 # dependencies
-*/node_modules
+**/node_modules
 
-# data storage
-server/src/data
+# build
+client/build
 
 # misc
 .DS_Store

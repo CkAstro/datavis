@@ -1,0 +1,4 @@
+# ensure directory is created
+*
+!img
+!.gitignore
