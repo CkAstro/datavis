@@ -1,5 +1,4 @@
 import ObjectManager from './manager';
 
-export {
-   ObjectManager,
-}
+export default ObjectManager;
+export { ObjectManager };

@@ -2,13 +2,15 @@
    font-family: 'Roboto';
    src: url('assets/fonts/Roboto-Regular.ttf');
 }
+
 @font-face {
    font-family: 'Roboto';
    src: url('assets/fonts/Roboto-Bold.ttf');
    font-weight: 700;
 }
 
-body, html {
+body,
+html {
    margin: 0px;
    padding: 0px;
    -webkit-font-smoothing: antialiased;
@@ -19,7 +21,7 @@ body, html {
    width: 100vw;
    height: 100vh;
    overflow-x: hidden;
-   overscroll-behavior-y: contain;     /* no refresh on pull-down in mobile */
+   overscroll-behavior-y: contain; /* no refresh on pull-down in mobile */
 }
 
 /* ----- layout troubleshooting (uncomment to view all borders) ----- */
@@ -28,7 +30,6 @@ body, html {
    color: #0f0 !important;
    outline: solid #f00 1px !important;
 } */
-
 
 /* ----- globals ----- */
 :root {
@@ -53,15 +54,17 @@ body, html {
    scrollbar-width: none;
    -ms-overflow-style: none;
 }
-.noscrollbar::-webkit-scrollbar { display: none; }
 
-a { 
-   margin: 0; 
-   padding: 0; 
-   text-decoration: none; 
-   color: var(--color-primary); 
+.noscrollbar::-webkit-scrollbar {
+   display: none;
 }
 
+a {
+   margin: 0;
+   padding: 0;
+   text-decoration: none;
+   color: var(--color-primary);
+}
 
 /* ----- main layout ----- */
 .mainLayout {
@@ -71,12 +74,15 @@ a {
    flex-direction: column;
 }
 
-.mainContainer { width: calc( min(1000px, 100vw) ); margin: auto; }
+.mainContainer {
+   width: calc(min(1000px, 100vw));
+   margin: auto;
+}
 
 .datavis {
    --display-background: #484848;
    --toolbar-background: var(--color-light-gray);
-   --divider-background: var(--color-black); 
+   --divider-background: var(--color-black);
    --display-darker: #333333;
    --toolbar-darker: #7b797d;
 
@@ -85,6 +91,7 @@ a {
 
 .datavis__flex {
    --display-width: 0;
+
    display: flex;
    width: 100vw;
    height: 100%;
@@ -96,14 +103,15 @@ a {
    width: 1rem;
    cursor: ew-resize;
    background: var(--divider-background);
-   border-left:  4px solid var(--display-darker);
+   border-left: 4px solid var(--display-darker);
    border-right: 4px solid var(--toolbar-darker);
 }
 
-
 /* ----- resizing ----- */
 @media only screen and (max-width: 700px) {
-   .datavis__flex { flex-direction: column; }
+   .datavis__flex {
+      flex-direction: column;
+   }
    .datavis__divider {
       cursor: ns-resize;
       border: none;
@@ -116,10 +124,15 @@ a {
 
 /* ----- change global sizing ----- */
 @media only screen and (max-width: 525px) {
-   :root { font-size: 12px;}
+   :root {
+      font-size: 12px;
+   }
 }
 
 /* don't center header on large screens */
 @media only screen and (min-width: 1450px) {
-   .mainContainer { margin: 0; margin-left: 225px}
+   .mainContainer {
+      margin: 0;
+      margin-left: 225px;
+   }
 }

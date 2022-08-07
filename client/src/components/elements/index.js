@@ -5,10 +5,4 @@ import Icons from './icons';
 import Modal from './modal';
 
 export * from './canvas';
-export {
-   Button,
-   DropDown,
-   Header,
-   Icons,
-   Modal,
-}
+export { Button, DropDown, Header, Icons, Modal };

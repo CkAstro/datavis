@@ -1,5 +1,4 @@
 import useTriggerOnce from './usetriggeronce';
 
-export {
-   useTriggerOnce,
-}
+export default { useTriggerOnce };
+export { useTriggerOnce };

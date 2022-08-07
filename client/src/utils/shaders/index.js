@@ -14,7 +14,7 @@ const loadShader = (gl, type, source) => {
       return null;
    }
    return shader;
-}
+};
 
 const initShaderProgram = (gl, shaderType) => {
    const vertexShader = loadShader(gl, gl.VERTEX_SHADER, shaderType.vs);
@@ -30,43 +30,47 @@ const initShaderProgram = (gl, shaderType) => {
       return null;
    }
    return shaderProgram;
-}
+};
 
 const getShaderProgram = (gl, type) => {
-   if (type === 'Slice' || type === 'slice') return initShaderProgram(gl, Slice);
-   if (type === 'Sphere' || type === 'sphere') return initShaderProgram(gl, Sphere);
-   if (type === 'Surface' || type === 'surface') return initShaderProgram(gl, Surface);
-   if (type === 'MCube' || type === 'mcube') return initShaderProgram(gl, MCube);
+   if (type === 'Slice' || type === 'slice')
+      return initShaderProgram(gl, Slice);
+   if (type === 'Sphere' || type === 'sphere')
+      return initShaderProgram(gl, Sphere);
+   if (type === 'Surface' || type === 'surface')
+      return initShaderProgram(gl, Surface);
+   if (type === 'MCube' || type === 'mcube')
+      return initShaderProgram(gl, MCube);
    throw new Error(`initShader called using unrecognized shader type ${type}`);
-}
+};
 
-const buildProgramInfo = (gl, info, programInfo=null) => {
+const buildProgramInfo = (gl, info, programInfo = null) => {
    const updatedProgramInfo = programInfo ? { ...programInfo } : {};
-   for (const shader in info) {
-      const program = info[shader].program;
+   Object.keys(info).forEach((shader) => {
+      const { program } = info[shader];
       const shaderAttribs = info[shader].attribs;
       const shaderUniforms = info[shader].uniforms;
 
-      const attribs = {}
-      for (const attrib in shaderAttribs) {
+      const attribs = {};
+      Object.keys(shaderAttribs).forEach((attrib) => {
          attribs[attrib] = gl.getAttribLocation(program, shaderAttribs[attrib]);
-      }
+      });
 
       const uniforms = {};
-      for (const uniform in shaderUniforms) {
-         uniforms[uniform] = gl.getUniformLocation(program, shaderUniforms[uniform]);
-      }
-      
+      Object.keys(shaderUniforms).forEach((uniform) => {
+         uniforms[uniform] = gl.getUniformLocation(
+            program,
+            shaderUniforms[uniform]
+         );
+      });
+
       updatedProgramInfo[shader] = {
-         program: program,
+         program,
          attribLocations: attribs,
          uniformLocations: uniforms,
-      }
-   }
+      };
+   });
    return updatedProgramInfo;
-}
-
-export { 
-   getShaderProgram,
-   buildProgramInfo, 
 };
+
+export { getShaderProgram, buildProgramInfo };

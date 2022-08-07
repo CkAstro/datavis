@@ -1,7 +1,8 @@
-jest.mock('contexts');
 import { render, screen, userEvent, act, container } from 'test';
 import { useRenderables } from 'contexts';
 import IsosurfaceButtons from '../isosurfacebuttons';
+
+jest.mock('contexts');
 
 beforeEach(() => {
    const { setAllRenderables } = useRenderables();
@@ -10,7 +11,7 @@ beforeEach(() => {
 
 describe('IsosurfaceButtons (integration)', () => {
    test('hover tooltip', async () => {
-      act(() => render(<IsosurfaceButtons/>, container));
+      act(() => render(<IsosurfaceButtons />, container));
       const button = document.querySelector('.buttonContainer');
 
       await userEvent.hover(button);
@@ -18,13 +19,14 @@ describe('IsosurfaceButtons (integration)', () => {
    });
 
    test('hover buttons', async () => {
-      act(() => render(<IsosurfaceButtons/>, container));
+      act(() => render(<IsosurfaceButtons />, container));
       const button = document.querySelector('.buttonContainer');
 
       await userEvent.hover(button);
       expect(screen.getByText('Isosurface')).toBeInTheDocument();
 
-      const [ base, rayBtn, triBtn ] = document.querySelectorAll('.buttonContainer');
+      const [base, rayBtn, triBtn] =
+         document.querySelectorAll('.buttonContainer');
 
       expect(base).toBeInTheDocument();
       expect(rayBtn).toBeInTheDocument();
@@ -32,7 +34,7 @@ describe('IsosurfaceButtons (integration)', () => {
    });
 
    test('create slice (ray marching)', async () => {
-      act(() => render(<IsosurfaceButtons/>, container));
+      act(() => render(<IsosurfaceButtons />, container));
       const button = document.querySelector('.buttonContainer');
 
       await userEvent.hover(button);
@@ -47,7 +49,7 @@ describe('IsosurfaceButtons (integration)', () => {
    });
 
    test('create slice (marching cubes)', async () => {
-      act(() => render(<IsosurfaceButtons/>, container));
+      act(() => render(<IsosurfaceButtons />, container));
       const button = document.querySelector('.buttonContainer');
 
       await userEvent.hover(button);

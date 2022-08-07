@@ -5,9 +5,10 @@ import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 
 // setup a DOM element as a render target
+// eslint-disable-next-line import/no-mutable-exports
 let container = null;
 beforeEach(() => {
-   container = document.createElement("div");
+   container = document.createElement('div');
    document.body.appendChild(container);
 });
 
@@ -22,7 +23,7 @@ export {
    render,
    screen,
    userEvent,
-   fireEvent,  // userEvent strongly preferred
+   fireEvent, // userEvent strongly preferred
    act,
    container,
-}
+};

@@ -9,18 +9,21 @@
 }
 
 @media only screen and (max-width: 700px) {
-   .toolbar { width: 100vw; }
+   .toolbar {
+      width: 100vw;
+   }
 }
 
-.toolbar p { text-align: center; margin: 1rem; }
-
+.toolbar p {
+   text-align: center;
+   margin: 1rem;
+}
 
 /* ----- options section ----- */
 .options {
    border-bottom: 1px dotted var(--color-dark-gray);
    padding: 0 0 0.5rem 0;
 }
-
 
 /* ----- item creator ----- */
 .options__itemCreator {

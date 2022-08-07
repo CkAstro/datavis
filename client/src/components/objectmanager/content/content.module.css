@@ -1,4 +1,3 @@
-
 /* ----- controller content ----- */
 .controllerContent {
    max-height: 0px;
@@ -10,26 +9,24 @@
    max-height: 150px;
 }
 
-.controllerContent>* {
+.controllerContent > * {
    padding: 6px;
    border-top: 1px dotted #999;
 }
 
-
 /* ----- slider container ----- */
-.sliderContainer>.varSlider {
-   display: grid; 
+.sliderContainer > .varSlider {
+   display: grid;
    grid-template-columns: 25% 60% 15%;
 }
 
-.varSlider>.varSliderValue {
+.varSlider > .varSliderValue {
    text-align: right;
 }
 
 .valChangeArea {
    width: 85%;
 }
-
 
 /* ----- variable selector ------ */
 .varSelectContainer {
@@ -38,9 +35,3 @@
    justify-content: space-between;
    box-sizing: border-box;
 }
-
-/* .varSelectContainer>span {
-} */
-
-/* .varSelectContainer>select {
-} */

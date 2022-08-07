@@ -1,33 +1,37 @@
-import { useState, useContext, createContext } from 'react';
+import { useState, useContext, createContext, useMemo } from 'react';
 
-const ModalContext = createContext(); 
+const ModalContext = createContext();
 
 const defaultParams = {
    content: '',
    isActive: false,
-}
+};
 
-const ModalProvider = ({ children }) => {
-   const [ modalParams, setModalParams ] = useState(defaultParams);
+function ModalProvider({ children }) {
+   const [modalParams, setModalParams] = useState(defaultParams);
+   const modal = useMemo(
+      () => ({ modalParams, setModalParams }),
+      [modalParams]
+   );
 
    return (
-      <ModalContext.Provider value={[modalParams, setModalParams]}>
-         {children}
-      </ModalContext.Provider>
+      <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
    );
 }
 
 const useModal = () => {
-   const [ modalParams, setModalParams ] = useContext(ModalContext);
+   const modal = useContext(ModalContext);
 
-   const setModalContent = content => setModalParams({ content: content, isActive: true });
-   const closeModal = () => setModalParams({ ...modalParams, isActive: false });
+   const setModalContent = (content) =>
+      modal.setModalParams({ content, isActive: true });
+   const closeModal = () =>
+      modal.setModalParams({ ...modal.modalParams, isActive: false });
 
    return {
-      modalParams,
+      modalParams: modal.modalParams,
       setModalContent,
       closeModal,
-   }
-}
+   };
+};
 
 export { ModalProvider, useModal };

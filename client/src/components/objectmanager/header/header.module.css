@@ -1,4 +1,3 @@
-
 /* ----- controller header ----- */
 .controllerHeader {
    display: grid;
@@ -6,20 +5,19 @@
    padding: 6px;
 }
 
-.controllerHeader>.activeToggle {
+.controllerHeader > .activeToggle {
    font-weight: bold;
    width: 16px;
    color: var(--color-dark-red);
    cursor: pointer;
 }
 
-
 /* ----- controller info ----- */
 .controllerInfo {
    position: relative;
 }
 
-.controllerInfo>.infoContainer {
+.controllerInfo > .infoContainer {
    position: absolute;
    top: 0;
    left: 0;
@@ -47,7 +45,6 @@
    cursor: pointer;
 }
 
-
 /* ----- vis toggle ----- */
 .visToggle {
    position: relative;
@@ -61,7 +58,7 @@
    width: 1.1px;
    height: 80%;
    border-left: 1px dotted var(--color-dark-gray);
-   content: ''; 
+   content: '';
 }
 
 .visToggle::after {
@@ -74,7 +71,7 @@
    content: '';
 }
 
-.visToggle>.toggleButton {
+.visToggle > .toggleButton {
    display: inline-block;
    margin: 0px;
    padding: 0px 6px;
@@ -86,35 +83,34 @@
    transition: all 0.2s;
 }
 
-.visToggle>.toggleButton:hover {
+.visToggle > .toggleButton:hover {
    background: rgba(143, 0, 0, 0.3);
    border-color: #500;
    color: #300;
 }
 
-.visToggle>.toggleButton.active {
+.visToggle > .toggleButton.active {
    background: rgba(0, 143, 0, 0.1);
    border-color: #050;
    color: #050;
 }
 
-.visToggle>.toggleButton.active:hover {
+.visToggle > .toggleButton.active:hover {
    background: rgba(0, 143, 0, 0.3);
    border-color: #030;
    color: #030;
 }
 
-.visToggle>.toggleButton.disabled {
+.visToggle > .toggleButton.disabled {
    background: rgba(143, 143, 143, 0.1);
    border-color: #555;
    color: #555;
    cursor: not-allowed;
 }
 
-.visToggle>.toggleButton:not(:first-child) {
+.visToggle > .toggleButton:not(:first-child) {
    margin-left: 6px;
 }
-
 
 /* ----- close icon ----- */
 .closeButton {

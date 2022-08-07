@@ -4,8 +4,8 @@ import { Canvas2D } from 'components/elements';
 import { drawColorMap } from './drawscene';
 import style from './display.module.css';
 
-const CmapCanvas = () =>  {
-   const [ cmapData, setCmapData ] = useState(null);
+function CmapCanvas() {
+   const [cmapData, setCmapData] = useState(null);
 
    const cmapRef = useRef(cmapData);
    useEffect(() => {
@@ -13,9 +13,9 @@ const CmapCanvas = () =>  {
    }, [cmapData]);
 
    useEffect(() => {
-      const cmaps = texHelper.cmaps;
+      const { cmaps } = texHelper;
       if (cmaps.length === 0) return;
-      setCmapData(cmaps[cmaps.length-1].data);
+      setCmapData(cmaps[cmaps.length - 1].data);
    }, [texHelper.cmaps]);
 
    return (

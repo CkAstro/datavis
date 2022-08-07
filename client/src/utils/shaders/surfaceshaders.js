@@ -1,5 +1,4 @@
-const vs = 
-`#version 300 es
+const vs = `#version 300 es
    in vec4 aVertexPosition;
    uniform mat4 uProjectionMatrix;
    uniform mat4 uModelViewMatrix;
@@ -15,8 +14,7 @@ const vs =
    }
 `;
 
-const fs = 
-`#version 300 es
+const fs = `#version 300 es
    precision highp float;
 
    uniform mat4 uProjectionMatrix;

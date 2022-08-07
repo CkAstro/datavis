@@ -10,4 +10,4 @@ export {
    SessionController,
    UploadController,
    ViewController,
-}
+};

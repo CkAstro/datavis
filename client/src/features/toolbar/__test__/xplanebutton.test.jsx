@@ -1,7 +1,8 @@
-jest.mock('contexts');
 import { render, screen, userEvent, act, container } from 'test';
 import { useRenderables } from 'contexts';
 import XPlaneButton from '../xplanebutton';
+
+jest.mock('contexts');
 
 beforeEach(() => {
    const { setAllRenderables } = useRenderables();
@@ -10,7 +11,7 @@ beforeEach(() => {
 
 describe('XPlaneButton', () => {
    test('hover tooltip', async () => {
-      act(() => render(<XPlaneButton/>, container));
+      act(() => render(<XPlaneButton />, container));
       const button = document.querySelector('.buttonContainer');
 
       await userEvent.hover(button);
@@ -18,7 +19,7 @@ describe('XPlaneButton', () => {
    });
 
    test('create slice', async () => {
-      act(() => render(<XPlaneButton/>, container));
+      act(() => render(<XPlaneButton />, container));
       const { renderables } = useRenderables();
       const button = document.querySelector('.buttonContainer');
 

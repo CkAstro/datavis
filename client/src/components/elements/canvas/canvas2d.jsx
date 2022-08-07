@@ -4,10 +4,10 @@ const useCanvas2D = (glRef, draw, args) => {
    const canvasRef = useRef(null);
    const renderRef = useRef(null);
 
-   const animate = time => {
+   const animate = () => {
       draw(glRef.current, args);
       renderRef.current = requestAnimationFrame(animate);
-   }
+   };
 
    // init the canvas on load
    useEffect(() => {
@@ -17,23 +17,21 @@ const useCanvas2D = (glRef, draw, args) => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
+      // eslint-disable-next-line no-param-reassign
       glRef.current = gl;
-      
+
       renderRef.current = requestAnimationFrame(animate);
       return () => cancelAnimationFrame(renderRef.current);
    }, []);
 
    return canvasRef;
-}
+};
 
-
-const Canvas2D = ({ draw, className, style, ...args }) => {
+function Canvas2D({ draw, className, style, ...args }) {
    const glRef = useRef();
    const canvasRef = useCanvas2D(glRef, draw, args);
 
-   return (
-      <canvas ref={canvasRef} className={className} style={style}/>
-   );
+   return <canvas ref={canvasRef} className={className} style={style} />;
 }
 
 export default Canvas2D;

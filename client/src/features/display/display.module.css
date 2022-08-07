@@ -1,6 +1,6 @@
-.display {  
-   width: var(--display-width); 
-   background: var(--display-background); 
+.display {
+   width: var(--display-width);
+   background: var(--display-background);
    padding: 1rem;
    min-width: 350px;
    display: flex;
@@ -10,22 +10,25 @@
 }
 
 @media only screen and (min-width: 1700px) {
-   .display { min-width: 650px; }
+   .display {
+      min-width: 650px;
+   }
 }
 
 @media only screen and (min-width: 3400px) {
-   .display { min-width: 1300px; }
+   .display {
+      min-width: 1300px;
+   }
 }
 
 @media only screen and (max-width: 700px) {
-   .display { 
-      width: 100vw; 
+   .display {
+      width: 100vw;
       height: var(--display-height);
       min-height: 250px;
       padding-bottom: 0;
    }
 }
-
 
 /* ----- action bar ----- */
 .display__actionbar {
@@ -40,7 +43,6 @@
    flex-wrap: wrap;
    gap: 0.25rem;
 }
-
 
 /* ----- canvas container ----- */
 .display__container {
@@ -65,7 +67,6 @@
    height: 200px;
 }
 
-
 /* ----- scene controller ----- */
 .sceneOptions {
    display: flex;
@@ -79,8 +80,13 @@
    align-items: center;
 }
 
-.sceneController:not(.active) { opacity: 0.3; }
-.sceneController.hidden { visibility: hidden; }
+.sceneController:not(.active) {
+   opacity: 0.3;
+}
+
+.sceneController.hidden {
+   visibility: hidden;
+}
 
 .sceneController > span {
    padding: 0 0.75rem;

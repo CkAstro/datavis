@@ -1,7 +1,8 @@
-jest.mock('contexts');
-import { render, screen, userEvent, act, container } from 'test';
+import { render, userEvent, act, container } from 'test';
 import { useRenderables } from 'contexts';
 import ItemCreator from '../itemcreator';
+
+jest.mock('contexts');
 
 beforeEach(() => {
    const { setAllRenderables } = useRenderables();
@@ -10,7 +11,7 @@ beforeEach(() => {
 
 describe('ItemCreator', () => {
    test('ensure renderable created', () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       expect(renderables.length).toEqual(1);
@@ -18,7 +19,7 @@ describe('ItemCreator', () => {
    });
 
    test('create surface', async () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       const buttons = document.querySelectorAll('.buttonContainer');
@@ -40,7 +41,7 @@ describe('ItemCreator', () => {
    });
 
    test('create sphere', async () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       const buttons = document.querySelectorAll('.buttonContainer');
@@ -52,7 +53,7 @@ describe('ItemCreator', () => {
    });
 
    test('create zslice', async () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       const buttons = document.querySelectorAll('.buttonContainer');
@@ -64,7 +65,7 @@ describe('ItemCreator', () => {
    });
 
    test('create yslice', async () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       const buttons = document.querySelectorAll('.buttonContainer');
@@ -76,7 +77,7 @@ describe('ItemCreator', () => {
    });
 
    test('create xslice', async () => {
-      act(() => render(<ItemCreator/>, container));
+      act(() => render(<ItemCreator />, container));
       const { renderables } = useRenderables();
 
       const buttons = document.querySelectorAll('.buttonContainer');

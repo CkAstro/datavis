@@ -1,37 +1,37 @@
 import { generateRenderable, getNewId } from '../generaterenderable';
 
 const expectedKeys = [
-   'id', 
-   'itemName', 
-   'type', 
-   'isVisible', 
-   'isActive', 
-   'sliderList', 
-   'activeVar', 
+   'id',
+   'itemName',
+   'type',
+   'isVisible',
+   'isActive',
+   'sliderList',
+   'activeVar',
    'activeVarIndex',
    'renderer',
 ];
 
 describe('getNewId', () => {
    test('normal array', () => {
-      const testRends = [ {id: 0}, {id: 1}, {id: 2} ];
-      const [ last ] = testRends.slice(-1);
+      const testRends = [{ id: 0 }, { id: 1 }, { id: 2 }];
+      const [last] = testRends.slice(-1);
       const id = getNewId(testRends);
-      expect(id).toEqual(last.id+1);
+      expect(id).toEqual(last.id + 1);
    });
 
    test('some deletes', () => {
-      const testRends = [ {id: 0}, {id: 1}, {id: 4} ];
-      const [ last ] = testRends.slice(-1);
+      const testRends = [{ id: 0 }, { id: 1 }, { id: 4 }];
+      const [last] = testRends.slice(-1);
       const id = getNewId(testRends);
-      expect(id).toEqual(last.id+1);
+      expect(id).toEqual(last.id + 1);
    });
 
    test('empty array', () => {
       const testRends = [];
       const id = getNewId(testRends);
       expect(id).toEqual(0);
-   })
+   });
 });
 
 describe('generateRenderable', () => {

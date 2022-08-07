@@ -5,9 +5,9 @@ import SphereButton from './spherebutton';
 import ZPlaneButton from './zplanebutton';
 import YPlaneButton from './yplanebutton';
 import XPlaneButton from './xplanebutton';
-import style from './toolbar.module.css'; 
+import style from './toolbar.module.css';
 
-const ItemCreator = () => {
+function ItemCreator() {
    const { createRenderable } = useRenderables();
 
    // create sphere on initial load
@@ -18,11 +18,11 @@ const ItemCreator = () => {
    return (
       <div className={style.options}>
          <div className={style.options__itemCreator}>
-            <IsosurfaceButtons/>
-            <SphereButton/>
-            <ZPlaneButton/>
-            <YPlaneButton/>
-            <XPlaneButton/>
+            <IsosurfaceButtons />
+            <SphereButton />
+            <ZPlaneButton />
+            <YPlaneButton />
+            <XPlaneButton />
          </div>
          <div className={style.options__miniHeader}>Create Items</div>
       </div>

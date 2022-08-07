@@ -1,24 +1,36 @@
+img {
+   width: 100%;
+   height: 100%;
+}
 
-img { width: 100%; height: 100%; }
-.disabled { cursor: not-allowed; }
+.disabled {
+   cursor: not-allowed;
+}
 
 .nameContainer {
    display: flex;
    gap: 2px;
 }
 
-.nameArea { width: 50%; }
-.nameArea.disabled { color: #999; cursor: default; }
+.nameArea {
+   width: 50%;
+}
+
+.nameArea.disabled {
+   color: #999;
+   cursor: default;
+}
 
 .saveButton {
    padding: 6px 12px;
-   background: #888; 
+   background: #888;
    transition: all 0.2s;
    cursor: pointer;
 }
 
-.saveButton:hover { background: #777; }
-
+.saveButton:hover {
+   background: #777;
+}
 
 .sessionContainer {
    --container-size: 32px;
@@ -50,21 +62,19 @@ img { width: 100%; height: 100%; }
 
 .session .sessionName > div {
    display: inline-block;
-   width: 100%; 
+   width: 100%;
 
    overflow: hidden;
    white-space: nowrap;
    text-overflow: ellipsis;
 }
 
-
-
 .session .deleteButton {
    width: var(--container-size);
    height: var(--container-size);
    font-size: 24px;
    cursor: pointer;
-   background: #999; 
+   background: #999;
    filter: brightness(100%);
    transition: all 0.2s;
 
@@ -73,12 +83,12 @@ img { width: 100%; height: 100%; }
    justify-content: center;
 }
 
-.session .deleteButton > div { transform: translate(0, -2px); }
-
-
+.session .deleteButton > div {
+   transform: translate(0, -2px);
+}
 
 .session .confirmDelete {
-   width: calc(60% - 2*var(--gap) - var(--container-size));
+   width: calc(60% - 2 * var(--gap) - var(--container-size));
    height: var(--container-size);
    color: #955;
 
@@ -87,11 +97,22 @@ img { width: 100%; height: 100%; }
    justify-content: center;
 }
 
-.session .confirmDelete.active { display: flex; }
+.session .confirmDelete.active {
+   display: flex;
+}
 
+.session:nth-child(2n) .sessionName {
+   background: #888;
+}
 
-.session:nth-child(2n) .sessionName { background: #888; }
-.session:nth-child(2n) .closeButton { background: #888; }
+.session:nth-child(2n) .closeButton {
+   background: #888;
+}
 
-.session .sessionName:hover { filter: brightness(80%); }
-.session .deleteButton:hover { filter: brightness(70%); }
+.session .sessionName:hover {
+   filter: brightness(80%);
+}
+
+.session .deleteButton:hover {
+   filter: brightness(70%);
+}

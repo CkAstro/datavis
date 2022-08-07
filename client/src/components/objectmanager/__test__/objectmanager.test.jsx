@@ -1,7 +1,8 @@
-jest.mock('contexts');
 import { render, screen, userEvent, fireEvent, act, container } from 'test';
 import { useRenderables, useCamera } from 'contexts';
 import { ObjectManager } from '..';
+
+jest.mock('contexts');
 
 beforeEach(() => {
    const { setAllRenderables } = useRenderables();
@@ -10,7 +11,7 @@ beforeEach(() => {
 
 describe('ObjectManager', () => {
    test('init', () => {
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const list = document.querySelector('.itemDisplay');
       expect(list.children.length).toEqual(0);
@@ -19,7 +20,7 @@ describe('ObjectManager', () => {
    test('one create', () => {
       const { createRenderable } = useRenderables();
       createRenderable('xslice');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const list = document.querySelector('.itemDisplay');
       expect(list.children.length).toEqual(1);
@@ -31,7 +32,7 @@ describe('ObjectManager', () => {
       const { createRenderable } = useRenderables();
       createRenderable('xslice');
       createRenderable('sphere');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const list = document.querySelector('.itemDisplay');
       expect(list.children.length).toEqual(2);
@@ -46,7 +47,7 @@ describe('individual parts', () => {
       const { renderables, createRenderable } = useRenderables();
       createRenderable('xslice');
       createRenderable('sphere');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const list = document.querySelector('.itemDisplay');
       expect(list.children.length).toEqual(2);
@@ -65,7 +66,7 @@ describe('individual parts', () => {
    test('toggle visibility', async () => {
       const { renderables, createRenderable } = useRenderables();
       createRenderable('xslice');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       // default
       expect(renderables[0].isVisible).toEqual([true, true]);
@@ -93,12 +94,12 @@ describe('individual parts', () => {
    test('change slidebar', () => {
       const { renderables, createRenderable } = useRenderables();
       createRenderable('xslice');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const slider = screen.getByRole('slider');
-      fireEvent.change(slider, {target: {value: 75}});
+      fireEvent.change(slider, { target: { value: 75 } });
 
-      const [ rendSlider ] = renderables[0].sliderList;
+      const [rendSlider] = renderables[0].sliderList;
       expect(rendSlider.value).toEqual(75);
       expect(rendSlider.trueValue).toEqual(0.75);
    });
@@ -106,13 +107,13 @@ describe('individual parts', () => {
    test('change slide display', async () => {
       const { renderables, createRenderable } = useRenderables();
       createRenderable('xslice');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       const valDisplay = document.querySelector('.varSliderValue');
       await userEvent.dblClick(valDisplay);
       await userEvent.keyboard('0.25{enter}');
 
-      const [ rendSlider ] = renderables[0].sliderList;
+      const [rendSlider] = renderables[0].sliderList;
       expect(rendSlider.value).toEqual(25);
       expect(rendSlider.trueValue).toEqual(0.25);
    });
@@ -120,7 +121,7 @@ describe('individual parts', () => {
    test('change display variable', async () => {
       const { renderables, createRenderable } = useRenderables();
       createRenderable('xslice');
-      act(() => render(<ObjectManager/>, container));
+      act(() => render(<ObjectManager />, container));
 
       // density on init
       expect(renderables[0].activeVar).toEqual('density');

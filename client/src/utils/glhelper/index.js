@@ -1,4 +1,4 @@
-import { Renderables } from 'utils';
+import Renderables from 'utils/renderables';
 import {
    clearCanvas,
    enableViewport,
@@ -30,10 +30,14 @@ class GLHelper {
       this.sphere = new Renderables.Sphere(gl, shaderSuite.sphereShader);
       this.surface = new Renderables.Surface(gl, shaderSuite.surfaceShader);
       this.mcube = new Renderables.MarchingCube(gl, shaderSuite.mcubeShader);
-      await this.mcube.init(0.2);
 
       this.isInit = true;
       return Promise.resolve();
+   }
+
+   // temporary method before we fully implement marching cubes
+   async initMCube(texHelper) {
+      return Promise.resolve().then(() => this.mcube.init(texHelper, 0.2));
    }
 
    renderObjects(objects, scene, data, cmap) {
@@ -42,15 +46,15 @@ class GLHelper {
       clearCanvas(gl);
       const projectionMatrix = getProjectionMatrix(gl, scene.compare);
 
-      for (let viewport=0; viewport<2; viewport++) {
-         if (viewport === 1 && !scene.compare) return;   // exit if viewport isn't active
+      for (let viewport = 0; viewport < 2; viewport++) {
+         if (viewport === 1 && !scene.compare) return; // exit if viewport isn't active
 
          enableViewport(gl, viewport, scene.compare);
          const modelViewMatrix = getModelViewMatrix(viewport, scene);
          const eyePosition = getEyePosition(modelViewMatrix);
 
-         for (const obj of objects) {
-            if (!obj.isVisible[viewport]) continue;      // only draw visible objects
+         objects.forEach((obj) => {
+            if (!obj.isVisible[viewport]) return; // only draw visible objects
 
             const shader = enableShader(gl, obj.type, this.shaderSuite);
             setProjectionMatrix(gl, shader, projectionMatrix);
@@ -60,9 +64,9 @@ class GLHelper {
             setObjectUniforms(gl, shader, obj, eyePosition);
 
             this[obj.renderer].render();
-         }
+         });
       }
    }
 }
 
-export default new GLHelper;
+export default new GLHelper();

@@ -1,7 +1,7 @@
-
 .itemController {
    background: #b9b9b9;
 }
-.itemController:nth-child(2n+1) {
+
+.itemController:nth-child(2n + 1) {
    background: #adadad;
 }

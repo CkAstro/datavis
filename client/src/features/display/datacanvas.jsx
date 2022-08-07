@@ -4,7 +4,7 @@ import { texHelper, glHelper } from 'utils';
 import { GL2Canvas } from 'components/elements';
 import { drawScene } from './drawscene';
 
-const DataCanvas = ({ passThroughEvent }) => {
+function DataCanvas({ passThroughEvent }) {
    const { options, moveCamera } = useCamera();
    const { renderables } = useRenderables();
 
@@ -24,8 +24,8 @@ const DataCanvas = ({ passThroughEvent }) => {
    const renderRef = useRef(glHelper);
 
    return (
-      <GL2Canvas 
-         draw={drawScene} 
+      <GL2Canvas
+         draw={drawScene}
          moveCamera={moveCamera}
          passThroughEvent={passThroughEvent}
          sceneRef={sceneRef}

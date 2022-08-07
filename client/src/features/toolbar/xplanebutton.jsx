@@ -1,19 +1,23 @@
 import { useRenderables } from 'contexts';
 import { Button, DropDown } from 'components/elements';
+import { zyxXIcon } from 'assets/img';
 
-const XPlaneButton = () => {
+function XPlaneButton() {
    const { createRenderable } = useRenderables();
 
    return (
-      <DropDown header='X-Slice' baseItem={
-         <Button 
-            onClick={() => createRenderable('xslice')} 
-            enabled 
-            active 
-            title='X-Planar Slice' 
-            image={require('assets/img/zyx_x_icon.png')}
-         /> 
-      }/>
+      <DropDown
+         header="X-Slice"
+         baseItem={
+            <Button
+               onClick={() => createRenderable('xslice')}
+               enabled
+               active
+               title="X-Planar Slice"
+               image={zyxXIcon}
+            />
+         }
+      />
    );
 }
 

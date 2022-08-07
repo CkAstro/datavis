@@ -12,24 +12,24 @@ describe('buildAxes', () => {
 
       // bounds
       expect(axis[0]).toEqual(-1);
-      expect(axis[length-1]).toEqual(1);
+      expect(axis[length - 1]).toEqual(1);
 
       // increasing order
       let prev = axis[0];
-      for (let i=1; i<length; i++) {
+      for (let i = 1; i < length; i++) {
          expect(axis[i]).toBeGreaterThan(prev);
          prev = axis[i];
       }
    });
-   
+
    test('invalid length', () => {
       const err = new Error('buildAxes length argument invalid');
       expect(() => buildAxes('3')).toThrow(err);
-      expect(() => buildAxes( 0 )).toThrow(err);
+      expect(() => buildAxes(0)).toThrow(err);
       expect(() => buildAxes(-14)).toThrow(err);
       expect(() => buildAxes(5.3)).toThrow(err);
    });
-   
+
    test('length too large', () => {
       const err = new Error('buildAxes length argument too large');
       expect(() => buildAxes(1e10)).toThrow(err);
@@ -45,23 +45,25 @@ describe('buildPoints', () => {
       const axis = buildAxes(length);
 
       const points = buildPoints(axis);
-      expect(points.length).toEqual(length**3);
+      expect(points.length).toEqual(length ** 3);
    });
 
    test('correct coordinates', () => {
       const length = 3;
-      const axis = buildAxes(length);     // [-1, 0, 1]
+      const axis = buildAxes(length); // [-1, 0, 1]
       const testAxis = [-1, 0, 1];
 
       const points = buildPoints(axis);
-      for (const k of testAxis) {
-         for (const j of testAxis) {
-            for (const i of testAxis) {
-               const testPoint = points.filter(point => point.x === i && point.y === j && point.z === k);
+      testAxis.forEach((k) => {
+         testAxis.forEach((j) => {
+            testAxis.forEach((i) => {
+               const testPoint = points.filter(
+                  (point) => point.x === i && point.y === j && point.z === k
+               );
                expect(testPoint.length).toEqual(1);
-            }
-         }
-      }
+            });
+         });
+      });
    });
 
    test('invalid axis', () => {
@@ -82,11 +84,11 @@ describe('buildPoints', () => {
 describe('buildGrid', () => {
    test('correct size', () => {
       const size = 3;
-      const axis = buildAxes(size+1);
+      const axis = buildAxes(size + 1);
       const points = buildPoints(axis);
       const grid = buildGrid(axis, points);
 
-      expect(grid.length).toEqual(size**3);
+      expect(grid.length).toEqual(size ** 3);
    });
 
    test('cube has correct elements', () => {
@@ -97,7 +99,7 @@ describe('buildGrid', () => {
       const expectedKeys = ['v0', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7'];
       const keys = Object.keys(grid[0]);
       expect(keys).toEqual(expectedKeys);
-      expect(keys).not.toEqual(expectedKeys.slice(1));   // key missing
+      expect(keys).not.toEqual(expectedKeys.slice(1)); // key missing
    });
 
    test('verify references', () => {
@@ -119,10 +121,10 @@ describe('buildGrid', () => {
 describe('getCubeGrid', () => {
    test('ensure length and reference', () => {
       // simply a repeat of above tests to ensure function works
-      const size = 3;   // test will fail if set to 2
-      const {grid, points} = getCubeGrid(size+1);
+      const size = 3; // test will fail if set to 2
+      const { grid } = getCubeGrid(size + 1);
 
-      expect(grid.length).toEqual(size**3);
+      expect(grid.length).toEqual(size ** 3);
 
       const testVal = 'a';
       grid[2].v0.v = testVal;
@@ -132,8 +134,8 @@ describe('getCubeGrid', () => {
 
    test('ensure points reference', () => {
       // simply a repeat of above tests to ensure function works
-      const size = 3;   // test will fail if set to 2
-      const {grid, points} = getCubeGrid(size+1);
+      const size = 3; // test will fail if set to 2
+      const { grid, points } = getCubeGrid(size + 1);
 
       const testVal = 'a';
       points[2].v = testVal;

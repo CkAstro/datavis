@@ -1,15 +1,16 @@
 import { useCamera } from 'contexts';
 import { Button } from 'components/elements';
+import { compareIcon } from 'assets/img';
 
 // this button toggles compare mode
 // initial state: inactive (red coloring)
 // toggles to active (green coloring)
-const CompareButton = () => {
+function CompareButton() {
    const { options, toggleCompare } = useCamera();
 
    return (
-      <Button 
-         image={require('assets/img/compare_icon.png')} 
+      <Button
+         image={compareIcon}
          enabled
          active={options.compare}
          onClick={toggleCompare}

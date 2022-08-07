@@ -1,4 +1,3 @@
-
 const offsetSlider = {
    variable: null,
    trueValue: 0.0,
@@ -6,7 +5,7 @@ const offsetSlider = {
    value: 0,
    min: -100,
    max: 100,
-}
+};
 
 const valueSlider = {
    variable: null,
@@ -15,25 +14,23 @@ const valueSlider = {
    value: 50,
    min: 0,
    max: 100,
-}
+};
 
-const getSliders = type => {
-   if (type === 'xslice' || type === 'yslice' || type === 'zslice') {
+const getSliders = (type) => {
+   if (type === 'xslice' || type === 'yslice' || type === 'zslice')
       return [{ ...offsetSlider, variable: 'offset', text: 'offset' }];
-   } else if (type === 'sphere') {
+   if (type === 'sphere')
       return [
-         { ...offsetSlider, variable: 'x offset', text: 'x offset' }, 
+         { ...offsetSlider, variable: 'x offset', text: 'x offset' },
          { ...offsetSlider, variable: 'y offset', text: 'y offset' },
          { ...offsetSlider, variable: 'z offset', text: 'z offset' },
-         { ...valueSlider,  variable: 'radius',   text: 'radius'   },
+         { ...valueSlider, variable: 'radius', text: 'radius' },
       ];
-   } else if (type === 'surface') {
+   if (type === 'surface')
       return [{ ...valueSlider, variable: 'value', text: 'value' }];
-   } else if (type === 'mcube') {
+   if (type === 'mcube')
       return [{ ...valueSlider, variable: 'value', text: 'value' }];
-   } else {
-      throw new Error('getSliders received invalid slider type');
-   }
-}
+   throw new Error('getSliders received invalid slider type');
+};
 
 export default getSliders;

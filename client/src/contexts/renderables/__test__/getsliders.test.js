@@ -18,7 +18,7 @@ describe('getSliders', () => {
    });
 
    test('slice slider', () => {
-      const [ slider ] = getSliders('xslice');
+      const [slider] = getSliders('xslice');
       expect(Object.keys(slider)).toEqual(expectedKeys);
       expect(slider.variable).toEqual('offset');
       expect(slider.trueValue).toEqual(0);
@@ -30,9 +30,9 @@ describe('getSliders', () => {
 
    test('sphere slider', () => {
       const sliders = getSliders('sphere');
-      for (const slider of sliders) {
+      sliders.forEach((slider) => {
          expect(Object.keys(slider)).toEqual(expectedKeys);
-      }
+      });
       expect(sliders[0].variable).toEqual('x offset');
       expect(sliders[1].variable).toEqual('y offset');
       expect(sliders[2].variable).toEqual('z offset');
@@ -40,7 +40,7 @@ describe('getSliders', () => {
    });
 
    test('surface slider', () => {
-      const [ slider ] = getSliders('surface');
+      const [slider] = getSliders('surface');
       expect(Object.keys(slider)).toEqual(expectedKeys);
       expect(slider.variable).toEqual('value');
       expect(slider.trueValue).toEqual(0.5);
@@ -51,8 +51,8 @@ describe('getSliders', () => {
    });
 
    test('multiple sliders', () => {
-      const [ slider1 ] = getSliders('xslice');
-      const [ slider2 ] = getSliders('xslice');
+      const [slider1] = getSliders('xslice');
+      const [slider2] = getSliders('xslice');
 
       // ensure they are not linked
       expect(slider1.value).toEqual(0);
