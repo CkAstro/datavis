@@ -12,41 +12,40 @@ const defaultOptions = {
    ],
 };
 
+// BUG FIX
+// note : this may be related to a 'passive event listener' issue
+//    with React; see https://github.com/facebook/react/issues/19651
+// note : this may also be related to bug in Reversi code where 'set'
+//    function is called multiple times too quickly;
+//    see 'client/src/contexts/gameinfo.js'
+//
+// issue : any time moveCamera is called from 'handleScroll()' in
+//    'GL2Canvas' (it works fine from 'handleMouseMove()' even if
+//    'zoom' argument is non-zero), both 'options.compare' and
+//    'options.linked' are reset to default values, while
+//    'options.camera' is updated as normal. This reset occurs
+//    prior to the function call, so 'options.camera[0]' always
+//    receives the 'zoom' update.
+//     - canvas also seems to redraw on scroll and we cannot pass
+//       bounding rect info; we instead get via getElementById()
+//
+// fix : since 'options' keeps partially resetting, we copy it and
+//    use that copy to build 'newOptions' for 'setOptions()' call
+//    we then add a 'useEffect()' to watch for 'options' change and
+//    recopy options to '_BUGFIX_options' on update
+let optionBUGFIX = { ...defaultOptions };
+
 function CameraProvider({ children }) {
    const [options, setOptions] = useState(defaultOptions);
-
    const camera = useMemo(() => ({ options, setOptions }), [options]);
+
    return (
       <CameraContext.Provider value={camera}>{children}</CameraContext.Provider>
    );
 }
 
 const useCamera = () => {
-   // const [options, setOptions] = useContext(CameraContext);
    const camera = useContext(CameraContext);
-
-   // BUG FIX
-   // note : this may be related to a 'passive event listener' issue
-   //    with React; see https://github.com/facebook/react/issues/19651
-   // note : this may also be related to bug in Reversi code where 'set'
-   //    function is called multiple times too quickly;
-   //    see 'client/src/contexts/gameinfo.js'
-   //
-   // issue : any time moveCamera is called from 'handleScroll()' in
-   //    'GL2Canvas' (it works fine from 'handleMouseMove()' even if
-   //    'zoom' argument is non-zero), both 'options.compare' and
-   //    'options.linked' are reset to default values, while
-   //    'options.camera' is updated as normal. This reset occurs
-   //    prior to the function call, so 'options.camera[0]' always
-   //    receives the 'zoom' update.
-   //     - canvas also seems to redraw on scroll and we cannot pass
-   //       bounding rect info; we instead get via getElementById()
-   //
-   // fix : since 'options' keeps partially resetting, we copy it and
-   //    use that copy to build 'newOptions' for 'setOptions()' call
-   //    we then add a 'useEffect()' to watch for 'options' change and
-   //    recopy options to '_BUGFIX_options' on update
-   let optionBUGFIX = { ...defaultOptions };
 
    // should only be used for loading from saved session
    const setAllOptions = (opts) => {
