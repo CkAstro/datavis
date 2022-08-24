@@ -4,6 +4,8 @@ This project is available at [datavis.chriskolb.dev](https://datavis.chriskolb.d
 
 The app allows you to view volumetric scalar data on the go. After uploading your data (or just using the default dataset), you may create multiple planar, spherical, or constant-value slices to explore the data however you want. The toolbar on the right allows you to rename the slices, adjust their values, and even toggle visibility of each individual piece. The app also offers a compare mode which splits the viewport in two and allows the user to adjust views independently. You may also save and load your sessions.
 
+This project is currently being converted to TypeScript.
+
 ## How it Works
 
 This project uses a custom voxel engine which reads data from an image file (lossless format). Image input is used because it allows large datasets (3 x 256^3 in the example on the app) can easily be compressed to very small files (e.g. three 64MB float[256\*\*3] data files reduced to a single ~5MB Uint8[3\*4096\*\*2] .png image), with virtually no loss in visual quality. This also significantly reduces communication time between client/server and required storage space once such a feature is added.
