@@ -1,13 +1,9 @@
-import { MAX_INDICES } from 'config';
+import { MAX_INDICES } from '@/config';
 import { edgeTable, triTable } from './tables';
 
 const interpolate = (p1, p2, val) => {
    const del = (val - p1.v) / (p2.v - p1.v);
-   return [
-      p1.x + del * (p2.x - p1.x),
-      p1.y + del * (p2.y - p1.y),
-      p1.z + del * (p2.z - p1.z),
-   ];
+   return [p1.x + del * (p2.x - p1.x), p1.y + del * (p2.y - p1.y), p1.z + del * (p2.z - p1.z)];
 };
 
 // reference: http://paulbourke.net/geometry/polygonise/
@@ -32,54 +28,18 @@ const march = (cubes, isoval) => {
 
       // find edge vertices
       const verts = Array(12);
-      verts[0] =
-         edgeTable[cubeIndices] & 1
-            ? interpolate(cube.v0, cube.v1, isoval)
-            : null;
-      verts[1] =
-         edgeTable[cubeIndices] & 2
-            ? interpolate(cube.v1, cube.v2, isoval)
-            : null;
-      verts[2] =
-         edgeTable[cubeIndices] & 4
-            ? interpolate(cube.v2, cube.v3, isoval)
-            : null;
-      verts[3] =
-         edgeTable[cubeIndices] & 8
-            ? interpolate(cube.v3, cube.v0, isoval)
-            : null;
-      verts[4] =
-         edgeTable[cubeIndices] & 16
-            ? interpolate(cube.v4, cube.v5, isoval)
-            : null;
-      verts[5] =
-         edgeTable[cubeIndices] & 32
-            ? interpolate(cube.v5, cube.v6, isoval)
-            : null;
-      verts[6] =
-         edgeTable[cubeIndices] & 64
-            ? interpolate(cube.v6, cube.v7, isoval)
-            : null;
-      verts[7] =
-         edgeTable[cubeIndices] & 128
-            ? interpolate(cube.v7, cube.v4, isoval)
-            : null;
-      verts[8] =
-         edgeTable[cubeIndices] & 256
-            ? interpolate(cube.v0, cube.v4, isoval)
-            : null;
-      verts[9] =
-         edgeTable[cubeIndices] & 512
-            ? interpolate(cube.v1, cube.v5, isoval)
-            : null;
-      verts[10] =
-         edgeTable[cubeIndices] & 1024
-            ? interpolate(cube.v2, cube.v6, isoval)
-            : null;
-      verts[11] =
-         edgeTable[cubeIndices] & 2048
-            ? interpolate(cube.v3, cube.v7, isoval)
-            : null;
+      verts[0] = edgeTable[cubeIndices] & 1 ? interpolate(cube.v0, cube.v1, isoval) : null;
+      verts[1] = edgeTable[cubeIndices] & 2 ? interpolate(cube.v1, cube.v2, isoval) : null;
+      verts[2] = edgeTable[cubeIndices] & 4 ? interpolate(cube.v2, cube.v3, isoval) : null;
+      verts[3] = edgeTable[cubeIndices] & 8 ? interpolate(cube.v3, cube.v0, isoval) : null;
+      verts[4] = edgeTable[cubeIndices] & 16 ? interpolate(cube.v4, cube.v5, isoval) : null;
+      verts[5] = edgeTable[cubeIndices] & 32 ? interpolate(cube.v5, cube.v6, isoval) : null;
+      verts[6] = edgeTable[cubeIndices] & 64 ? interpolate(cube.v6, cube.v7, isoval) : null;
+      verts[7] = edgeTable[cubeIndices] & 128 ? interpolate(cube.v7, cube.v4, isoval) : null;
+      verts[8] = edgeTable[cubeIndices] & 256 ? interpolate(cube.v0, cube.v4, isoval) : null;
+      verts[9] = edgeTable[cubeIndices] & 512 ? interpolate(cube.v1, cube.v5, isoval) : null;
+      verts[10] = edgeTable[cubeIndices] & 1024 ? interpolate(cube.v2, cube.v6, isoval) : null;
+      verts[11] = edgeTable[cubeIndices] & 2048 ? interpolate(cube.v3, cube.v7, isoval) : null;
 
       // reference triangle table
       for (let i = 0; triTable[cubeIndices][i] !== -1; i += 3) {

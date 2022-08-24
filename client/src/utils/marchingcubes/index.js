@@ -1,4 +1,4 @@
-import { MCUBE_SIZE } from 'config';
+import { MCUBE_SIZE } from '@/config';
 import { getCubeGrid } from './getcubegrid';
 import { march } from './march';
 import setPoints from './setpoints';

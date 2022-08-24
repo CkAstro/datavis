@@ -1,4 +1,4 @@
-import { MCUBE_SIZE } from 'config';
+import { MCUBE_SIZE } from '@/config';
 
 const getVolRes = (image) => {
    const { width, height } = image;
@@ -43,24 +43,14 @@ const loadImageData = (gl, imageData) => {
       for (let k = 0; k < volRes; k++) {
          const sliceX = k % sliceCount;
          const sliceY = Math.floor(k / sliceCount);
-         const img = ctx.getImageData(
-            sliceX * volRes,
-            sliceY * volRes,
-            volRes,
-            volRes
-         );
+         const img = ctx.getImageData(sliceX * volRes, sliceY * volRes, volRes, volRes);
 
          for (let j = 0; j < volRes; j++) {
             for (let i = 0; i < volRes; i++) {
                for (let n = 0; n < 3; n++) {
-                  dataBuffer[3 * (j * volRes + i) + n] =
-                     img.data[4 * (j * volRes + i) + n] / 255.0; // should range 0-1
+                  dataBuffer[3 * (j * volRes + i) + n] = img.data[4 * (j * volRes + i) + n] / 255.0; // should range 0-1
                }
-               if (
-                  i % valStep === 0 &&
-                  j % valStep === 0 &&
-                  k % valStep === 0
-               ) {
+               if (i % valStep === 0 && j % valStep === 0 && k % valStep === 0) {
                   values[pos] = img.data[4 * (j * volRes + i)] / 255.0;
                   pos++;
                }

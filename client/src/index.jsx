@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import { useState } from 'react';
-import { CameraProvider, ModalProvider, RenderablesProvider } from 'contexts';
-import { Display, Toolbar } from 'features';
-import { Header } from 'components/elements';
+import { CameraProvider, ModalProvider, RenderablesProvider } from '@/contexts';
+import { Display, Toolbar } from '@/features';
+import { Header } from '@/components/elements';
 import './index.css';
 
 function DataVis() {
