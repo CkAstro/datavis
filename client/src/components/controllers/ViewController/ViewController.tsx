@@ -4,7 +4,7 @@ import ViewAxisY from './ViewAxisY';
 import ViewAxisZ from './ViewAxisZ';
 
 // clicking buttons will snap to appropriate axis}
-export const ViewController = () => (
+export const ViewController = (): JSX.Element => (
    <div>
       <DropDown baseItem={<ViewAxisX />} header="Snap to X-Axis" />
       <DropDown baseItem={<ViewAxisY />} header="Snap to Y-Axis" />

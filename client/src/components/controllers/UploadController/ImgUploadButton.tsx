@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useModal } from '@/contexts';
-import { Button } from '@/components/elements';
-import { imgUploadIcon } from '@/assets/img';
 import { getImageData } from '@/api';
+import { imgUploadIcon } from '@/assets/img';
+import { Button } from '@/components/elements';
+import { useModal } from '@/contexts';
 import ImageUploader from './ImageUploader';
 import css from './UploadController.module.scss';
 
-const ModalContent = () => {
+const ModalContent = (): JSX.Element => {
    const [image, setImage] = useState<string | null>(null);
 
    // we will request sample image immediately, so we can use HTML5 download to download on link click
    useEffect(() => {
-      getImageData('sample_data.png').then((data) => setImage(URL.createObjectURL(data)));
+      getImageData('sample_data.png')
+         .then((data) => setImage(URL.createObjectURL(data as Blob)))
+         .catch((error) => console.log(error));
    }, []);
 
    return (
@@ -36,15 +38,15 @@ const ModalContent = () => {
    );
 };
 
-const ImgUploadButton = () => {
+const ImgUploadButton = (): JSX.Element => {
    const { setModalContent } = useModal();
 
    return (
       <Button
          image={imgUploadIcon}
-         enabled
-         active
-         onClick={() => setModalContent(<ModalContent />)}
+         enabled={true}
+         active={true}
+         onClick={(): void => setModalContent(<ModalContent />)}
       />
    );
 };

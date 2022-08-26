@@ -1,9 +1,9 @@
-import { useModal } from '@/contexts';
-import { Button } from '@/components/elements';
 import { binaryUploadIcon } from '@/assets/img';
+import { Button } from '@/components/elements';
+import { useModal } from '@/contexts';
 import css from './UploadController.module.scss';
 
-const BinaryUploadButton = () => {
+const BinaryUploadButton = (): JSX.Element => {
    const { setModalContent } = useModal();
    const displayModal = (): void =>
       setModalContent(

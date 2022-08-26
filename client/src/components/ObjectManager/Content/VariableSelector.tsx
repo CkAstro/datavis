@@ -1,5 +1,5 @@
 import { useRenderables } from '@/contexts';
-import css from './Content.module.css';
+import css from './Content.module.scss';
 
 type Props = {
    controllerId: number;

@@ -1,7 +1,7 @@
-import { useCamera } from '@/contexts';
 import { Button } from '@/components/elements';
+import { useCamera } from '@/contexts';
 
-const ViewAxisX = () => {
+const ViewAxisX = (): JSX.Element => {
    const { snapCamera } = useCamera();
 
    return (
@@ -12,9 +12,9 @@ const ViewAxisX = () => {
                <span>X</span>
             </>
          }
-         enabled
-         active
-         onClick={() => snapCamera('x')}
+         enabled={true}
+         active={true}
+         onClick={(): void => snapCamera('z')}
       />
    );
 };

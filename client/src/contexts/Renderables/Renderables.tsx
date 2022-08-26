@@ -110,7 +110,7 @@ const useRenderables = (): RenderablesInterface => {
    };
 
    // change item's displayed name
-   const changeItemName = (name: RenderableType, id: number): void => {
+   const changeItemName = (name: string, id: number): void => {
       const newRenderables: Renderable[] = renderables.map((item) => {
          if (item.id !== id) return item;
          const newItem = { ...item, itemName: name };

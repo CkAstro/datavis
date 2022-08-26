@@ -1,4 +1,7 @@
-const options = {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import type { CameraInterface, CameraOptions, MouseLocation } from '@/types';
+
+const options: CameraOptions = {
    compare: false,
    linked: true,
    lastActive: 0,
@@ -8,18 +11,18 @@ const options = {
    ],
 };
 
-const setAllOptions = (opts) => {
+const setAllOptions = (opts: CameraOptions): void => {
    options.compare = opts.compare;
    options.linked = opts.linked;
    options.lastActive = opts.lastActive;
    options.camera = opts.camera;
 };
 
-const toggleCompare = () => {
+const toggleCompare = (): void => {
    options.compare = !options.compare;
 };
 
-const toggleLinked = () => {
+const toggleLinked = (): void => {
    if (!options.compare) return;
    options.linked = !options.linked;
    const mainCamera = options.camera[0];
@@ -27,20 +30,19 @@ const toggleLinked = () => {
 };
 
 // not testing for now
-// const moveCamera = (clickLocation, dz, da, dp) => {
-// };
+const moveCamera = (clickLocation: MouseLocation, dz: number, da: number, dp: number): void =>
+   undefined;
 
 // not testing for now
-// const snapCamera = (direction) => {
-// };
+const snapCamera = (direction: 'x' | 'y' | 'z'): void => undefined;
 
-const useCamera = () => ({
+const useCamera = (): CameraInterface => ({
    options,
    setAllOptions,
    toggleCompare,
    toggleLinked,
-   // moveCamera,
-   // snapCamera,
+   moveCamera,
+   snapCamera,
 });
 
 export default useCamera;

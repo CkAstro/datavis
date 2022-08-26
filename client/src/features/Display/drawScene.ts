@@ -1,12 +1,24 @@
-import { buildShaderSuite } from 'utils';
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { CameraOptions, Renderable, TextureHelper, GLHelper } from '@/types';
+import { buildShaderSuite } from '@/utils';
 
-let _lastScene = null; // scene comparison to determine re-render
-let _lastObjs = null; // object comparison to determine re-render
-let _lastWidth = null;
-let _lastHeight = null;
+let _lastScene: CameraOptions | null = null; // scene comparison to determine re-render
+let _lastObjs: Renderable[] | null = null; // object comparison to determine re-render
+let _lastWidth: number | null = null;
+let _lastHeight: number | null = null;
 let _isInit = false;
 
-const drawScene = (gl, { sceneRef, objsRef, texRef, renderRef }) => {
+type GLProps = {
+   sceneRef: React.MutableRefObject<CameraOptions>;
+   objsRef: React.MutableRefObject<Renderable[]>;
+   texRef: React.MutableRefObject<TextureHelper>;
+   renderRef: React.MutableRefObject<GLHelper>;
+};
+
+const drawScene = (
+   gl: WebGLRenderingContext,
+   { sceneRef, objsRef, texRef, renderRef }: GLProps
+): void => {
    const scene = sceneRef.current;
    const objects = objsRef.current;
    const texHelper = texRef.current;
@@ -43,14 +55,10 @@ const drawScene = (gl, { sceneRef, objsRef, texRef, renderRef }) => {
                texHelper.data[0].texture,
                texHelper.cmaps[0].texture
             )
-         );
+         )
+         .catch((err) => console.log(err));
    } else {
-      glHelper.renderObjects(
-         objects,
-         scene,
-         texHelper.data[0].texture,
-         texHelper.cmaps[0].texture
-      );
+      glHelper.renderObjects(objects, scene, texHelper.data[0].texture, texHelper.cmaps[0].texture);
    }
 };
 
@@ -60,8 +68,12 @@ const _cbarHeight = 150;
 const _yBuffer = 10;
 const _nTicks = 6;
 
+type CanvasProps = {
+   cmapRef: React.MutableRefObject<CanvasImageData>;
+};
+
 let _firstDraw = false;
-const drawColorMap = (ctx, { cmapRef }) => {
+const drawColorMap = (ctx: HTMLCanvasContext, { cmapRef }: CanvasProps): void => {
    const cmapData = cmapRef.current;
 
    // only need to draw once until we implement new colormaps

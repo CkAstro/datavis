@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Cookies from 'universal-cookie';
 import { useModal, useCamera, useRenderables } from '@/contexts';
-import css from './sessioncontroller.module.css';
+import css from './SessionController.module.scss';
 
 // todo: need to also save data/colormap IDs so we can request from server
 // todo: need to also store session info on server so we can request if cookies
 //    are not available
-const SaveSessionForm = () => {
+const SaveSessionForm = (): JSX.Element => {
    const defaultSessionName = 'session name...';
    const [sessionName, setSessionName] = useState(defaultSessionName);
    const { renderables } = useRenderables();
@@ -17,7 +17,7 @@ const SaveSessionForm = () => {
    const handleInput = (event: React.FormEvent<HTMLInputElement>): void =>
       setSessionName(event.currentTarget.value);
 
-   const handleSaveSession = (event: React.FormEvent) => {
+   const handleSaveSession = (event: React.FormEvent): void => {
       event.preventDefault();
       const cookies = new Cookies();
       const session = { renderables, options };

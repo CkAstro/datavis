@@ -1,6 +1,11 @@
+import type { glHelper, texHelper } from '@/utils';
+
+export type GLHelper = typeof glHelper;
+export type TextureHelper = typeof texHelper;
+
 export type MouseLocation = {
-   x: number;
-   y: number;
+   x: number | null;
+   y: number | null;
 };
 
 export interface Slider {

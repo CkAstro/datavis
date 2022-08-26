@@ -1,11 +1,11 @@
-import { useCamera } from '@/contexts';
-import { Button } from '@/components/elements';
 import { linkedIcon } from '@/assets/img';
+import { Button } from '@/components/elements';
+import { useCamera } from '@/contexts';
 
 // this button toggles camera link mode
 // initial state: disabled (gray coloring)
 // toggles from active (green coloring) to inactive (red coloring)
-const LinkedButton = () => {
+const LinkedButton = (): JSX.Element => {
    const { options, toggleLinked } = useCamera();
 
    return (

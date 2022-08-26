@@ -79,7 +79,7 @@ const useCamera = (): CameraInterface => {
 
       // use click location to determine which viewport we are on
       const { top, left, width } = canvas.getBoundingClientRect();
-      const location = { x: clickLocation.x - left, y: clickLocation.y - top };
+      const location = { x: clickLocation.x! - left, y: clickLocation.y! - top };
 
       const newOptions = { ...optionBUGFIX }; // see comment below for bugfix
       const activeCamera =

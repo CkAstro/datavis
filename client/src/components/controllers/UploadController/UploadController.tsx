@@ -1,12 +1,15 @@
-import { Button, DropDown } from '@/components/elements';
 import { uploadIcon } from '@/assets/img';
-import UploadButton from './UploadButton';
-import ImgUploadButton from './ImgUploadButton';
+import { Button, DropDown } from '@/components/elements';
 import BinaryUploadButton from './BinaryUploadButton';
+import ImgUploadButton from './ImgUploadButton';
+import UploadButton from './UploadButton';
 
-export const UploadController = () => (
+export const UploadController = (): JSX.Element => (
    <div>
-      <DropDown baseItem={<Button enabled active image={uploadIcon} />} header="Upload Data">
+      <DropDown
+         baseItem={<Button enabled={true} active={true} image={uploadIcon} />}
+         header="Upload Data"
+      >
          <DropDown baseItem={<ImgUploadButton />} header="Image Format" />
          <DropDown baseItem={<UploadButton />} header="Text Format" />
          <DropDown baseItem={<BinaryUploadButton />} header="Binary Format" />

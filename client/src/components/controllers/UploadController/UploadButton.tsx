@@ -1,11 +1,11 @@
-import { useModal } from '@/contexts';
-import { Button } from '@/components/elements';
 import { uploadIcon } from '@/assets/img';
+import { Button } from '@/components/elements';
+import { useModal } from '@/contexts';
 import css from './UploadController.module.scss';
 
-const UploadButton = () => {
+const UploadButton = (): JSX.Element => {
    const { setModalContent } = useModal();
-   const displayModal = () =>
+   const displayModal = (): void =>
       setModalContent(
          <div className={css.modalContent}>
             <h1>Upload from Text</h1>

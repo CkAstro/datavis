@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { memo } from 'react';
 import handlePointerDown from './handlepointerdown';
 import handlePointerLeave from './handlepointerleave';
 import handlePointerMove from './handlepointermove';
@@ -14,17 +14,12 @@ const getEventHandlers = ({
    setClickLocation,
    moveCamera,
 }) =>
-   useMemo(
+   memo(
       () => ({
          onWheel: (e) => handleWheel(e, moveCamera),
          onPointerUp: (e) => handlePointerUp(e, setIsActive),
          onPointerDown: (e) =>
-            handlePointerDown(
-               e,
-               setMouseLocation,
-               setClickLocation,
-               setIsActive
-            ),
+            handlePointerDown(e, setMouseLocation, setClickLocation, setIsActive),
          onPointerLeave: (e) => handlePointerLeave(e, setIsActive),
          onPointerMove: (e) =>
             handlePointerMove(
@@ -35,11 +30,11 @@ const getEventHandlers = ({
                clickLocation,
                setMouseLocation
             ),
-         onPointerOver: () => {},
-         onPointerOut: () => {},
-         onPointerEnter: () => {},
-         onClick: () => {},
-         onDoubleClick: () => {},
+         onPointerOver: () => undefined,
+         onPointerOut: () => undefined,
+         onPointerEnter: () => undefined,
+         onClick: () => undefined,
+         onDoubleClick: () => undefined,
       }),
       []
    );

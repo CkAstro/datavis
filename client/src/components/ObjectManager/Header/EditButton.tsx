@@ -1,5 +1,5 @@
-import { Icons } from 'components/elements';
-import css from './header.module.css';
+import { Icons } from '@/components/elements';
+import css from './Header.module.scss';
 
 type Props = {
    enableEdit: () => void;

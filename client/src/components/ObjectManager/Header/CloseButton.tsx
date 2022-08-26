@@ -1,6 +1,6 @@
 import { Icons } from '@/components/elements';
 import { useRenderables } from '@/contexts';
-import css from './Header.module.css';
+import css from './Header.module.scss';
 
 type Props = { controllerId: number };
 

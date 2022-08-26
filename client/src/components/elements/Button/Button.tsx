@@ -27,9 +27,9 @@ export const Button = ({
    const buttonStatus = getButtonStatus(enabled, active);
 
    return (
-      <div className={`noselect ${css.buttonContainer} ${buttonStatus}`} onClick={onClick}>
+      <button className={`noselect ${css.buttonContainer} ${buttonStatus}`} onClick={onClick}>
          {buttonImage}
          {buttonText}
-      </div>
+      </button>
    );
 };

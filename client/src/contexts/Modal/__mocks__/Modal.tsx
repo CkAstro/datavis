@@ -1,15 +1,17 @@
-const useModal = () => {
-   const modalParams = {
+import type { ModalParams, ModalInterface } from '@/types';
+
+const useModal = (): ModalInterface => {
+   const modalParams: ModalParams = {
       content: '',
       isActive: false,
    };
 
-   const setModalContent = (content) => {
+   const setModalContent = (content: string | React.ReactNode): void => {
       modalParams.content = content;
       modalParams.isActive = true;
    };
 
-   const closeModal = () => {
+   const closeModal = (): void => {
       modalParams.isActive = false;
    };
 

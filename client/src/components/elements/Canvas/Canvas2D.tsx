@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const useCanvas2D = (glRef: any, draw: (gl: any, args: any) => void, args: any) => {
+const useCanvas2D = (glRef: HTMLCanvasContext, draw: (gl: any, args: any) => void, args: any) => {
    const canvasRef = useRef<any>(null);
    const renderRef = useRef<number | null>(null);
 

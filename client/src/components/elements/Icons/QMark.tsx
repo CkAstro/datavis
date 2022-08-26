@@ -1,10 +1,10 @@
 type Props = {
    size: number;
    fill?: string;
-   style: React.CSSProperties;
+   style?: React.CSSProperties;
 };
 
-export const QMark = ({ size, fill = 'white', style }: Props) => (
+export const QMark = ({ size, fill = 'white', style = {} }: Props): JSX.Element => (
    <svg
       fill={fill}
       width={size}

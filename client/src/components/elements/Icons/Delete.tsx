@@ -1,10 +1,10 @@
 type Props = {
    size: number;
    fill?: string;
-   style: React.CSSProperties;
+   style?: React.CSSProperties;
 };
 
-export const Delete = ({ size, fill = 'white', style }: Props) => (
+export const Delete = ({ size, fill = 'white', style = {} }: Props): JSX.Element => (
    <svg fill={fill} width={size} height={size} style={style} viewBox="0 0 40 40">
       <g>
          <path d="M28,40H11.8c-3.3,0-5.9-2.7-5.9-5.9V16c0-0.6,0.4-1,1-1s1,0.4,1,1v18.1c0,2.2,1.8,3.9,3.9,3.9H28c2.2,0,3.9-1.8,3.9-3.9V16   c0-0.6,0.4-1,1-1s1,0.4,1,1v18.1C33.9,37.3,31.2,40,28,40z" />

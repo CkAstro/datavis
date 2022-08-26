@@ -1,7 +1,7 @@
-import { useModal } from '@/contexts';
 import { Button, Icons } from '@/components/elements';
+import { useModal } from '@/contexts';
 
-const ModalContent = () => (
+const ModalContent = (): JSX.Element => (
    <div>
       <h1>About</h1>
 
@@ -18,15 +18,15 @@ const ModalContent = () => (
    </div>
 );
 
-const AboutButton = () => {
+const AboutButton = (): JSX.Element => {
    const { setModalContent } = useModal();
 
    return (
       <Button
-         text={<Icons.QMark size="60" fill="black" />}
-         enabled
-         active
-         onClick={() => setModalContent(<ModalContent />)}
+         text={<Icons.QMark size={60} fill="black" />}
+         enabled={true}
+         active={true}
+         onClick={(): void => setModalContent(<ModalContent />)}
       />
    );
 };
